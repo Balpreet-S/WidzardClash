@@ -75,6 +75,8 @@ public class EnemyScript : MonoBehaviour
             // If the enemy is close enough to the castle, attack it
             if (distanceToCastle <= attackRange)
             {
+
+                Debug.Log(" ----------------------------- Attacking Castle ----------------------------- "  );
                 ReachCastle();
             }
         }

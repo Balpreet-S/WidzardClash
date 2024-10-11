@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tower Spot
   - TowerSpot
+  - Castle
   layers:
   - Default
   - TransparentFX

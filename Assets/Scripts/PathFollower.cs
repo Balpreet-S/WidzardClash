@@ -5,7 +5,7 @@ using UnityEngine;
 public class PathFollower : MonoBehaviour
 {
     public Transform[] waypoints;  // Array of waypoints for the path
-    public float speed = 3f;       // Speed of the enemy's movement
+    private float speed;       // Speed of the enemy's movement
     private int currentWaypointIndex = 0;  // Index of the current waypoint
     private bool shouldMove = true;        // Control if the object should move
 
