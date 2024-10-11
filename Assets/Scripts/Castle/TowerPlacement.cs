@@ -3,8 +3,7 @@ using UnityEngine;
 public class TowerPlacementManager : MonoBehaviour
 {
     public GameObject towerPrefab;
-    // Set this to a value above the cube's height
-    private float towerHeightOffset = 1.15f; // Adjust this as neede
+    private float towerHeightOffset = 1.15f; // Adjust this for correct height
 
     void Update()
     {
@@ -19,11 +18,15 @@ public class TowerPlacementManager : MonoBehaviour
                 {
                     if (hit.collider.transform.childCount == 0) // If spot is empty
                     {
-                        // Calculate the position to place the tower above the placement spot
+                        // Calculate the exact position to place the tower above the placement spot
                         Vector3 towerPosition = hit.collider.transform.position + new Vector3(0, towerHeightOffset, 0);
-                        
-                        // Instantiate a clone of the tower and place it at the new position
-                        Instantiate(towerPrefab, towerPosition, Quaternion.identity, hit.collider.transform); 
+
+                        // Instantiate the tower at the calculated position
+                        GameObject towerInstance = Instantiate(towerPrefab, towerPosition, Quaternion.identity);
+
+                        // Force the position to be exactly at the calculated position, to avoid any other influences
+                        towerInstance.transform.position = towerPosition;
+
                         Debug.Log("Tower placed!");
                     }
                     else
