@@ -13,15 +13,16 @@ public class EnemyScript : MonoBehaviour
     private PathFollower pathFollower;  // Reference to the PathFollower component
     private bool hasAttacked = false;   // To ensure the enemy attacks only once
 
-    void Start()
+    public void Initialize(Transform[] waypoints)  // Added method to initialize the waypoints
     {
-        // Get the PathFollower component from the enemy GameObject
         pathFollower = GetComponent<PathFollower>();
 
         if (pathFollower != null)
         {
-            // Initialize PathFollower by setting its speed
+            // Initialize PathFollower by setting its speed and waypoints
             pathFollower.SetSpeed(movementSpeed);
+            pathFollower.waypoints = waypoints;  // Set the waypoints for the enemy to follow
+            pathFollower.StartMoving();  // Ensure movement starts
         }
         else
         {
