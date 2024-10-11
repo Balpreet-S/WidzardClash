@@ -1,15 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PathCreation;
-using PathCreation.Examples;  // Import the namespace for PathFollower
 
 public class EnemyScript : MonoBehaviour
 {
-    // PathFollower parameters
-    public PathCreator pathCreator;    // Reference to the PathCreator component
-    public EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Stop;     // End of path instruction
-
     // Enemy parameters
     public int health = 100;           // Enemy's health
     public float movementSpeed = 5f;   // Movement speed for the enemy
@@ -21,12 +15,13 @@ public class EnemyScript : MonoBehaviour
 
     void Start()
     {
+        // Get the PathFollower component from the enemy GameObject
         pathFollower = GetComponent<PathFollower>();
 
         if (pathFollower != null)
         {
-            // Initialize PathFollower with necessary data
-            pathFollower.Initialize(pathCreator, endOfPathInstruction, movementSpeed);
+            // Initialize PathFollower by setting its speed
+            pathFollower.SetSpeed(movementSpeed);
         }
         else
         {
@@ -67,7 +62,6 @@ public class EnemyScript : MonoBehaviour
     // Check if the enemy is close enough to the castle and attack it
     void TryAttackCastle()
     {
-        
         if (hasAttacked) return;  // Ensure the enemy only attacks once
 
         CastleHealth castle = Object.FindAnyObjectByType<CastleHealth>();  // Find the Castle in the scene
@@ -75,7 +69,7 @@ public class EnemyScript : MonoBehaviour
         if (castle != null)
         {
             float distanceToCastle = Vector3.Distance(transform.position, castle.transform.position);
-            Debug.Log("-----------------  distance to castle. ----------------- " + distanceToCastle);
+            Debug.Log("Distance to Castle: " + distanceToCastle);
 
             // If the enemy is close enough to the castle, attack it
             if (distanceToCastle <= attackRange)
