@@ -60,6 +60,10 @@ public class EnemyScript : MonoBehaviour
         Destroy(gameObject);  // Destroy the enemy
     }
 
+    public int getCurrentHealth(){
+        return health;
+    }
+
     // Check if the enemy is close enough to the castle and attack it
     void TryAttackCastle()
     {
@@ -70,7 +74,7 @@ public class EnemyScript : MonoBehaviour
         if (castle != null)
         {
             float distanceToCastle = Vector3.Distance(transform.position, castle.transform.position);
-            Debug.Log("Distance to Castle: " + distanceToCastle);
+            //Debug.Log("Distance to Castle: " + distanceToCastle);
 
             // If the enemy is close enough to the castle, attack it
             if (distanceToCastle <= attackRange)

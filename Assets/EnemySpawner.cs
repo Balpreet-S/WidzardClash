@@ -9,12 +9,28 @@ public class EnemySpawner : MonoBehaviour
     public Transform[] waypoints;   // The waypoints for the path the enemies will follow
     public int numberOfEnemies = 5; // Number of enemies to spawn
     public float spawnInterval = 1f; // Time delay between each spawn
+    public float initialSpawnDelay = 5f; // Time delay before the first enemy spawns
 
     private int enemiesSpawned = 0; // Count of how many enemies have been spawned
 
     void Start()
     {
-        // Start spawning enemies at game start
+        // Start spawning enemies with an initial delay
+        StartCoroutine(StartSpawningAfterDelay());
+    }
+
+    // Coroutine to wait for a delay before starting to spawn enemies
+    IEnumerator StartSpawningAfterDelay()
+    {
+        // Wait for the initial delay (5 seconds)
+        for (float countdown = initialSpawnDelay; countdown > 0; countdown--)
+        {
+            Debug.Log("Waiting for " + countdown + " seconds before starting enemy spawn...");
+            yield return new WaitForSeconds(1f);  // Wait for 1 second between each countdown tick
+        }
+
+        // Start spawning enemies after the delay
+        Debug.Log("Starting enemy spawn...");
         StartCoroutine(SpawnEnemies());
     }
 
