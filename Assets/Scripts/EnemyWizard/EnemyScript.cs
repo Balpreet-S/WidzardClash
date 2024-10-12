@@ -9,17 +9,17 @@ public class EnemyScript : MonoBehaviour
     public float movementSpeed = 5f;   // Movement speed for the enemy
     public int damageToCastle = 10;    // Damage to the castle when the enemy reaches it
     public float attackRange = 1f;     // Range within which the enemy can attack the castle
+    public int xpValue = 5;           // XP given when the enemy wizard is killed
 
     private PathFollower pathFollower;  // Reference to the PathFollower component
     private bool hasAttacked = false;   // To ensure the enemy attacks only once
 
-    public void Initialize(Transform[] waypoints)  // Added method to initialize the waypoints
+    public void Initialize(Transform[] waypoints)
     {
         pathFollower = GetComponent<PathFollower>();
 
         if (pathFollower != null)
         {
-            // Initialize PathFollower by setting its speed and waypoints
             pathFollower.SetSpeed(movementSpeed);
             pathFollower.waypoints = waypoints;  // Set the waypoints for the enemy to follow
             pathFollower.StartMoving();  // Ensure movement starts
@@ -32,73 +32,67 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
-        // Check if the enemy's health is zero or less
         if (health <= 0)
         {
-            Die();  // Destroy the enemy
+            Die();  // Destroy the enemy and give XP
         }
 
-        // Check if the enemy is close enough to the castle to attack
         TryAttackCastle();
     }
 
-    // Method to take damage
     public void TakeDamage(int damage)
     {
         health -= damage;
 
-        // Check if the enemy's health has reached zero
         if (health <= 0)
         {
-            Die();
+            Die();  // Destroy the enemy and give XP
         }
     }
 
-    // Method to destroy the enemy when health is zero or it reaches the castle
     void Die()
     {
-        Destroy(gameObject);  // Destroy the enemy
+        // Award XP to the player
+        XPManager.instance.AddXP(xpValue);
+
+        // Destroy the enemy
+        Destroy(gameObject);
     }
 
-    public int getCurrentHealth(){
+    public int getCurrentHealth()
+    {
         return health;
     }
 
-    // Check if the enemy is close enough to the castle and attack it
     void TryAttackCastle()
     {
-        if (hasAttacked) return;  // Ensure the enemy only attacks once
+        if (hasAttacked) return;
 
-        CastleHealth castle = Object.FindAnyObjectByType<CastleHealth>();  // Find the Castle in the scene
+        CastleHealth castle = Object.FindAnyObjectByType<CastleHealth>();
 
         if (castle != null)
         {
             float distanceToCastle = Vector3.Distance(transform.position, castle.transform.position);
-            //Debug.Log("Distance to Castle: " + distanceToCastle);
 
-            // If the enemy is close enough to the castle, attack it
             if (distanceToCastle <= attackRange)
             {
-
-                Debug.Log(" ----------------------------- Attacking Castle ----------------------------- "  );
+                Debug.Log(" ----------------------------- Attacking Castle ----------------------------- ");
                 ReachCastle();
             }
         }
     }
 
-    // Call this when the enemy reaches the castle
     public void ReachCastle()
     {
         CastleHealth castle = Object.FindAnyObjectByType<CastleHealth>();
 
         if (castle != null)
         {
-            castle.TakeDamage(damageToCastle);  // Deal damage to the castle
+            castle.TakeDamage(damageToCastle);
         }
 
-        hasAttacked = true;  // Mark as attacked to prevent multiple attacks
+        hasAttacked = true;
 
-        // Stop the enemy from moving further
         pathFollower.StopMoving();
 
         Die();  // Destroy the enemy after attacking the castle
