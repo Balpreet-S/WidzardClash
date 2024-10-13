@@ -24,6 +24,9 @@ public class TowerPlacementManager : MonoBehaviour
                         // Instantiate the tower at the calculated position
                         GameObject towerInstance = Instantiate(towerPrefab, towerPosition, Quaternion.identity);
 
+                        // Parent the tower to the spot so childCount increases
+                        towerInstance.transform.SetParent(hit.collider.transform);
+
                         // Force the position to be exactly at the calculated position, to avoid any other influences
                         towerInstance.transform.position = towerPosition;
 
