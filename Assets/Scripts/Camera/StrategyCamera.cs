@@ -7,11 +7,11 @@ public class CameraController : MonoBehaviour
     public float minZoom = 5f;          // Minimum zoom value
     public float maxZoom = 20f;         // Maximum zoom value
 
-    private Camera camera;
+    private Camera mainCamera; // Renamed from 'camera' to 'mainCamera'
 
     void Start()
     {
-        camera = Camera.main; // Get the main camera
+        mainCamera = Camera.main; // Get the main camera
     }
 
     void Update()
@@ -27,8 +27,8 @@ public class CameraController : MonoBehaviour
         float zoomInput = Input.GetAxis("Mouse ScrollWheel");
         if (zoomInput != 0)
         {
-            float newZoom = camera.fieldOfView - zoomInput * zoomSpeed;
-            camera.fieldOfView = Mathf.Clamp(newZoom, minZoom, maxZoom);
+            float newZoom = mainCamera.fieldOfView - zoomInput * zoomSpeed;
+            mainCamera.fieldOfView = Mathf.Clamp(newZoom, minZoom, maxZoom);
         }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1900447016319661312}
   - component: {fileID: 6864271613212057213}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Enemy Wizard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
   movementSpeed: 5
   damageToCastle: 10
   attackRange: 3
+  xpValue: 6
 --- !u!114 &6864271613212057213
 MonoBehaviour:
   m_ObjectHideFlags: 0

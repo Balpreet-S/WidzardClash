@@ -15,27 +15,35 @@ public class WizardAttack : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log("WizardAttack: Running Update.");
+        // Check if there is a current target
+        if (currentTarget != null)
+        {
+            // Check if the target is still within attack range
+            float distanceToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
 
-        // Look for enemies in range if the wizard isn't already attacking
+            if (distanceToTarget > attackRange)
+            {
+                // Target is out of range, stop attacking
+                currentTarget = null;
+                return; // Exit early to avoid attacking an out-of-range target
+            }
+        }
+
+        // If there is no current target, search for a new one
         if (currentTarget == null)
         {
-            //Debug.Log("WizardAttack: No current target. Searching for target...");
             FindTarget();
         }
 
-        // Attack the current target if within range
+        // If there is a target and attack cooldown is ready, attack the enemy
         if (currentTarget != null)
         {
-            //Debug.Log("WizardAttack: Target found. Checking if ready to attack...");
             attackTimer -= Time.deltaTime;
 
-            // Check if the wizard can attack again (based on attack cooldown)
             if (attackTimer <= 0f)
             {
-                //Debug.Log("WizardAttack: Ready to attack. Attacking target...");
                 AttackEnemy();
-                attackTimer = attackCooldown;  // Reset attack cooldown
+                attackTimer = attackCooldown;  // Reset cooldown after attacking
             }
         }
     }
@@ -43,8 +51,6 @@ public class WizardAttack : MonoBehaviour
     // Find the closest enemy within attack range
     void FindTarget()
     {
-        //Debug.Log("WizardAttack: Finding target...");
-        
         // Find all colliders within the wizard's attack range
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
 
@@ -58,7 +64,6 @@ public class WizardAttack : MonoBehaviour
             {
                 // Calculate distance to the enemy
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                //Debug.Log("WizardAttack: Found enemy at distance: " + distanceToEnemy);
 
                 // Select the closest enemy
                 if (distanceToEnemy < closestDistance)
@@ -70,53 +75,32 @@ public class WizardAttack : MonoBehaviour
         }
 
         // Set the closest enemy as the target
-        /*
-        if (closestEnemy != null)
-        {
-            Debug.Log("WizardAttack: New target acquired.");
-        }
-        else
-        {
-            Debug.Log("WizardAttack: No enemies in range.");
-        }*/
-
         currentTarget = closestEnemy;
     }
 
     // Attack the current target enemy
     void AttackEnemy()
     {
-        //Debug.Log("WizardAttack: Attacking enemy.");
-
         if (currentTarget != null)
         {
-            //Debug.Log("WizardAttack: Dealing damage to enemy.");
             // Deal damage directly to the enemy
             currentTarget.TakeDamage(attackDamage);
 
             // Optional: If using projectiles, shoot a projectile
-            
             if (projectilePrefab != null && firePoint != null)
             {
-                //Debug.Log("WizardAttack: Firing projectile.");
                 ShootProjectile();
             }
 
             // Check if the target is dead, stop attacking if so
             if (currentTarget.health <= 0)
             {
-                //Debug.Log("WizardAttack: Target has been killed.");
                 currentTarget = null;  // Reset target if the enemy is killed
             }
-        }
-        else
-        {
-            //Debug.Log("WizardAttack: No valid target to attack.");
         }
     }
 
     // Optional: Shoot a projectile towards the enemy
-    
     void ShootProjectile()
     {
         // Instantiate the projectile at the fire point's position and rotation
@@ -133,8 +117,6 @@ public class WizardAttack : MonoBehaviour
             Debug.LogError("Projectile script is missing on the projectile prefab.");
         }
     }
-
-
 
     // Optional: Visualize the attack range in the editor
     void OnDrawGizmosSelected()
