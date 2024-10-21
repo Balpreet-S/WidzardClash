@@ -11,7 +11,7 @@ public class CastleHealth : MonoBehaviour
     void Start()
     {
         // Initialize the castle's health to the maximum health value
-        currentHealth = maxHealth;
+        currentHealth = XPManager.instance.playerXP;
     }
 
     // This method will be called to decrease the castle's health
@@ -33,6 +33,9 @@ public class CastleHealth : MonoBehaviour
     void CastleDestroyed()
     {
         Debug.Log("The castle has been destroyed!");
+        Debug.Log("You Lose!!");
+        //Application.Quit();
+        Time.timeScale = 0;
         // Add any additional logic like ending the game, playing an animation, etc.
     }
 
