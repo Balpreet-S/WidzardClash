@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 622933789942139098}
   - component: {fileID: 266790781512364140}
   - component: {fileID: 137164428422645854}
+  - component: {fileID: 3270591892030532552}
   m_Layer: 0
   m_Name: Ice Tower
   m_TagString: Untagged
@@ -126,6 +127,18 @@ MonoBehaviour:
   attackDamage: 20
   projectilePrefab: {fileID: 2092063007772922939, guid: 1b6ef248faab64b009de1d43eaf2dd5b, type: 3}
   firePoint: {fileID: 5890040427777464603}
+--- !u!114 &3270591892030532552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286139539451100936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60ba66461ebe6b4f9106acac8344057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8504161055871862799
 GameObject:
   m_ObjectHideFlags: 0
