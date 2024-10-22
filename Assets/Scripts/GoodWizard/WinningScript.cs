@@ -2,12 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Winning game end script (when alt is pressed)
 public class WinningScript : MonoBehaviour
 {
-    // winning game end scipt (should be improved for final game e.g using animation or messages/music)
-    void Start()
+    
+    public void WinGame()
     {
         Debug.Log("Congrats on beating the game!!");
+        
+        // Find all enemies in the scene
+        EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
+
+        // kill all remaigning enemies
+        foreach (EnemyScript enemy in allEnemies)
+        {
+            enemy.Die();
+        }
+
         Time.timeScale = 0;
     }
 }

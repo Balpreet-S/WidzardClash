@@ -13,12 +13,11 @@ public class EnemyScript : MonoBehaviour
     public int xpValue = 5;
 
     private PathFollower pathFollower;
-    private bool hasAttacked = false;  //check if enemy attacked
+    private bool hasAttacked = false; 
 
-    //event for when the enemy dies
+
     public event Action OnDeath;
 
-    // check if killed by tower or castle
     public bool killedByCastle = false;
 
     public void Initialize(Transform[] waypoints)
@@ -57,9 +56,9 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
-        // Notify Enemy Spwaner listener that wizzard died
+        // Notify Enemy Spwaner listener that wizzard died, for wave starting/ending logic 
         OnDeath?.Invoke();
 
         // Only award XP if not killed by the castle
@@ -88,7 +87,7 @@ public class EnemyScript : MonoBehaviour
 
             if (distanceToCastle <= attackRange)
             {
-                Debug.Log(" ----------------------------- Attacking Castle ----------------------------- ");
+                //Debug.Log(" ----------------------------- Attacking Castle ----------------------------- ");
                 ReachCastle();
             }
         }

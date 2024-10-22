@@ -5,19 +5,10 @@ using UnityEngine;
 
 public class CastleHealth : MonoBehaviour
 {
-    //public int maxHealth = 100;
-    //private int currentHealth;
 
-    /*void Start()
-    {
-        currentHealth = XPManager.instance.playerXP;
-    }
-    */
-    // castle taking damage function
     public void TakeDamage(int damage)
     {
-        //currentHealth = XPManager.instance.playerXP;
-        //currentHealth -= damage;
+
         XPManager.instance.playerXP -= damage;
         Debug.Log("The castle has been attacked!, the new health is " + XPManager.instance.playerXP);
 
@@ -34,11 +25,18 @@ public class CastleHealth : MonoBehaviour
     {
         Debug.Log("The castle has been destroyed!");
         Debug.Log("You Lose!!");
+        EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
+
+        // Loop through each enemy and kill them
+        foreach (EnemyScript enemy in allEnemies)
+        {
+            enemy.Die(); // Call the Die method to destroy the enemy
+        }
+
         Time.timeScale = 0;
-        // for final game animation or message on screen can be added 
     }
 
-    // get health method to display current health if needed --also helpful for final game
+    // Get current health method
     public int GetCurrentHealth()
     {
         return XPManager.instance.playerXP;
