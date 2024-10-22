@@ -838,6 +838,7 @@ GameObject:
   - component: {fileID: 808336632}
   - component: {fileID: 808336631}
   - component: {fileID: 808336630}
+  - component: {fileID: 808336634}
   m_Layer: 5
   m_Name: FirstSkillButton
   m_TagString: Untagged
@@ -973,6 +974,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808336628}
   m_CullTransparentMesh: 1
+--- !u!114 &808336634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808336628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1bf60f6d18beb84faa67e8e0cbc26d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 1286139539451100936, guid: 304f66021a28544908ef44f75e1928cf, type: 3}
+  fireButton: {fileID: 808336631}
+  selected: 0
 --- !u!1 &961795245
 GameObject:
   m_ObjectHideFlags: 0
