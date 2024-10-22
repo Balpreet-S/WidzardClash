@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PathFollower : MonoBehaviour
 {
-    public Transform[] waypoints;  // Array of waypoints for the path
-    private float speed;       // Speed of the enemy's movement
-    private int currentWaypointIndex = 0;  // Index of the current waypoint
-    private bool shouldMove = true;        // Control if the object should move
+    public Transform[] waypoints;
+    private float speed;
+    private int currentWaypointIndex = 0;
+    private bool shouldMove = true;
 
     void Update()
     {
@@ -17,30 +17,25 @@ public class PathFollower : MonoBehaviour
         }
     }
 
+    //function for wizzards to move along the set waypoints
     void MoveAlongPath()
     {
-        if (waypoints.Length == 0) return;  // If no waypoints are set, do nothing
+        if (waypoints.Length == 0) return;
 
-        // Get the current waypoint
         Transform targetWaypoint = waypoints[currentWaypointIndex];
 
-        // Calculate the direction to the waypoint
         Vector3 direction = targetWaypoint.position - transform.position;
-        direction.Normalize();  // Normalize the direction vector
+        direction.Normalize();
 
-        // Move towards the current waypoint
         transform.position += direction * speed * Time.deltaTime;
-
-        // Check if the enemy has reached the waypoint
+        //move to next waypoint after reaching the first
         if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
-            // Move to the next waypoint
             currentWaypointIndex++;
 
-            // If we have reached the last waypoint, stop or loop back to the first one
             if (currentWaypointIndex >= waypoints.Length)
             {
-                currentWaypointIndex = 0;  // Optional: loop back to the start (remove this if you want to stop at the end)
+                currentWaypointIndex = 0;
             }
         }
     }
@@ -57,14 +52,14 @@ public class PathFollower : MonoBehaviour
         shouldMove = true;
     }
 
-    // Method to reset the enemy back to the first waypoint
+    // Function to reset the enemy back to the first waypoint
     public void ResetToStart()
     {
-        currentWaypointIndex = 0;  // Reset to the first waypoint
-        transform.position = waypoints[currentWaypointIndex].position;  // Move the enemy back to the first waypoint
+        currentWaypointIndex = 0;
+        transform.position = waypoints[currentWaypointIndex].position;
     }
 
-    // Method to set a new speed for the enemy
+    // Function to set a new speed for the enemy helpful for changing speeds for special enemy wizzards in final game
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;

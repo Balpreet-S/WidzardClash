@@ -5,38 +5,36 @@ using UnityEngine;
 
 public class CastleHealth : MonoBehaviour
 {
-    public int maxHealth = 100; // Maximum health of the castle
-    private int currentHealth;  // Current health of the castle
+    public int maxHealth = 100;
+    private int currentHealth;
 
     void Start()
     {
-        // Initialize the castle's health to the maximum health value
         currentHealth = maxHealth;
     }
 
-    // This method will be called to decrease the castle's health
+    // Decrease health when the enemy wizard reaches tower
     public void TakeDamage(int damage)
     {
-        // Decrease the current health by the damage amount
         currentHealth -= damage;
         Debug.Log("The castle has been attacked!, the new health is " + currentHealth);
 
-        // Check if the castle's health has reached zero or below
+        // destroy the castle if the health is 0 or below
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            CastleDestroyed(); // Call the castle destroyed method
+            CastleDestroyed();
         }
     }
 
-    // Method to handle what happens when the castle is destroyed
+    // Destroy the castle method
     void CastleDestroyed()
     {
         Debug.Log("The castle has been destroyed!");
-        // Add any additional logic like ending the game, playing an animation, etc.
+        // after the prototype we can add annimation or a message on the screen
     }
 
-    // Optional: Method to get the current health of the castle for display purposes
+    // get health method to display current health if needed
     public int GetCurrentHealth()
     {
         return currentHealth;

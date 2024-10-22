@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//projectiles fired from towers
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;        // Speed of the projectile
-    public int damage = 10;          // Damage dealt by the projectile
-    private Transform target;        // The enemy the projectile is targeting
+    public float speed = 10f;
+    public int damage = 10;
+    private Transform target;
 
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+
+        //uncomment lines to chck for errors
         if (target != null)
         {
             //Debug.Log("Projectile: Target set to " + target.name);
         }
         else
         {
-            Debug.LogError("Projectile: Target is null when SetTarget was called.");
+            //Debug.LogError("Projectile: Target is null when SetTarget was called.");
         }
     }
 
