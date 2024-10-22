@@ -26,7 +26,7 @@ To run or develop the game locally, follow these steps:
 
  **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/tower-defense-game.git
+   git clone https://github.com/Balpreet-S/tower-defense-game.git
 ```
 ## How to Play
 
