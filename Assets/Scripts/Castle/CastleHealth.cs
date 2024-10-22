@@ -5,24 +5,26 @@ using UnityEngine;
 
 public class CastleHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
-    private int currentHealth;
+    //public int maxHealth = 100;
+    //private int currentHealth;
 
-    void Start()
+    /*void Start()
     {
         currentHealth = XPManager.instance.playerXP;
     }
-
+    */
     // castle taking damage function
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        Debug.Log("The castle has been attacked!, the new health is " + currentHealth);
+        //currentHealth = XPManager.instance.playerXP;
+        //currentHealth -= damage;
+        XPManager.instance.playerXP -= damage;
+        Debug.Log("The castle has been attacked!, the new health is " + XPManager.instance.playerXP);
 
         // destroy the castle if the health is 0 or below
-        if (currentHealth <= 0)
+        if (XPManager.instance.playerXP <= 0)
         {
-            currentHealth = 0;
+            XPManager.instance.playerXP = 0;
             CastleDestroyed();
         }
     }
@@ -39,6 +41,6 @@ public class CastleHealth : MonoBehaviour
     // get health method to display current health if needed --also helpful for final game
     public int GetCurrentHealth()
     {
-        return currentHealth;
+        return XPManager.instance.playerXP;
     }
 }
