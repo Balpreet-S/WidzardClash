@@ -69,6 +69,24 @@ public class XPManager : MonoBehaviour
             this.Button = s;
         }
     }
+
+    public void WinningCondition(SkillsButtons s)
+    {
+        if (SkillLv1 >= s.Cost)
+        {
+            this.Button = s;
+            SkillLv1 -= s.Cost;
+            Time.timeScale = 0;
+            EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
+
+            // kill all remaigning enemies
+            foreach (EnemyScript enemy in allEnemies)
+            {
+                enemy.Die();
+            }
+            Debug.Log("Congrats on Winning the game!!");
+        }
+    }
     //buy the skill 
     public void PurchaseSkill()
     {
