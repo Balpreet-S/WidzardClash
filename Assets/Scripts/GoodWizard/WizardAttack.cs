@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//tower behaviour
 public class WizardAttack : MonoBehaviour
 {
-    public float attackRange = 5f;        // Range within which the wizard can attack enemies
-    public float attackCooldown = 2f;     // Time between attacks
-    public int attackDamage = 10;         // Damage dealt to enemies
-    public GameObject projectilePrefab;   // Optional: Projectile prefab to shoot at enemies
-    public Transform firePoint;           // Optional: The point from which the wizard fires projectiles
+    public float attackRange = 5f;
+    public float attackCooldown = 2f;
+    public int attackDamage = 10;
+    public GameObject projectilePrefab;
+    public Transform firePoint;
 
-    private float attackTimer = 0f;       // Timer to track when the wizard can attack again
-    private EnemyScript currentTarget;    // The enemy currently being targeted
+    private float attackTimer = 0f;
+    private EnemyScript currentTarget;
 
     void Update()
     {
-        // Check if there is a current target
         if (currentTarget != null)
         {
             // Check if the target is still within attack range
@@ -23,9 +24,8 @@ public class WizardAttack : MonoBehaviour
 
             if (distanceToTarget > attackRange)
             {
-                // Target is out of range, stop attacking
                 currentTarget = null;
-                return; // Exit early to avoid attacking an out-of-range target
+                return;
             }
         }
 
@@ -43,7 +43,7 @@ public class WizardAttack : MonoBehaviour
             if (attackTimer <= 0f)
             {
                 AttackEnemy();
-                attackTimer = attackCooldown;  // Reset cooldown after attacking
+                attackTimer = attackCooldown;
             }
         }
     }
@@ -51,7 +51,6 @@ public class WizardAttack : MonoBehaviour
     // Find the closest enemy within attack range
     void FindTarget()
     {
-        // Find all colliders within the wizard's attack range
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
 
         float closestDistance = Mathf.Infinity;
@@ -62,7 +61,7 @@ public class WizardAttack : MonoBehaviour
             EnemyScript enemy = collider.GetComponent<EnemyScript>();
             if (enemy != null)
             {
-                // Calculate distance to the enemy
+
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
                 // Select the closest enemy
@@ -73,8 +72,6 @@ public class WizardAttack : MonoBehaviour
                 }
             }
         }
-
-        // Set the closest enemy as the target
         currentTarget = closestEnemy;
     }
 
@@ -83,45 +80,36 @@ public class WizardAttack : MonoBehaviour
     {
         if (currentTarget != null)
         {
-            // Deal damage directly to the enemy
+
             currentTarget.TakeDamage(attackDamage);
 
-            // Optional: If using projectiles, shoot a projectile
             if (projectilePrefab != null && firePoint != null)
             {
                 ShootProjectile();
             }
 
-            // Check if the target is dead, stop attacking if so
             if (currentTarget.health <= 0)
             {
-                currentTarget = null;  // Reset target if the enemy is killed
+                currentTarget = null;
             }
         }
     }
 
-    // Optional: Shoot a projectile towards the enemy
+    // Shoot a projectile towards the enemy
     void ShootProjectile()
     {
-        // Instantiate the projectile at the fire point's position and rotation
+
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
-        // Set the projectile's target to be the current enemy
+
         Projectile projectileScript = projectile.GetComponent<Projectile>();
         if (projectileScript != null)
         {
-            projectileScript.SetTarget(currentTarget.transform);  // Make sure currentTarget is assigned properly
+            projectileScript.SetTarget(currentTarget.transform);
         }
         else
         {
             Debug.LogError("Projectile script is missing on the projectile prefab.");
         }
-    }
-
-    // Optional: Visualize the attack range in the editor
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

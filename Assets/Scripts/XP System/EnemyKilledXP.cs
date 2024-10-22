@@ -4,38 +4,42 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//class for managing xp from enemy kills
 public class XPManager : MonoBehaviour
 {
     public SkillsButtons Button { get; private set; }
-    public static XPManager instance;  // Singleton instance
+    public static XPManager instance;
 
-    public int playerXP = 0;  // Player's XP
+    public int playerXP = 0;
 
-    private int SkillLv; //Player's Skills points aka health bar as well
+    private int SkillLv;
 
-    private int count = 0; 
+    private int count = 0;
     public int div = 1;
 
     public TextMeshProUGUI LevelText;
-
-    public int SkillLv1 {
-        get{
+    //getting skill level
+    public int SkillLv1
+    {
+        get
+        {
             return SkillLv;
         }
-        set{
+        set
+        {
             this.SkillLv = value;
             this.LevelText.text = "You have: " + value.ToString() + " skills points";
         }
     }
 
-     void Start()
+    //start with 2 skills points to place 2 towers
+    void Start()
     {
         SkillLv1 = 2;
     }
 
     void Awake()
     {
-        // Ensure there is only one instance of XPManager
         if (instance == null)
         {
             instance = this;
@@ -45,25 +49,31 @@ public class XPManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    // add xp for every kill and add skill points for every 50 xp
     public void AddXP(int xpAmount)
     {
         playerXP += xpAmount;
-        if(playerXP / 50 >= div){
+        if (playerXP / 50 >= div)
+        {
             count = count + 1;
             div = div + 1;
             SkillLv1 = count;
         }
         Debug.Log("Player gained " + xpAmount + " XP. Total XP: " + playerXP);
     }
-
-    public void SkillTowers(SkillsButtons s){
-        if(SkillLv1 >= s.Cost){
+    //skill tower function
+    public void SkillTowers(SkillsButtons s)
+    {
+        if (SkillLv1 >= s.Cost)
+        {
             this.Button = s;
         }
     }
-
-    public void PurchaseSkill(){
-        if(SkillLv1 >= Button.Cost){
+    //buy the skill 
+    public void PurchaseSkill()
+    {
+        if (SkillLv1 >= Button.Cost)
+        {
             SkillLv1 -= Button.Cost;
         }
         Button = null;
