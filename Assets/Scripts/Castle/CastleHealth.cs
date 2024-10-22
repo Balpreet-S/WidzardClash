@@ -10,7 +10,8 @@ public class CastleHealth : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
+        // Initialize the castle's health to the maximum health value
+        currentHealth = XPManager.instance.playerXP;
     }
 
     // Decrease health when the enemy wizard reaches tower
@@ -31,7 +32,10 @@ public class CastleHealth : MonoBehaviour
     void CastleDestroyed()
     {
         Debug.Log("The castle has been destroyed!");
-        // after the prototype we can add annimation or a message on the screen
+        Debug.Log("You Lose!!");
+        //Application.Quit();
+        Time.timeScale = 0;
+        // Add any additional logic like ending the game, playing an animation, etc.
     }
 
     // get health method to display current health if needed
