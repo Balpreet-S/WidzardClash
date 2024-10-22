@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571363, b: 0.30692217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112325188}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -1296,10 +1296,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 794375068}
         m_TargetAssemblyTypeName: XPManager, Assembly-CSharp
-        m_MethodName: SkillTowers
+        m_MethodName: WinningCondition
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1112325194}
           m_ObjectArgumentAssemblyTypeName: SkillsButtons, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1353,11 +1353,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1112325188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 547f60242aa6c46519502428691b5d03, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fd4e8d4daea9c44e9eb75f42641deb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xpManager: {fileID: 794375068}
-  winningScript: {fileID: 1765065635}
+  skillTowers: {fileID: 1286139539451100936, guid: 923e1c533e346f8449a100f6b8e110e6, type: 3}
+  cost: 4
 --- !u!1 &1140902716
 GameObject:
   m_ObjectHideFlags: 0
