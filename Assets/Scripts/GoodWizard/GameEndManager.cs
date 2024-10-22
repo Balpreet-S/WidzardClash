@@ -25,7 +25,7 @@ public class GameEndManager : MonoBehaviour
     private void Update()
     {
         // Check if the player has at least 4 skill points before allowing the final skill
-        if (xpManager.SkillLv1 >= 4 && endGameAction.WasPerformedThisFrame())
+        if (xpManager.SkillPoints >= 4 && endGameAction.WasPerformedThisFrame())
         {
             EndGame();
         }
@@ -38,7 +38,7 @@ public class GameEndManager : MonoBehaviour
         // Call the method from WinningScript
         if (winningScript != null)
         {
-            winningScript.WinGame(); 
+            winningScript.WinGame();
         }
         else
         {

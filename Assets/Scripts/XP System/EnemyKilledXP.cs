@@ -1,99 +1,101 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-//class for managing xp from enemy kills
+//xp system for when enemies are killed (includes skill points)
 public class XPManager : MonoBehaviour
 {
-    public SkillsButtons Button { get; private set; }
     public static XPManager instance;
+    public SkillsButtons Button { get; private set; }
 
-    public int playerXP = 0;
-
-    private int SkillLv;
-
-    private int count = 0;
-    public int div = 1;
-
+    public int playerXP = 50;
+    private int skillPoints;
     public TextMeshProUGUI LevelText;
-    //getting skill level
-    public int SkillLv1
+
+    private int nextXPThreshold;
+
+    public int SkillPoints
     {
-        get
-        {
-            return SkillLv;
-        }
+        get { return skillPoints; }
         set
         {
-            this.SkillLv = value;
-            this.LevelText.text = "You have: " + value.ToString() + " skills points";
+            skillPoints = value;
+            UpdateSkillPointsText();
         }
     }
 
-    //start with 2 skills points to place 2 towers
-    void Start()
-    {
-        SkillLv1 = 2;
-    }
-
-    void Awake()
+    private void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
-    // add xp for every kill and add skill points for every 50 xp
+
+    private void Start()
+    {
+        SkillPoints = 2;
+        playerXP = 50;
+        nextXPThreshold = 100;
+    }
+    //add skill points and player xp depending on threshold
     public void AddXP(int xpAmount)
     {
         playerXP += xpAmount;
-        if (playerXP / 50 >= div)
+
+        while (playerXP >= nextXPThreshold)
         {
-            count = count + 1;
-            div = div + 1;
-            SkillLv1 = count;
+            SkillPoints += 1;
+            nextXPThreshold += 50;
         }
-        Debug.Log("Player gained " + xpAmount + " XP. Total XP: " + playerXP);
+
+        Debug.Log($"Player gained {xpAmount} XP. Total XP: {playerXP}");
     }
-    //skill tower function
+
+    //buying fire tower
     public void SkillTowers(SkillsButtons s)
     {
-        if (SkillLv1 >= s.Cost)
+        if (SkillPoints >= s.Cost)
         {
-            this.Button = s;
+            Button = s;
         }
     }
+    //for buying final skill
 
     public void WinningCondition(SkillsButtons s)
     {
-        if (SkillLv1 >= s.Cost)
+        if (SkillPoints >= s.Cost)
         {
-            this.Button = s;
-            SkillLv1 -= s.Cost;
+            Button = s;
+            SkillPoints -= s.Cost;
             Time.timeScale = 0;
             EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
-
-            // kill all remaigning enemies
             foreach (EnemyScript enemy in allEnemies)
             {
                 enemy.Die();
             }
-            Debug.Log("Congrats on Winning the game!!");
+
+            Debug.Log("Congrats on winning the game!!");
         }
     }
-    //buy the skill 
+
+    //decrease skillpoints when used by a button 
     public void PurchaseSkill()
     {
-        if (SkillLv1 >= Button.Cost)
+        if (SkillPoints >= Button.Cost)
         {
-            SkillLv1 -= Button.Cost;
+            SkillPoints -= Button.Cost;
+            Button = null;
         }
-        Button = null;
+    }
+
+
+    // update the uk to show current skill points
+
+    private void UpdateSkillPointsText()
+    {
+        if (LevelText != null)
+        {
+            LevelText.text = $"You have: {SkillPoints} skill points";
+        }
     }
 }
