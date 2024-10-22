@@ -1,0 +1,34 @@
+{
+    "name": "New input action",
+    "maps": [
+        {
+            "name": "Placing tower/skill",
+            "id": "6cf00a2c-559f-4a77-bdbb-f0f80a486db2",
+            "actions": [
+                {
+                    "name": "place",
+                    "type": "Button",
+                    "id": "318deb2b-a1a9-4538-8973-c5f9f1d32636",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "07312ae7-7ce2-445e-a28e-a9046ef5354f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "place",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

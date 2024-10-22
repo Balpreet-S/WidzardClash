@@ -1,36 +1,49 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public class TowerPlacementManager : MonoBehaviour
 {
     public GameObject towerPrefab;
-    private float towerHeightOffset = 1.15f; // Adjust this for correct height
+    private float towerHeightOffset = 1.15f;
+    private InputAction placeTowerAction;
+    // using left mouse button for input in new input system
+    private void Awake()
+    {
+        placeTowerAction = new InputAction(type: InputActionType.Button, binding: "<Mouse>/leftButton");
+        placeTowerAction.Enable();
+    }
+
+    private void OnDestroy()
+    {
+        // Disable and dispose of the input action when the script is destroyed
+        placeTowerAction.Disable();
+        placeTowerAction.Dispose();
+    }
 
     void Update()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && XPManager.instance.Button != null)
         {
-            if (Input.GetMouseButtonDown(0)) // Detect left mouse click
+            if (placeTowerAction.WasPerformedThisFrame())
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Check if the player is pointing in the correct spot
+                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.CompareTag("TowerSpot")) // Checks if the place the player clicked is a placable tower spot
+                    if (hit.collider.CompareTag("TowerSpot")) // Checks if the place clicked is a placable tower spot
                     {
-                        if (hit.collider.transform.childCount == 0) // If spot is empty
+                        //checks if spot is occupied or not
+                        if (hit.collider.transform.childCount == 0)
                         {
-                            // Calculate the exact position to place the tower above the placement spot
+
                             Vector3 towerPosition = hit.collider.transform.position + new Vector3(0, towerHeightOffset, 0);
 
-                            // Instantiate the tower at the calculated position
                             GameObject towerInstance = Instantiate(XPManager.instance.Button.SkillTowers, towerPosition, Quaternion.identity);
 
-                            // Parent the tower to the spot so childCount increases
                             towerInstance.transform.SetParent(hit.collider.transform);
 
-                            // Force the position to be exactly at the calculated position, to avoid any other influences
                             towerInstance.transform.position = towerPosition;
 
                             XPManager.instance.PurchaseSkill();
