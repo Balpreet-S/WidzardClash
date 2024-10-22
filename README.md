@@ -1,6 +1,6 @@
-# Tower Defense Game
+# Wizard Clash
 
-Welcome to the **Tower Defense Game** repository! This is a 3D tower defense game where players strategically place wizards to defend their castle against waves of enemies. 
+Welcome to the **Wizard Clash** repository! This is a 3D tower defense game where players strategically place wizards to defend their castle against waves of enemies. 
 The current project is only a prototype with only 1 type of enemy and 1 type of good wizard, however the final version of the game will include various types of wizards, each with unique abilities and projectiles, and enemies with different attack patterns and behaviors.
 
 ## Table of Contents
