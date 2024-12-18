@@ -15,10 +15,20 @@ public class EnemySpawner : MonoBehaviour
     private int currentWave = 0;
     private int enemiesToSpawn;
     private int enemiesRemaining;
+    private LineRenderer lr;
 
     void Start()
     {
-        // delay for the first wave spawn
+        lr = GetComponent<LineRenderer>();
+        lr.positionCount = waypoints.Length;
+        lr.useWorldSpace = true;
+
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            lr.SetPosition(i, waypoints[i].position);
+        }
+
+        // The rest of your start code (delays, wave starting, etc.)
         StartCoroutine(StartWaveAfterDelay());
     }
 
