@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//projectiles fired from towers
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;        // Speed of the projectile
-    public int damage = 10;          // Damage dealt by the projectile
-    private Transform target;        // The enemy the projectile is targeting
+    public float speed = 10f;
+    public int damage = 10;
+    private Transform target;
 
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+
+        //uncomment lines to check for run time errors
         if (target != null)
         {
             //Debug.Log("Projectile: Target set to " + target.name);
         }
         else
         {
-            Debug.LogError("Projectile: Target is null when SetTarget was called.");
+            //Debug.LogError("Projectile: Target is null when SetTarget was called.");
         }
     }
 
@@ -26,8 +29,9 @@ public class Projectile : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.LogError("Projectile: Target is null, cannot move towards target.");
-            Destroy(gameObject);  // Destroy projectile if there is no target
+            // uncoment line to check errors with the projectile
+            //Debug.LogError("Projectile: Target is null, cannot move towards target.");
+            Destroy(gameObject);
             return;
         }
 
@@ -35,7 +39,6 @@ public class Projectile : MonoBehaviour
         Vector3 direction = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
-        //Debug.Log("Projectile: Moving towards target. Distance this frame: " + distanceThisFrame);
 
         // Check if the projectile is close enough to hit the target
         if (direction.magnitude <= distanceThisFrame)
@@ -43,31 +46,27 @@ public class Projectile : MonoBehaviour
             HitTarget();
             return;
         }
-
-        // Move the projectile forward
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }
 
 
+    // Deal damage to the enemy
     void HitTarget()
     {
-        // Deal damage to the enemy
         EnemyScript enemy = target.GetComponent<EnemyScript>();
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
         }
-
-        // Destroy the projectile after hitting the target
         Destroy(gameObject);
     }
 
-    // Optional: Add collision detection if using physics
+    // collision for physics
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            HitTarget();  // Call the hit logic
+            HitTarget();
         }
     }
 }

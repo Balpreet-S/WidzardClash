@@ -5,43 +5,40 @@ using UnityEngine;
 
 public class CastleHealth : MonoBehaviour
 {
-    public int maxHealth = 100; // Maximum health of the castle
-    private int currentHealth;  // Current health of the castle
 
-    void Start()
-    {
-        // Initialize the castle's health to the maximum health value
-        currentHealth = XPManager.instance.playerXP;
-    }
-
-    // This method will be called to decrease the castle's health
     public void TakeDamage(int damage)
     {
-        // Decrease the current health by the damage amount
-        currentHealth -= damage;
-        Debug.Log("The castle has been attacked!, the new health is " + currentHealth);
 
-        // Check if the castle's health has reached zero or below
-        if (currentHealth <= 0)
+        XPManager.instance.playerXP -= damage;
+        Debug.Log("The castle has been attacked!, the new health is " + XPManager.instance.playerXP);
+
+        // destroy the castle if the health is 0 or below
+        if (XPManager.instance.playerXP <= 0)
         {
-            currentHealth = 0;
-            CastleDestroyed(); // Call the castle destroyed method
+            XPManager.instance.playerXP = 0;
+            CastleDestroyed();
         }
     }
 
-    // Method to handle what happens when the castle is destroyed
+    // Destroy the castle method
     void CastleDestroyed()
     {
         Debug.Log("The castle has been destroyed!");
         Debug.Log("You Lose!!");
-        //Application.Quit();
+        EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
+
+        // Loop through each enemy and kill them
+        foreach (EnemyScript enemy in allEnemies)
+        {
+            enemy.Die(); // Call the Die method to destroy the enemy
+        }
+
         Time.timeScale = 0;
-        // Add any additional logic like ending the game, playing an animation, etc.
     }
 
-    // Optional: Method to get the current health of the castle for display purposes
+    // Get current health method
     public int GetCurrentHealth()
     {
-        return currentHealth;
+        return XPManager.instance.playerXP;
     }
 }

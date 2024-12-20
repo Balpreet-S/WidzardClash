@@ -1,35 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System; // Needed for the Action delegate
+using System;
 
 public class EnemyScript : MonoBehaviour
 {
     // Enemy parameters
-    public int health = 100;           // Enemy's health
-    public float movementSpeed = 5f;   // Movement speed for the enemy
-    public int damageToCastle = 10;    // Damage to the castle when the enemy reaches it
-    public float attackRange = 1f;     // Range within which the enemy can attack the castle
-    public int xpValue = 5;            // XP given when the enemy wizard is killed
+    public int health = 100;
+    public float movementSpeed = 5f;
+    public int damageToCastle = 10;
+    public float attackRange = 1f;
+    public int xpValue = 5;
 
-    private PathFollower pathFollower;  // Reference to the PathFollower component
-    private bool hasAttacked = false;   // To ensure the enemy attacks only once
+    private PathFollower pathFollower;
+    private bool hasAttacked = false; 
 
-    // Declare an event that will be triggered when the enemy dies
+
     public event Action OnDeath;
 
-    // Flag to check if the enemy was killed by the castle or by the player
     public bool killedByCastle = false;
 
     public void Initialize(Transform[] waypoints)
     {
         pathFollower = GetComponent<PathFollower>();
 
-        if (pathFollower != null)
+        if (pathFollower != null) //path for enemy wizzards
         {
             pathFollower.SetSpeed(movementSpeed);
-            pathFollower.waypoints = waypoints;  // Set the waypoints for the enemy to follow
-            pathFollower.StartMoving();          // Ensure movement starts
+            pathFollower.waypoints = waypoints;
+            pathFollower.StartMoving();
         }
         else
         {
@@ -39,9 +38,9 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0)
+        if (health <= 0) //if enemy health below or = 0, destroy 
         {
-            Die();  // Destroy the enemy and give XP
+            Die();
         }
 
         TryAttackCastle();
@@ -53,13 +52,13 @@ public class EnemyScript : MonoBehaviour
 
         if (health <= 0)
         {
-            Die();  // Destroy the enemy and give XP
+            Die();
         }
     }
 
-    void Die()
+    public void Die()
     {
-        // Notify any listeners (e.g., EnemySpawner) that this enemy has died
+        // Notify Enemy Spwaner listener that wizzard died, for wave starting/ending logic 
         OnDeath?.Invoke();
 
         // Only award XP if not killed by the castle
@@ -68,7 +67,7 @@ public class EnemyScript : MonoBehaviour
             XPManager.instance.AddXP(xpValue);
         }
 
-        // Destroy the enemy
+
         Destroy(gameObject);
     }
 
@@ -88,7 +87,7 @@ public class EnemyScript : MonoBehaviour
 
             if (distanceToCastle <= attackRange)
             {
-                Debug.Log(" ----------------------------- Attacking Castle ----------------------------- ");
+                //Debug.Log(" ----------------------------- Attacking Castle ----------------------------- ");
                 ReachCastle();
             }
         }
@@ -104,10 +103,10 @@ public class EnemyScript : MonoBehaviour
         }
 
         hasAttacked = true;
-        killedByCastle = true; // Set the flag when the enemy reaches the castle
+        killedByCastle = true; //enemy reaches the castle
 
         pathFollower.StopMoving();
 
-        Die();  // Destroy the enemy after attacking the castle
+        Die();  // Destroy the enemy wizzard after reaching the castle
     }
 }

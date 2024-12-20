@@ -122,10 +122,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  movementSpeed: 5
+  movementSpeed: 6
   damageToCastle: 10
   attackRange: 3
   xpValue: 6
+  killedByCastle: 0
 --- !u!114 &6864271613212057213
 MonoBehaviour:
   m_ObjectHideFlags: 0

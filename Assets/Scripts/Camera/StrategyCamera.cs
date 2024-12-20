@@ -2,28 +2,29 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float rotationSpeed = 100f; // Speed of rotation
-    public float zoomSpeed = 10f;       // Speed of zoom
-    public float minZoom = 5f;          // Minimum zoom value
-    public float maxZoom = 20f;         // Maximum zoom value
+    // camera usage variables
+    public float rotationSpeed = 100f;
+    public float zoomSpeed = 10f;
+    public float minZoom = 5f;
+    public float maxZoom = 20f;
 
-    private Camera mainCamera; // Renamed from 'camera' to 'mainCamera'
+    private Camera mainCamera;
 
     void Start()
     {
-        mainCamera = Camera.main; // Get the main camera
+        mainCamera = Camera.main;
     }
 
     void Update()
     {
-        // Rotate the camera around the Y-axis
-        if (Input.GetMouseButton(1)) // Right mouse button to rotate
+        // Rotate the camera around the Y-axis (slow rotation as fast rotation not needed)
+        if (Input.GetMouseButton(1))
         {
             float rotationInput = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
             transform.Rotate(0, rotationInput, 0);
         }
 
-        // Zoom in and out
+        // Zoom in and out on object
         float zoomInput = Input.GetAxis("Mouse ScrollWheel");
         if (zoomInput != 0)
         {
