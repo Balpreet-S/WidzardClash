@@ -1,25 +1,36 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//tower behaviour
 public class WizardAttack : MonoBehaviour
 {
     public float attackRange = 5f;
     public float attackCooldown = 2f;
     public int attackDamage = 10;
-    public GameObject projectilePrefab;
     public Transform firePoint;
+    public float rotationSpeed = 5f; // Speed of rotation toward the enemy
+
+    public GameObject fireballPrefab;
+    public GameObject waterfallPrefab;
+
+    public int fireballPoolSize = 25;
+    public int waterfallPoolSize = 25;
+
+    public string wizardType; // Type of wizard ("Fire", "Water", etc.)
 
     private float attackTimer = 0f;
     private EnemyScript currentTarget;
+
+    void Start()
+    {
+        // Initialize pools for each type of projectile
+        Projectile.InitializePool("Fireball", fireballPoolSize, fireballPrefab);
+        Projectile.InitializePool("Waterfall", waterfallPoolSize, waterfallPrefab);
+    }
 
     void Update()
     {
         if (currentTarget != null)
         {
-            // Check if the target is still within attack range
             float distanceToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
 
             if (distanceToTarget > attackRange)
@@ -27,15 +38,15 @@ public class WizardAttack : MonoBehaviour
                 currentTarget = null;
                 return;
             }
+
+            RotateTowardsTarget();
         }
 
-        // If there is no current target, search for a new one
         if (currentTarget == null)
         {
             FindTarget();
         }
 
-        // If there is a target and attack cooldown is ready, attack the enemy
         if (currentTarget != null)
         {
             attackTimer -= Time.deltaTime;
@@ -48,7 +59,18 @@ public class WizardAttack : MonoBehaviour
         }
     }
 
-    // Find the closest enemy within attack range
+    void RotateTowardsTarget()
+    {
+        if (currentTarget != null)
+        {
+            Vector3 direction = currentTarget.transform.position - transform.position;
+            direction.y = 0;
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
+
     void FindTarget()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
@@ -61,10 +83,8 @@ public class WizardAttack : MonoBehaviour
             EnemyScript enemy = collider.GetComponent<EnemyScript>();
             if (enemy != null)
             {
-
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
-                // Select the closest enemy
                 if (distanceToEnemy < closestDistance)
                 {
                     closestEnemy = enemy;
@@ -75,15 +95,13 @@ public class WizardAttack : MonoBehaviour
         currentTarget = closestEnemy;
     }
 
-    // Attack the current target enemy
     void AttackEnemy()
     {
         if (currentTarget != null)
         {
-
             currentTarget.TakeDamage(attackDamage);
 
-            if (projectilePrefab != null && firePoint != null)
+            if (firePoint != null)
             {
                 ShootProjectile();
             }
@@ -95,21 +113,23 @@ public class WizardAttack : MonoBehaviour
         }
     }
 
-    // Shoot a projectile towards the enemy
     void ShootProjectile()
     {
+        string projectileType = wizardType == "Fire" ? "Fireball" : "Waterfall";
 
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-
-
-        Projectile projectileScript = projectile.GetComponent<Projectile>();
-        if (projectileScript != null)
+        Projectile projectile = Projectile.GetFromPool(projectileType);
+        if (projectile != null)
         {
-            projectileScript.SetTarget(currentTarget.transform);
+            projectile.transform.position = firePoint.position;
+            projectile.transform.rotation = firePoint.rotation;
+
+            projectile.SetTarget(currentTarget.transform);
+
+            Debug.Log($"{projectileType} instantiated at: {projectile.transform.position}");
         }
         else
         {
-            Debug.LogError("Projectile script is missing on the projectile prefab.");
+            Debug.LogError($"Failed to retrieve {projectileType} from pool.");
         }
     }
 }
