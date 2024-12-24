@@ -129,10 +129,13 @@ MonoBehaviour:
   attackRange: 5
   attackCooldown: 2
   attackDamage: 10
-  projectilePrefab: {fileID: 7131939408385119077, guid: d6c7fdf162b9145868492af247276f15, type: 3}
   firePoint: {fileID: 1459614395512780102}
   rotationSpeed: 5
-  poolSize: 25
+  fireballPrefab: {fileID: 0}
+  waterballPrefab: {fileID: 7131939408385119077, guid: d6c7fdf162b9145868492af247276f15, type: 3}
+  fireballPoolSize: 25
+  waterballPoolSize: 25
+  wizardType: Water
 --- !u!4 &2196431318141701489 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}

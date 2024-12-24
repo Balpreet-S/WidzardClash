@@ -124,10 +124,10 @@ MonoBehaviour:
   firePoint: {fileID: 2292148154401064729}
   rotationSpeed: 5
   fireballPrefab: {fileID: 9083432090902696954, guid: dc999d13075f84402b5e9263107e7e9c, type: 3}
-  waterfallPrefab: {fileID: 0}
+  waterfallPrefab: {fileID: 7131939408385119077, guid: d6c7fdf162b9145868492af247276f15, type: 3}
   fireballPoolSize: 25
   waterfallPoolSize: 25
-  wizardType: 
+  wizardType: Fire
 --- !u!4 &6539949408301583177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}

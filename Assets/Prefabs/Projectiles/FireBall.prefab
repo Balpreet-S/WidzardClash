@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 3246050841507094208}
   - component: {fileID: 7030759609156847061}
   m_Layer: 0
-  m_Name: FireBallPrefab
+  m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
