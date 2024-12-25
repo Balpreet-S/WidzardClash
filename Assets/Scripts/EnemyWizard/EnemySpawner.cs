@@ -4,21 +4,28 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // enemy spawner variables
-    public GameObject enemyPrefab;
+    [Header("Enemy Prefabs")]
+    public GameObject enemyPrefab1;
+    public GameObject enemyPrefab2;
+    public GameObject enemyPrefab3;
+    public GameObject enemyPrefab4;
+
+    [Header("Spawn & Waypoints")]
     public Transform spawnPoint;
     public Transform[] waypoints;
+
+    [Header("Wave Settings")]
     public int initialEnemyCount = 5;
     public float spawnInterval = 1f;
     public float initialSpawnDelay = 5f;
     public int waveCount = 5;
+
     private int currentWave = 0;
     private int enemiesToSpawn;
     private int enemiesRemaining;
 
     void Start()
     {
-        // delay for the first wave spawn
         StartCoroutine(StartWaveAfterDelay());
     }
 
@@ -28,12 +35,12 @@ public class EnemySpawner : MonoBehaviour
         StartNextWave();
     }
 
-    // enemy spawner for next waves
     void StartNextWave()
     {
         currentWave++;
         if (currentWave <= waveCount)
         {
+            // Increase enemy count per wave
             enemiesToSpawn = initialEnemyCount + (currentWave - 1) * 6;
             enemiesRemaining = enemiesToSpawn;
 
@@ -45,27 +52,66 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // interval so that enemies dont spawn all at once
     IEnumerator SpawnEnemies()
     {
+        // 1) Get the list of available enemy types for this wave
+        List<GameObject> availablePrefabs = GetPrefabsForWave(currentWave);
+
+        // 2) Spawn enemies one at a time
         while (enemiesToSpawn > 0)
         {
-            SpawnEnemy();
+            // 3) Pick one prefab from the list to spawn
+            int index = Random.Range(0, availablePrefabs.Count);
+            GameObject prefabToSpawn = availablePrefabs[index];
+            
+            SpawnEnemy(prefabToSpawn);
+
             enemiesToSpawn--;
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    // Method to instantiate (getting enemies from the prefabs) and spawning a new enemy
-    void SpawnEnemy()
+    /// <summary>
+    /// Returns a list of enemy prefabs allowed for the given wave.
+    /// Example logic:
+    ///   Wave 1: Enemy 1
+    ///   Wave 2: Enemy 1, 2
+    ///   Wave 3: Enemy 1, 2, 3
+    ///   Wave 4+: Enemy 1, 2, 3, 4
+    /// </summary>
+    private List<GameObject> GetPrefabsForWave(int wave)
     {
-        GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        List<GameObject> enemyList = new List<GameObject>();
+
+        // Wave 1
+        if (wave >= 1) enemyList.Add(enemyPrefab1);
+
+        // Wave 2
+        if (wave >= 2) enemyList.Add(enemyPrefab2);
+
+        // Wave 3
+        if (wave >= 3) enemyList.Add(enemyPrefab3);
+
+        // Wave 4+
+        if (wave >= 4) enemyList.Add(enemyPrefab4);
+
+        return enemyList;
+    }
+
+    /// <summary>
+    /// Instantiates an enemy at the spawn point and wires up references/events
+    /// </summary>
+    /// <param name="prefab">The prefab to be spawned</param>
+    void SpawnEnemy(GameObject prefab)
+    {
+        GameObject newEnemy = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
         EnemyScript enemyScript = newEnemy.GetComponent<EnemyScript>();
 
         if (enemyScript != null)
         {
             enemyScript.Initialize(waypoints);
 
+            // subscribe to the death event
             enemyScript.OnDeath += OnEnemyDeath;
         }
         else
@@ -74,7 +120,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // Called when an enemy dies
     void OnEnemyDeath()
     {
         enemiesRemaining--;
@@ -82,7 +127,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemiesRemaining <= 0)
         {
             Debug.Log("Wave " + currentWave + " complete.");
-            StartNextWave();  // wave starts after all current enemies are dead
+            StartNextWave();
         }
     }
 }

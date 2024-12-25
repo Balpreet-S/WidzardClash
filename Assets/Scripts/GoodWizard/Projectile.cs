@@ -89,7 +89,6 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        // Move the projectile
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }
 
@@ -116,7 +115,7 @@ public class Projectile : MonoBehaviour
         if (animator != null)
         {
             animator.Play("ImpactAnimation");
-            StartCoroutine(ReturnToPoolAfterDelay(0.5f)); // Wait for impact animation to finish
+            StartCoroutine(ReturnToPoolAfterDelay(0.5f));
         }
         else
         {
@@ -138,6 +137,5 @@ public class Projectile : MonoBehaviour
         ReturnToPool(this);
     }
 }
-
 
 

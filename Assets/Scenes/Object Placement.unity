@@ -1148,7 +1148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984cfe8dbc94d44ed802e71c3e9a8b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8015567469832531410, guid: f4f53d038fafe4717a1bdc677606c98f, type: 3}
+  enemyPrefab1: {fileID: 6874542551522743495, guid: 66ead187fcd934ad8be1d2bd12e59253, type: 3}
+  enemyPrefab2: {fileID: 8866218700127635742, guid: fa3de0635bc1943cda76bdf39820afaa, type: 3}
+  enemyPrefab3: {fileID: 709240121358135082, guid: 67f815d742621435c9ec540147d62c32, type: 3}
+  enemyPrefab4: {fileID: 0}
   spawnPoint: {fileID: 1363330212}
   waypoints:
   - {fileID: 1603625703}
@@ -1164,7 +1167,7 @@ MonoBehaviour:
   - {fileID: 1292689689}
   initialEnemyCount: 5
   spawnInterval: 1
-  initialSpawnDelay: 5
+  initialSpawnDelay: 0
   waveCount: 5
 --- !u!4 &740011230
 Transform:
@@ -1284,7 +1287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd4e8d4daea9c44e9eb75f42641deb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillTowers: {fileID: 2828160826260076024, guid: 435ad6cd64b864347945a7b3cd8cd730, type: 3}
+  skillTowers: {fileID: 5875299733704528371, guid: 29f0e750090834c45bd9a9b45be7eab2, type: 3}
   cost: 1
 --- !u!114 &808336631
 MonoBehaviour:
