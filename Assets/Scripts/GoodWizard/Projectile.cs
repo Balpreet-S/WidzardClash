@@ -2,71 +2,140 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//projectiles fired from towers
+
 public class Projectile : MonoBehaviour
 {
     public float speed = 10f;
     public int damage = 10;
+    public GameObject impactEffect; // Explosion effect prefab (optional)
+    public float explosionRadius = 2f; // Area of effect radius (optional)
+
     private Transform target;
+    private Animator animator; // Animator for animations
+    private bool hasHit = false; // To prevent multiple triggers
+    private static Dictionary<string, ObjectPool<Projectile>> projectilePools; // Separate pools for each projectile type
+
+    public string type; // Type of projectile (e.g., "Fireball", "Waterfall")
+
+    public static void InitializePool(string type, int size, GameObject prefab)
+    {
+        if (projectilePools == null)
+        {
+            projectilePools = new Dictionary<string, ObjectPool<Projectile>>();
+        }
+
+        if (!projectilePools.ContainsKey(type))
+        {
+            projectilePools[type] = new ObjectPool<Projectile>(size, prefab);
+        }
+    }
+
+    public static Projectile GetFromPool(string type)
+    {
+        if (projectilePools != null && projectilePools.ContainsKey(type))
+        {
+            return projectilePools[type].GetObject();
+        }
+
+        Debug.LogError($"No pool initialized for projectile type: {type}");
+        return null;
+    }
+
+    public static void ReturnToPool(Projectile projectile)
+    {
+        if (projectilePools != null && projectilePools.ContainsKey(projectile.type))
+        {
+            projectilePools[projectile.type].ReturnObject(projectile);
+        }
+        else
+        {
+            Destroy(projectile.gameObject);
+        }
+    }
 
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
-
-        //uncomment lines to check for run time errors
-        if (target != null)
-        {
-            //Debug.Log("Projectile: Target set to " + target.name);
-        }
-        else
-        {
-            //Debug.LogError("Projectile: Target is null when SetTarget was called.");
-        }
+        hasHit = false; // Reset state when reused
     }
 
+    void OnEnable()
+    {
+        if (animator == null) animator = GetComponent<Animator>();
+
+        if (animator != null)
+        {
+            animator.Play("LaunchAnimation"); // Play the projectile animation
+        }
+    }
 
     void Update()
     {
         if (target == null)
         {
-            // uncoment line to check errors with the projectile
-            //Debug.LogError("Projectile: Target is null, cannot move towards target.");
-            Destroy(gameObject);
+            ReturnToPool(this);
             return;
         }
 
-        // Move the projectile towards the target
+        // Rotate to face the target
         Vector3 direction = target.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(direction);
+
         float distanceThisFrame = speed * Time.deltaTime;
 
-
-        // Check if the projectile is close enough to hit the target
-        if (direction.magnitude <= distanceThisFrame)
+        if (direction.magnitude <= distanceThisFrame && !hasHit)
         {
             HitTarget();
             return;
         }
+
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }
 
-
-    // Deal damage to the enemy
     void HitTarget()
     {
-        EnemyScript enemy = target.GetComponent<EnemyScript>();
-        if (enemy != null)
+        if (hasHit) return; // Prevent multiple hits
+        hasHit = true;
+
+        if (impactEffect != null)
         {
-            enemy.TakeDamage(damage);
+            Instantiate(impactEffect, transform.position, transform.rotation);
         }
-        Destroy(gameObject);
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in hitColliders)
+        {
+            EnemyScript enemy = collider.GetComponent<EnemyScript>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+        }
+
+        if (animator != null)
+        {
+            animator.Play("ImpactAnimation");
+            StartCoroutine(ReturnToPoolAfterDelay(0.5f));
+        }
+        else
+        {
+            ReturnToPool(this);
+        }
     }
 
-    // collision for physics
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && !hasHit)
         {
             HitTarget();
         }
     }
+
+    IEnumerator ReturnToPoolAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ReturnToPool(this);
+    }
 }
+
+
