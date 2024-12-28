@@ -50,4 +50,8 @@ Our team consists of four members, each focusing on specific areas of the game's
 - **Ralph El Achkar El Zoghbi**
 - **Ka Hei Chan**
 - **Joshua Ronald Jayasinghe**
+
+
+## References
+-- tower descrutions sound: Destruction, Wooden, A.wav by InspectorJ -- https://freesound.org/s/352513/ -- License: Attribution 4.0
   
