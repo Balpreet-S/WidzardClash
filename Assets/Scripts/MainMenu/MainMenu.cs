@@ -10,6 +10,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Object Placement");
     }
 
+    public void GoToSettings()
+    {
+        SceneManager.LoadScene("Settings Menu");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
