@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class TowerPlacementManager : MonoBehaviour
 {
     public GameObject towerPrefab;
-    private float towerHeightOffset = 1.15f;
+    private float towerHeightOffset = 0f;
     private InputAction placeTowerAction;
     // using left mouse button for input in new input system
     private void Awake()

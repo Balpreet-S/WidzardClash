@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoblinL1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 761d9347036b54bc0b9b8133df7eb956, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -8700617353114198275, guid: 761d9347036b54bc0b9b8133df7eb956, type: 3}
