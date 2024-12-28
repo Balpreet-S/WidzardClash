@@ -198,6 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 222523462}
   - component: {fileID: 222523463}
+  - component: {fileID: 222523464}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -237,6 +238,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c046946c0953c974f8191d0b8262cc21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &222523464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222523461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65af506c15efaf9488afe5ebf622a76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &235888778
@@ -1131,9 +1144,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 222523464}
+        m_TargetAssemblyTypeName: Resume, Assembly-CSharp
+        m_MethodName: ResumeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1625,8 +1638,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 222523463}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: OpenSettings
+        m_TargetAssemblyTypeName: OpenSettings, Assembly-CSharp
+        m_MethodName: OpenSettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

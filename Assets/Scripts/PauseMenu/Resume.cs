@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class Resume : MonoBehaviour
 {
-    public void OpenSettings()
+    public void ResumeButton()
     {
-        SceneManager.LoadScene("Settings Menu");
+        SceneManager.LoadScene(0); // go back to the game scene
     }
 }
