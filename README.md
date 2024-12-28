@@ -50,4 +50,39 @@ Our team consists of four members, each focusing on specific areas of the game's
 - **Ralph El Achkar El Zoghbi**
 - **Ka Hei Chan**
 - **Joshua Ronald Jayasinghe**
+
+## References
+
+**Tower Brick Material**
+- **Material:** Japanese Stone Wall  
+- **Provided by:** [Poly Haven](https://polyhaven.com/)  
+- **License:** CC0 (Creative Commons Zero)  
+- **Creators:**
+  - Photography: Charlotte Baglioni  
+  - Processing: Dario Barresi  
+  - Tiling: Rico Cilliers  
+
+
+
+**Tower Transition Sound**
+- **Name:** Destruction, Wooden, A.wav  
+- **Author:** InspectorJ  
+- **Source:** [Freesound](https://freesound.org/s/352513/)  
+- **License:** [Attribution 4.0](https://creativecommons.org/licenses/by/4.0/)  
+
+
+
+**Fire Ball**
+- **Sound Source:** [Zapsplat.com](https://www.zapsplat.com)
+
+
+
+**Water Ball**
+- **Sound Source:** [Zapsplat.com](https://www.zapsplat.com)
+
+
+
+**Earth Ball**
+- **Sound Source:** [Zapsplat.com](https://www.zapsplat.com)
+
   
