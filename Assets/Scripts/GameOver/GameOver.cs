@@ -7,7 +7,7 @@ public class GameOver : MonoBehaviour
 {
     public void restart() // Starts the game from the beginning
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Object Placement");
     }
 
     public void quit() // quits game
