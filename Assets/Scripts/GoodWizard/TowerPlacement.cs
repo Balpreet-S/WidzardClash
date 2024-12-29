@@ -49,10 +49,12 @@ public class TowerPlacementManager : MonoBehaviour
                             XPManager.instance.PurchaseSkill();
 
                             Debug.Log("Tower placed!");
+
                         }
                         else
                         {
                             Debug.Log("Spot already occupied!");
+                            
                         }
                     }
                 }

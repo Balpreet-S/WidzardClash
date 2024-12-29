@@ -8,5 +8,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Object Placement.unity
     guid: f9d700f5f914447f48566abe5b02d921
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 52a161424d99b0b48a0c0a05e3cb8ea2
+  - enabled: 1
+    path: Assets/Scenes/Settings Menu.unity
+    guid: 8a5df67b322efa14dbc6a1f4363f0750
+  - enabled: 1
+    path: Assets/Scenes/Pause Menu.unity
+    guid: eda25b5a1db56e34593e9c5f090799df
+  - enabled: 1
+    path: Assets/Scenes/Game Over.unity
+    guid: 2b475eda38338e74489f58e5902d36c9
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
