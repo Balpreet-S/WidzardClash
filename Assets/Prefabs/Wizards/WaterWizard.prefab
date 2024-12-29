@@ -141,6 +141,8 @@ MonoBehaviour:
   earthballPrefab: {fileID: 0}
   earthballPoolSize: 25
   firePoint: {fileID: 1459614395512780102}
+  specialProjectilePrefab: {fileID: 5942370526381713114, guid: f67abfbd31c044039842ac3d821c00dd, type: 3}
+  specialAttackCooldown: 2
   fireballSound: {fileID: 0}
   waterballSound: {fileID: 8300000, guid: 1c1f2952f577f4497a8c64623ce4f6ff, type: 3}
   earthballSound: {fileID: 0}

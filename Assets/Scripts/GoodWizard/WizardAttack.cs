@@ -28,6 +28,12 @@ public class WizardAttack : MonoBehaviour
     [Header("Firing Point")]
     public Transform firePoint;
 
+    [Header("Special Attack")]
+    public GameObject specialProjectilePrefab; // Special projectile prefab
+    public float specialAttackCooldown = 10f; // Cooldown between special attacks
+    private float specialAttackTimer = 0f; // Timer to track cooldown
+
+
     [Header("Audio Settings")]
     public AudioClip fireballSound; // Fire wizard sound effect
     public AudioClip waterballSound; // Water wizard sound effect
@@ -52,7 +58,10 @@ public class WizardAttack : MonoBehaviour
         }
         else if (wizardType == "Water")
         {
+
             Projectile.InitializePool("Waterball", waterballPoolSize, waterballPrefab);
+
+
         }
         else if (wizardType == "Earth")
         {
@@ -66,6 +75,11 @@ public class WizardAttack : MonoBehaviour
         if (soundCooldownTimer > 0)
         {
             soundCooldownTimer -= Time.deltaTime;
+        }
+
+        if (specialAttackTimer > 0)
+        {
+            specialAttackTimer -= Time.deltaTime;
         }
 
         // If we have a target, check if it's still in range, and rotate if needed
@@ -155,53 +169,81 @@ public class WizardAttack : MonoBehaviour
         }
     }
 
+
     void ShootProjectile()
     {
-        // Decide which projectile type to shoot
-        string projectileType;
-        if (wizardType == "Fire")
-        {
-            projectileType = "Fireball";
-            PlaySound(fireballSound);
-        }
-        else if (wizardType == "Water")
-        {
-            projectileType = "Waterball";
-            if (soundCooldownTimer <= 0f) // Only play sound if cooldown is over
-            {
-                PlaySound(waterballSound);
-                soundCooldownTimer = soundCooldown; // Reset cooldown timer
-            }
-        }
-        else if (wizardType == "Earth")
-        {
-            projectileType = "Earthball";
+        GameObject projectilePrefab;
 
-            if (soundCooldownTimer <= 0f) // Only play sound if cooldown is over
+        // Check if the wizard can shoot a special projectile
+        if (specialAttackTimer <= 0f && specialProjectilePrefab != null)
+        {
+            Debug.Log("--------------------Special attack available!--------------------");
+            projectilePrefab = specialProjectilePrefab;
+
+            // Instantiate and launch the special projectile
+            GameObject specialProjectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            SpecialWaterProjectile specialProjectile = specialProjectileInstance.GetComponent<SpecialWaterProjectile>();
+            
+            if (specialProjectile != null)
             {
-                PlaySound(earthballSound);
-                soundCooldownTimer = soundCooldown; // Reset cooldown timer
+                specialProjectile.SetTarget(currentTarget.transform); // Assign the target
+                Debug.Log($"Special projectile instantiated at position {firePoint.position} and assigned to target at position {currentTarget.transform.position}.");
             }
+            else
+            {
+                Debug.LogError("Special projectile does not have a SpecialWaterProjectile script attached!");
+            }
+
+            specialAttackTimer = specialAttackCooldown; // Reset cooldown
         }
         else
         {
-            projectileType = "Fireball"; // Fallback, just in case
-        }
+            // Decide which projectile type to shoot
+            string projectileType;
+            if (wizardType == "Fire")
+            {
+                projectileType = "Fireball";
+                PlaySound(fireballSound);
+            }
+            else if (wizardType == "Water")
+            {
+                projectileType = "Waterball";
+                if (soundCooldownTimer <= 0f) // Only play sound if cooldown is over
+                {
+                    PlaySound(waterballSound);
+                    soundCooldownTimer = soundCooldown; // Reset cooldown timer
+                }
+            }
+            else if (wizardType == "Earth")
+            {
+                projectileType = "Earthball";
 
-        Projectile projectile = Projectile.GetFromPool(projectileType);
-        if (projectile != null)
-        {
-            projectile.transform.position = firePoint.position;
-            projectile.transform.rotation = firePoint.rotation;
-            projectile.SetTarget(currentTarget.transform);
+                if (soundCooldownTimer <= 0f) // Only play sound if cooldown is over
+                {
+                    PlaySound(earthballSound);
+                    soundCooldownTimer = soundCooldown; // Reset cooldown timer
+                }
+            }
+            else
+            {
+                projectileType = "Fireball"; // Fallback, just in case
+            }
 
-            Debug.Log($"{projectileType} instantiated at: {projectile.transform.position}");
-        }
-        else
-        {
-            Debug.LogError($"Failed to retrieve {projectileType} from pool.");
+            Projectile projectile = Projectile.GetFromPool(projectileType);
+            if (projectile != null)
+            {
+                projectile.transform.position = firePoint.position;
+                projectile.transform.rotation = firePoint.rotation;
+                projectile.SetTarget(currentTarget.transform);
+            }
+            else
+            {
+                Debug.LogError($"Failed to retrieve {projectileType} from pool.");
+            }
         }
     }
+
+
 
     void PlaySound(AudioClip clip)
     {
@@ -213,3 +255,7 @@ public class WizardAttack : MonoBehaviour
         }
     }
 }
+
+
+
+

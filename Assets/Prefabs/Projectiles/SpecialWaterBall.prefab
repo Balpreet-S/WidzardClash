@@ -4842,9 +4842,9 @@ GameObject:
   - component: {fileID: 3555561426462684595}
   - component: {fileID: 2067644787864234482}
   - component: {fileID: 4624732426730775096}
-  - component: {fileID: 2349057757858844102}
+  - component: {fileID: 147471843825717577}
   m_Layer: 0
-  m_Name: WaterBall
+  m_Name: SpecialWaterBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4937,7 +4937,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2349057757858844102
+--- !u!114 &147471843825717577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4946,11 +4946,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7131939408385119077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffc30905eef9844f4ba08c7a5cb24908, type: 3}
+  m_Script: {fileID: 11500000, guid: bf2272a275ac54b869c47b9cc33fdf87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 10
+  damage: 5
+  slowEffectDuration: 3
+  slowEffectMultiplier: 0.5
   impactEffect: {fileID: 0}
-  explosionRadius: 2
-  type: 

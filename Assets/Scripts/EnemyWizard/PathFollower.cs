@@ -5,9 +5,22 @@ using UnityEngine;
 public class PathFollower : MonoBehaviour
 {
     public Transform[] waypoints;
-    private float speed;
+    private float speed; // This can still be set via SetSpeed if needed.
     private int currentWaypointIndex = 0;
     private bool shouldMove = true;
+
+    private EnemyScript enemyScript; // Reference to EnemyScript to fetch speed dynamically
+
+    void Start()
+    {
+        // Cache the EnemyScript component
+        enemyScript = GetComponent<EnemyScript>();
+
+        if (enemyScript == null)
+        {
+            Debug.LogError("PathFollower: EnemyScript not found on this GameObject!");
+        }
+    }
 
     void Update()
     {
@@ -17,10 +30,16 @@ public class PathFollower : MonoBehaviour
         }
     }
 
-    //function for wizzards to move along the set waypoints
+    // Function for enemies to move along the set waypoints
     void MoveAlongPath()
     {
         if (waypoints.Length == 0) return;
+
+        // Fetch speed from EnemyScript if available
+        if (enemyScript != null)
+        {
+            speed = enemyScript.movementSpeed;
+        }
 
         Transform targetWaypoint = waypoints[currentWaypointIndex];
 
@@ -28,7 +47,8 @@ public class PathFollower : MonoBehaviour
         direction.Normalize();
 
         transform.position += direction * speed * Time.deltaTime;
-        //move to next waypoint after reaching the first
+
+        // Move to the next waypoint after reaching the current one
         if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
             currentWaypointIndex++;
@@ -59,7 +79,7 @@ public class PathFollower : MonoBehaviour
         transform.position = waypoints[currentWaypointIndex].position;
     }
 
-    // Function to set a new speed for the enemy helpful for changing speeds for special enemy wizzards in final game
+    // Function to set a new speed for the enemy (still useful for initialization or special cases)
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;
