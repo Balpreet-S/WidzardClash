@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Object Placement"); // Reloads the game
         Time.timeScale = 1f; // resumes the game
+        AudioListener.volume = 1; // turns sound on
     }
     public void QuitGame()
     {
