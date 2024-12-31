@@ -11,20 +11,30 @@ public class EnemyScript : MonoBehaviour
     public int damageToCastle = 10;
     public float attackRange = 1f;
     public int xpValue = 5;
+    public float knockbackDuration = 0.5f;
 
     private PathFollower pathFollower;
-    private bool hasAttacked = false; 
+    private bool hasAttacked = false;
 
+    private float originalSpeed;
+    private Coroutine slowEffectCoroutine; // Corrected typo here
 
     public event Action OnDeath;
 
     public bool killedByCastle = false;
 
+    
+
+    void Start()
+    {
+        originalSpeed = movementSpeed;
+    }
+
     public void Initialize(Transform[] waypoints)
     {
         pathFollower = GetComponent<PathFollower>();
 
-        if (pathFollower != null) //path for enemy wizzards
+        if (pathFollower != null)
         {
             pathFollower.SetSpeed(movementSpeed);
             pathFollower.waypoints = waypoints;
@@ -38,7 +48,7 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0) //if enemy health below or = 0, destroy 
+        if (health <= 0)
         {
             Die();
         }
@@ -49,7 +59,6 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-
         if (health <= 0)
         {
             Die();
@@ -58,7 +67,7 @@ public class EnemyScript : MonoBehaviour
 
     public void Die()
     {
-        // Notify Enemy Spwaner listener that wizzard died, for wave starting/ending logic 
+        // Notify listeners that the enemy died, for wave starting/ending logic
         OnDeath?.Invoke();
 
         // Only award XP if not killed by the castle
@@ -67,11 +76,10 @@ public class EnemyScript : MonoBehaviour
             XPManager.instance.AddXP(xpValue);
         }
 
-
         Destroy(gameObject);
     }
 
-    public int getCurrentHealth()
+    public int GetCurrentHealth()
     {
         return health;
     }
@@ -87,7 +95,6 @@ public class EnemyScript : MonoBehaviour
 
             if (distanceToCastle <= attackRange)
             {
-                //Debug.Log(" ----------------------------- Attacking Castle ----------------------------- ");
                 ReachCastle();
             }
         }
@@ -103,10 +110,44 @@ public class EnemyScript : MonoBehaviour
         }
 
         hasAttacked = true;
-        killedByCastle = true; //enemy reaches the castle
+        killedByCastle = true;
 
         pathFollower.StopMoving();
 
-        Die();  // Destroy the enemy wizzard after reaching the castle
+        Die(); // Destroy the enemy after reaching the castle
     }
+
+    public void ApplySlow(float slowMultiplier, float duration)
+    {
+        // Cancel any existing slow effect
+        if (slowEffectCoroutine != null)
+        {
+            StopCoroutine(slowEffectCoroutine);
+            movementSpeed = originalSpeed; // Reset to original speed before applying a new slow effect
+        }
+
+        Debug.Log($"enemy: Applying slow effect, Original speed {originalSpeed}, New speed {movementSpeed * slowMultiplier}, Duration {duration}");
+        movementSpeed *= slowMultiplier; // Apply the slow effect
+        slowEffectCoroutine = StartCoroutine(RemoveSlowAfterDelay(duration));
+    }
+
+    private IEnumerator RemoveSlowAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        movementSpeed = originalSpeed; // Restore the original speed
+        Debug.Log($"Enemey: Slow effect expired, New speed {originalSpeed}");
+        slowEffectCoroutine = null; // Clear the coroutine reference
+    }
+
+   
+    public void ApplyKnockback(Vector3 firingPosition, float knockbackForce, float knockbackDuration)
+    {
+        // Temporarily stop path-following
+        if (pathFollower != null)
+        {
+            //pathFollower.StopMoving();
+            pathFollower.ApplyKnockback(firingPosition, knockbackForce, knockbackDuration);
+        }
+    }
+
 }

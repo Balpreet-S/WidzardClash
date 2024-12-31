@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+// COMMENTS COMPLETED
+
 public class Projectile : MonoBehaviour
 {
     public float speed = 10f;
     public int damage = 10;
-    public GameObject impactEffect; // Explosion effect prefab (optional)
-    public float explosionRadius = 2f; // Area of effect radius (optional)
+    public GameObject impactEffect; 
+    public float explosionRadius = 2f;
 
     private Transform target;
-    private Animator animator; // Animator for animations
-    private bool hasHit = false; // To prevent multiple triggers
-    private static Dictionary<string, ObjectPool<Projectile>> projectilePools; // Separate pools for each projectile type
+    private Animator animator;
+    private bool hasHit = false;
+    private static Dictionary<string, ObjectPool<Projectile>> projectilePools;
 
-    public string type; // Type of projectile (e.g., "Fireball", "Waterfall")
+    public string type;
 
     public static void InitializePool(string type, int size, GameObject prefab)
     {
@@ -56,7 +58,7 @@ public class Projectile : MonoBehaviour
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
-        hasHit = false; // Reset state when reused
+        hasHit = false;
     }
 
     void OnEnable()
@@ -65,7 +67,7 @@ public class Projectile : MonoBehaviour
 
         if (animator != null)
         {
-            animator.Play("LaunchAnimation"); // Play the projectile animation
+            animator.Play("LaunchAnimation");
         }
     }
 
@@ -77,7 +79,6 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        // Rotate to face the target
         Vector3 direction = target.position - transform.position;
         transform.rotation = Quaternion.LookRotation(direction);
 
@@ -94,7 +95,7 @@ public class Projectile : MonoBehaviour
 
     void HitTarget()
     {
-        if (hasHit) return; // Prevent multiple hits
+        if (hasHit) return;
         hasHit = true;
 
         if (impactEffect != null)
