@@ -2336,7 +2336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd4e8d4daea9c44e9eb75f42641deb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillTowers: {fileID: 2828160826260076024, guid: 435ad6cd64b864347945a7b3cd8cd730, type: 3}
+  skillTowers: {fileID: 8694308759232829234, guid: 5d23424e6a7af4be8bc8a2e58e0a9cf5, type: 3}
   cost: 1
 --- !u!114 &808336631
 MonoBehaviour:

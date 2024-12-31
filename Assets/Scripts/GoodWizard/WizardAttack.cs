@@ -8,11 +8,14 @@ public class WizardAttack : MonoBehaviour
     [Header("Attack Settings")]
     public float attackRange = 5f;
     public float attackCooldown = 2f;
-    public int attackDamage = 10;
     public float rotationSpeed = 5f; // Speed of rotation toward the enemy
 
     [Header("Wizard Type (e.g., 'Fire', 'Water', 'Earth')")]
     public string wizardType;
+
+    [Header("Base Wizard")]
+    public GameObject BasePrefab;
+    public int BasePoolSize = 25;
 
     [Header("Fire Wizard")]
     public GameObject fireballPrefab;
@@ -36,6 +39,7 @@ public class WizardAttack : MonoBehaviour
 
 
     [Header("Audio Settings")]
+    public AudioClip baseballSound;
     public AudioClip fireballSound; 
     public AudioClip waterballSound;
     public AudioClip earthballSound;
@@ -53,7 +57,11 @@ public class WizardAttack : MonoBehaviour
         audioSource.playOnAwake = false;
 
         // Initialize the pool for the wizard's actual projectile type
-        if (wizardType == "Fire")
+        if (wizardType == "Base")
+        {
+            Projectile.InitializePool("BaseBall", BasePoolSize, BasePrefab); 
+        }
+        else if (wizardType == "Fire")
         {
             Projectile.InitializePool("Fireball", fireballPoolSize, fireballPrefab);
         }
@@ -152,7 +160,6 @@ public class WizardAttack : MonoBehaviour
     {
         if (currentTarget != null)
         {
-            currentTarget.TakeDamage(attackDamage);
 
             if (firePoint != null)
             {
@@ -195,6 +202,11 @@ public class WizardAttack : MonoBehaviour
                 PlaySound(earthballSound);
                 soundCooldownTimer = soundCooldown;
             }
+        }
+        else if (wizardType == "Base")
+        {
+            projectileType = "BaseBall";
+            PlaySound(baseballSound);
         }
         else
         {

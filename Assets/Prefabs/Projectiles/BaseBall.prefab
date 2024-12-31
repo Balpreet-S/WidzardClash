@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 830459874749614087}
   - component: {fileID: 5327434058859624284}
   - component: {fileID: 5371953680903393423}
-  - component: {fileID: 792855334325846098}
+  - component: {fileID: -6440408887179776979}
   m_Layer: 0
-  m_Name: SuperWaterBall
+  m_Name: BaseBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 9.99}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e919bb8475c8d4fd19ba27f8a208f823, type: 2}
+  - {fileID: 2100000, guid: db0100b52d94b4d8890c637901f96bd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,7 +106,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &792855334325846098
+--- !u!114 &-6440408887179776979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,11 +115,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5942370526381713114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf2272a275ac54b869c47b9cc33fdf87, type: 3}
+  m_Script: {fileID: 11500000, guid: ffc30905eef9844f4ba08c7a5cb24908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 5
-  slowEffectDuration: 9
-  slowEffectMultiplier: 0.5
+  damage: 10
   impactEffect: {fileID: 0}
+  explosionRadius: 2
+  type: 
