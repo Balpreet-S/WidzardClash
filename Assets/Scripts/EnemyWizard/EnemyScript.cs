@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     public int damageToCastle = 10;
     public float attackRange = 1f;
     public int xpValue = 5;
+    public float knockbackDuration = 0.5f;
 
     private PathFollower pathFollower;
     private bool hasAttacked = false;
@@ -21,6 +22,8 @@ public class EnemyScript : MonoBehaviour
     public event Action OnDeath;
 
     public bool killedByCastle = false;
+
+    
 
     void Start()
     {
@@ -136,4 +139,16 @@ public class EnemyScript : MonoBehaviour
         Debug.Log($"Enemey: Slow effect expired, New speed {originalSpeed}");
         slowEffectCoroutine = null; // Clear the coroutine reference
     }
+
+   
+    public void ApplyKnockback(Vector3 firingPosition, float knockbackForce, float knockbackDuration)
+    {
+        // Temporarily stop path-following
+        if (pathFollower != null)
+        {
+            //pathFollower.StopMoving();
+            pathFollower.ApplyKnockback(firingPosition, knockbackForce, knockbackDuration);
+        }
+    }
+
 }
