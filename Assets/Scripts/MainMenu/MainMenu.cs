@@ -5,17 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public void PlayGame() // Starts the game
     {
         SceneManager.LoadScene("Object Placement");
     }
 
-    public void GoToSettings()
+    public void HowToPlay() // Takes you to another scene that explains how the game works
     {
-        SceneManager.LoadScene("Settings Menu");
+        SceneManager.LoadScene("How To Play");
     }
 
-    public void QuitGame()
+    public void QuitGame() // Quits the game
     {
         Application.Quit();
     }

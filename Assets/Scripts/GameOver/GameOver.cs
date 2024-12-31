@@ -7,7 +7,9 @@ public class GameOver : MonoBehaviour
 {
     public void restart() // Starts the game from the beginning
     {
-        SceneManager.LoadScene("Object Placement");
+        SceneManager.LoadScene("Object Placement"); // Reloads the game
+        Time.timeScale = 1f; // resumes the game
+        AudioListener.volume = 1; // turns sound on
     }
 
     public void quit() // quits game
