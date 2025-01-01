@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.063, y: 2.821}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8685237287145258202
 Canvas:
@@ -138,7 +138,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3105762433369735054
 CanvasRenderer:
@@ -337,6 +337,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7282376524960668856}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3102921183869997910}
   m_SourcePrefab: {fileID: 100100000, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
 --- !u!1 &5875299733704528371 stripped
 GameObject:
@@ -376,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47497b704dfe4d029e92825c65a8082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doubleClickDelay: 0.3
 --- !u!82 &-4595364929986968755
 AudioSource:
   m_ObjectHideFlags: 0
@@ -486,9 +490,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 10
   attackCooldown: 0.5
-  attackDamage: 15
   rotationSpeed: 5
   wizardType: Fire
+  BasePrefab: {fileID: 0}
+  BasePoolSize: 25
   fireballPrefab: {fileID: 9083432090902696954, guid: dc999d13075f84402b5e9263107e7e9c, type: 3}
   fireballPoolSize: 25
   waterballPrefab: {fileID: 0}
@@ -498,9 +503,23 @@ MonoBehaviour:
   firePoint: {fileID: 2292148154401064729}
   specialProjectilePrefab: {fileID: 7817785742061471692, guid: 79579d2b0e0db4c34baf14f7dd0c6428, type: 3}
   specialAttackCooldown: 10
+  damageMultiplier: 1
+  baseballSound: {fileID: 0}
   fireballSound: {fileID: 8300000, guid: 8167426335d254d7e85372346e6c4b22, type: 3}
   waterballSound: {fileID: 0}
   earthballSound: {fileID: 0}
+--- !u!114 &3102921183869997910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875299733704528371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2930d75fa87bc4ed69c989bae196231b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6539949408301583177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}

@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     public int damage = 10;
     public GameObject impactEffect; 
     public float explosionRadius = 2f;
+    private float damageMultiplier = 1.0f;
 
     private Transform target;
     private Animator animator;
@@ -61,6 +62,11 @@ public class Projectile : MonoBehaviour
         hasHit = false;
     }
 
+    public void SetDamageMultiplier(float multiplier)
+    {
+        damageMultiplier = multiplier;
+    }
+
     void OnEnable()
     {
         if (animator == null) animator = GetComponent<Animator>();
@@ -103,13 +109,16 @@ public class Projectile : MonoBehaviour
             Instantiate(impactEffect, transform.position, transform.rotation);
         }
 
+        float finalDamage = damage * damageMultiplier;
+        Debug.Log("Final damage: " + finalDamage);
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in hitColliders)
         {
             EnemyScript enemy = collider.GetComponent<EnemyScript>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(Mathf.RoundToInt(finalDamage));
             }
         }
 

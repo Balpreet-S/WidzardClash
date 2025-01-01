@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3337031505411143184
 CanvasRenderer:
@@ -187,7 +187,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.01, y: 2.818}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7090287331329853173
 Canvas:
@@ -345,6 +345,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7202727010454995208}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5980479037508212994}
   m_SourcePrefab: {fileID: 100100000, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
 --- !u!1 &2828160826260076024 stripped
 GameObject:
@@ -384,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47497b704dfe4d029e92825c65a8082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doubleClickDelay: 0.3
 --- !u!82 &3202845681657136736
 AudioSource:
   m_ObjectHideFlags: 0
@@ -494,9 +498,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 10
   attackCooldown: 0.5
-  attackDamage: 10
   rotationSpeed: 5
   wizardType: Earth
+  BasePrefab: {fileID: 0}
+  BasePoolSize: 25
   fireballPrefab: {fileID: 0}
   fireballPoolSize: 25
   waterballPrefab: {fileID: 0}
@@ -506,9 +511,23 @@ MonoBehaviour:
   firePoint: {fileID: 8114488295199967580}
   specialProjectilePrefab: {fileID: 3970704022524701318, guid: 4d4266d6b44114c398c915a9237f7630, type: 3}
   specialAttackCooldown: 10
+  damageMultiplier: 1
+  baseballSound: {fileID: 0}
   fireballSound: {fileID: 0}
   waterballSound: {fileID: 0}
   earthballSound: {fileID: 8300000, guid: a119ec29459254ad292a0d01c9187cbc, type: 3}
+--- !u!114 &5980479037508212994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828160826260076024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2930d75fa87bc4ed69c989bae196231b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3203314861683011394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
