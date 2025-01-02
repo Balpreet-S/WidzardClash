@@ -26,6 +26,8 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
+        Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
+
         StartCoroutine(StartWaveAfterDelay());
     }
 
@@ -104,7 +106,7 @@ public class EnemySpawner : MonoBehaviour
     /// <param name="prefab">The prefab to be spawned</param>
     void SpawnEnemy(GameObject prefab)
     {
-        GameObject newEnemy = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject newEnemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity); //spawnPoint.rotation
         EnemyScript enemyScript = newEnemy.GetComponent<EnemyScript>();
 
         if (enemyScript != null)

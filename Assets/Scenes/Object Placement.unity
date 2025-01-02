@@ -2284,9 +2284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984cfe8dbc94d44ed802e71c3e9a8b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab1: {fileID: 6874542551522743495, guid: 66ead187fcd934ad8be1d2bd12e59253, type: 3}
-  enemyPrefab2: {fileID: 8866218700127635742, guid: fa3de0635bc1943cda76bdf39820afaa, type: 3}
-  enemyPrefab3: {fileID: 709240121358135082, guid: 67f815d742621435c9ec540147d62c32, type: 3}
+  enemyPrefab1: {fileID: 7474846248238024318, guid: 66ead187fcd934ad8be1d2bd12e59253, type: 3}
+  enemyPrefab2: {fileID: 6114717140279395546, guid: fa3de0635bc1943cda76bdf39820afaa, type: 3}
+  enemyPrefab3: {fileID: 4560920566149554390, guid: 67f815d742621435c9ec540147d62c32, type: 3}
   enemyPrefab4: {fileID: 0}
   spawnPoint: {fileID: 1363330212}
   waypoints:
@@ -2303,7 +2303,7 @@ MonoBehaviour:
   - {fileID: 1292689689}
   initialEnemyCount: 5
   spawnInterval: 1
-  initialSpawnDelay: 0
+  initialSpawnDelay: 4
   waveCount: 5
 --- !u!4 &740011230
 Transform:
@@ -2510,7 +2510,7 @@ Terrain:
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
+  m_DetailObjectDistance: 294
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
@@ -2649,7 +2649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd4e8d4daea9c44e9eb75f42641deb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillTowers: {fileID: 2828160826260076024, guid: 435ad6cd64b864347945a7b3cd8cd730, type: 3}
+  skillTowers: {fileID: 8694308759232829234, guid: 5d23424e6a7af4be8bc8a2e58e0a9cf5, type: 3}
   cost: 1
 --- !u!114 &808336631
 MonoBehaviour:
@@ -4619,13 +4619,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363330211}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -24.9, y: 0.03, z: 48.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &1364704388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}

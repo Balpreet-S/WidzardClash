@@ -48,7 +48,7 @@ public class XPManager : MonoBehaviour
             nextXPThreshold += 50;
         }
 
-        Debug.Log($"Player gained {xpAmount} XP. Total XP: {playerXP}");
+        //Debug.Log($"Player gained {xpAmount} XP. Total XP: {playerXP}");
     }
 
     //buying fire tower
