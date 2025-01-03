@@ -1,87 +1,179 @@
-using UnityEngine;
-using System.Collections;
+/*using UnityEngine;
 
-public class WizardClickController : MonoBehaviour
+public class WizardClickHandler : MonoBehaviour
 {
-    private WizardAttack wizardAttack;
-    private WizardUpgrade wizardUpgrade;
-    private ImageFillGradient cooldownBar;
+    public GameObject uiWindowPrefab; // Assign your prefab in the Inspector
+    private GameObject activeWindow; // To track the currently active panel
 
-    [Header("Double-Click Settings")]
-    [Tooltip("Time within which a second click must occur to register as a double-click.")]
-    public float doubleClickDelay = 0.3f;
-
-    private int clickCount = 0;        // How many clicks have happened
-    private bool coroutineRunning = false; 
-
-    void Start()
+    void OnMouseDown()
     {
-        // Get references (assuming WizardAttack and WizardUpgrade are on the same GameObject)
-        wizardAttack = GetComponent<WizardAttack>();
-        wizardUpgrade = GetComponent<WizardUpgrade>();
-        cooldownBar  = GetComponentInChildren<ImageFillGradient>();
+        // If a panel is already active for this wizard, destroy it (close the panel)
+        if (activeWindow != null)
+        {
+            Destroy(activeWindow);
+            activeWindow = null; // Reset the reference
+            Debug.Log("UI Window closed.");
+            return;
+        }
 
-        if (wizardAttack == null)
-            Debug.LogError("WizardClickController: WizardAttack script not found!");
+        if (uiWindowPrefab == null)
+        {
+            Debug.LogError("UI Window Prefab is not assigned!");
+            return;
+        }
 
-        if (wizardUpgrade == null)
-            Debug.LogWarning("WizardClickController: WizardUpgrade script not found. Double-click upgrades won't work.");
+        // Instantiate the UI window
+        GameObject uiWindow = Instantiate(uiWindowPrefab);
 
-        if (cooldownBar == null)
-            Debug.LogError("WizardClickController: CooldownBar (ImageFillGradient) not found!");
+        // Parent the window to this wizard (so it follows the wizard)
+        uiWindow.transform.SetParent(transform, false);
+
+        // Position the pop-up slightly above the wizard
+        Vector3 offset = new Vector3(0, 2, 0); // Adjust this offset as needed
+        uiWindow.transform.localPosition = offset;
+
+        // Store reference to the active window
+        activeWindow = uiWindow;
+
+        Debug.Log($"UI Window opened at position: {uiWindow.transform.position}");
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Left mouse button
+        // Ensure the UI always faces the camera
+        if (activeWindow != null)
         {
-            // Raycast to see if we actually clicked THIS wizard
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider != null && hit.collider.gameObject == gameObject)
-                {
-                    // We clicked on this wizard; increment click count
-                    clickCount++;
-
-                    if (!coroutineRunning)
-                    {
-                        // Start the coroutine to check if it's single or double click
-                        StartCoroutine(ClickRoutine());
-                    }
-                }
-            }
+            activeWindow.transform.LookAt(Camera.main.transform);
+            activeWindow.transform.Rotate(0, 180, 0); // Flip to face the camera properly
         }
     }
+}
 
-    private IEnumerator ClickRoutine()
+private WizardAttack wizardAttack;
+    private WizardUpgrade wizardUpgrade;
+    private ImageFillGradient cooldownBar;
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+
+// uiWindow.SetActive(true);
+
+public class WizardClickHandler : MonoBehaviour
+{
+    public GameObject uiWindowPrefab; // Assign your prefab in the Inspector
+    private Camera mainCamera;
+    private GameObject activeWindow; // To track the currently active panel
+
+
+    private WizardAttack wizardAttack;
+    private WizardUpgrade wizardUpgrade;
+    private ImageFillGradient cooldownBar;
+
+
+    // upgrade level 
+    
+    private int upgradeLevel = 0;   
+
+
+    
+
+    void Start()
     {
-        coroutineRunning = true;
+        mainCamera = Camera.main;
 
-        // Wait for the doubleClickDelay to see if a second click happens
-        yield return new WaitForSeconds(doubleClickDelay);
-
-        // If after waiting, clickCount is still 1, it's a single click
-        if (clickCount == 1)
-        {
-            HandleSingleClick();
-        }
-        // If clickCount == 2 (or more), it's a double click
-        else if (clickCount >= 2)
-        {
-            HandleDoubleClick();
-        }
-
-        // Reset for next time
-        clickCount = 0;
-        coroutineRunning = false;
+        wizardAttack = GetComponent<WizardAttack>();
+        wizardUpgrade = GetComponent<WizardUpgrade>();
+        cooldownBar = GetComponentInChildren<ImageFillGradient>();
     }
 
-    private void HandleSingleClick()
+    void OnMouseDown()
     {
-        Debug.Log("Wizard was SINGLE-clicked!");
+        // If a panel is already active for this wizard, destroy it (close the panel)
+        if (activeWindow != null)
+        {
+            Destroy(activeWindow);
+            activeWindow = null; // Reset the reference
+            Debug.Log("UI Window closed.");
+            return;
+        }
 
-        // Existing logic: Try to activate special power if cooldown is ready
+        if (uiWindowPrefab == null)
+        {
+            Debug.LogError("UI Window Prefab is not assigned!");
+            return;
+        }
+
+        // Find the WizardCanvas
+        GameObject canvasObject = GameObject.Find("WizardCanvas");
+        if (canvasObject == null)
+        {
+            Debug.LogError("WizardCanvas not found in the scene!");
+            return;
+        }
+
+        Canvas canvas = canvasObject.GetComponent<Canvas>();
+        if (canvas == null)
+        {
+            Debug.LogError("WizardCanvas does not have a Canvas component!");
+            return;
+        }
+
+        // Instantiate the UI window
+        GameObject uiWindow = Instantiate(uiWindowPrefab);
+        uiWindow.transform.SetParent(canvas.transform, false);
+
+        // Ensure the panel is active
+        uiWindow.SetActive(true);
+
+        // Position the panel at the wizard's screen position
+        Vector3 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
+
+        // Convert screen position to local position in the Canvas space
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.transform as RectTransform,
+            screenPosition,
+            canvas.worldCamera,
+            out Vector2 localPosition
+        );
+
+        // Set the panel's position
+        RectTransform rectTransform = uiWindow.GetComponent<RectTransform>();
+        localPosition += new Vector2(0, -55);
+        rectTransform.localPosition = localPosition;
+
+        // Store reference to the active window
+        activeWindow = uiWindow;
+
+        Button[] buttons = uiWindow.GetComponentsInChildren<Button>();
+        if (buttons.Length >= 2)
+        {
+            buttons[0].onClick.AddListener(LevelUpWizard);
+            buttons[1].onClick.AddListener(ActivateSpecialPower);
+        }
+
+        Debug.Log("UI Window opened and positioned.");
+    }
+
+
+
+    public void ActivateSpecialPower()
+    {
+        Debug.Log("Activate Special Power!");
+
         if (cooldownBar != null && cooldownBar.IsCooldownComplete())
         {
             if (wizardAttack != null)
@@ -109,21 +201,37 @@ public class WizardClickController : MonoBehaviour
         {
             Debug.Log("Special power is not ready yet.");
         }
+
     }
 
-    private void HandleDoubleClick()
+    public void LevelUpWizard()
     {
-        Debug.Log("Wizard was DOUBLE-clicked!");
+        Debug.Log("Level Up Wizard!");
 
-        // Upgrade damage by 20% if we have a WizardUpgrade reference
-        if (wizardUpgrade != null)
-        {
-            wizardUpgrade.UpgradeWizardDamage(20f);
-            Debug.Log("Wizard damage upgraded by +20%!");
-        }
-        else
+        if (wizardUpgrade == null)
         {
             Debug.LogWarning("No WizardUpgrade script found on this Wizard.");
+            return;
         }
+
+
+        switch (upgradeLevel)
+        {
+            case 0:
+                wizardUpgrade.UpgradeWizardDamage(30f);
+                Debug.Log("Wizard damage upgraded by +30%!");
+                upgradeLevel++;
+                break;
+            case 1:
+                wizardUpgrade.UpgradeWizardDamage(20f);
+                Debug.Log("Wizard damage upgraded by +20%!");
+                upgradeLevel++;
+
+                break;
+            default:
+                Debug.LogWarning($"Invalid upgrade level: {upgradeLevel}");
+                break;
+        }
+
     }
 }

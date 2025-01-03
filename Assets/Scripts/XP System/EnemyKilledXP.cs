@@ -88,6 +88,15 @@ public class XPManager : MonoBehaviour
         }
     }
 
+    public void PurchaseUpgrade()
+    {
+        if (SkillPoints >= Button.Cost)
+        {
+            SkillPoints -= Button.Cost;
+            Button = null;
+        }
+    }
+
 
     // update the uk to show current skill points
 

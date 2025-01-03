@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47497b704dfe4d029e92825c65a8082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doubleClickDelay: 0.3
+  uiWindowPrefab: {fileID: 3126147981100979984, guid: 730bb8507f2be455cb00ce8a00a0110b, type: 3}
 --- !u!82 &3202845681657136736
 AudioSource:
   m_ObjectHideFlags: 0

@@ -15,8 +15,10 @@ public class WizardUpgrade : MonoBehaviour
     public void UpgradeWizardDamage(float percentIncrease)
     {
         // e.g., passing in 20 means +20% damage
-        float increment = percentIncrease / 100f;
-        wizardAttack.damageMultiplier += increment;
+        
+            float increment = percentIncrease / 100f;
+            wizardAttack.damageMultiplier += increment;
+        
         
         // If wizardAttack.damageMultiplier was 1.0 and percentIncrease is 20,
         // new multiplier is 1.2 (i.e., +20% damage).

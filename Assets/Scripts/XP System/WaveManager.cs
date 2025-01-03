@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
     {
         // Wave 1: only the base button is interactable
         baseSkillButton.interactable = true;
-        fireSkillButton.interactable = false;
+        fireSkillButton.interactable = true;
         waterSkillButton.interactable = false;
         earthSkillButton.interactable = false;
         ULTButton.interactable = false;
