@@ -85,4 +85,14 @@ Our team consists of four members, each focusing on specific areas of the game's
 **Earth Ball**
 - **Sound Source:** [Zapsplat.com](https://www.zapsplat.com)
 
+**Grass and Grass Texture**
+- **Grass Model (grass)**: Used for environmental decoration grass in the game.
+- **Grass Texture (grass_texture_1)**: Applied to the terrain for ground texturing.
+
+These assets were sourced from the Unity Asset Store package:
+- **Lowpoly Piece of Nature**: [Link to Asset Store Page](https://assetstore.unity.com/packages/3d/environments/fantasy/lowpoly-piece-of-nature-40538)
+
+### License and Attribution
+The assets are used under the Unity Asset Store license. For more details, see the [Unity Asset Store Terms of Service](https://unity.com/legal/as-terms).
+
   
