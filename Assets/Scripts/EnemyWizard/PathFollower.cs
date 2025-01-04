@@ -74,7 +74,9 @@ public class PathFollower : MonoBehaviour
         // Move to the next waypoint after reaching the current one
         if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
+            Debug.Log("old waypoint index: " + currentWaypointIndex);
             currentWaypointIndex++;
+            Debug.Log("next waypoint index: " + currentWaypointIndex);
 
             // Loop back to the start or stop moving if it's the last waypoint
             if (currentWaypointIndex >= waypoints.Length)
