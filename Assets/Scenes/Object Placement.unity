@@ -3548,7 +3548,7 @@ MonoBehaviour:
   - {fileID: 120309464}
   - {fileID: 833703304}
   - {fileID: 975958085}
-  initialEnemyCount: 5
+  initialEnemyCount: 2
   spawnInterval: 1
   initialSpawnDelay: 4
   waveCount: 5
@@ -4008,7 +4008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40f65894efce4759a54b47f62e6fdb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerXP: 50
+  playerXP: 400
   LevelText: {fileID: 1929399522}
 --- !u!4 &794375069
 Transform:
