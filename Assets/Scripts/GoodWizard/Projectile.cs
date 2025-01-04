@@ -126,7 +126,6 @@ public class Projectile : MonoBehaviour
         }
 
         float finalDamage = damage * damageMultiplier;
-        Debug.Log("Final damage: " + finalDamage);
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in hitColliders)

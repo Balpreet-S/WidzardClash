@@ -79,6 +79,11 @@ public class EnemyScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void DieNoXP()
+    {
+        Destroy(gameObject);
+    }
+
     public int GetCurrentHealth()
     {
         return health;

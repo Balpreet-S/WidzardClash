@@ -13,15 +13,7 @@ public class XPManager : MonoBehaviour
 
     private int nextXPThreshold;
 
-    public int SkillPoints
-    {
-        get { return skillPoints; }
-        set
-        {
-            skillPoints = value;
-            UpdateSkillPointsText();
-        }
-    }
+
 
     private void Awake()
     {
@@ -33,28 +25,25 @@ public class XPManager : MonoBehaviour
 
     private void Start()
     {
-        SkillPoints = 2;
-        playerXP = 50;
-        nextXPThreshold = 100;
+        playerXP = 100;
+        UpdateSkillPointsText();
+    }
+
+    private void Update()
+    {
+        UpdateSkillPointsText();
     }
     //add skill points and player xp depending on threshold
     public void AddXP(int xpAmount)
     {
         playerXP += xpAmount;
 
-        while (playerXP >= nextXPThreshold)
-        {
-            SkillPoints += 1;
-            nextXPThreshold += 50;
-        }
-
-        //Debug.Log($"Player gained {xpAmount} XP. Total XP: {playerXP}");
     }
 
-    //buying fire tower
+    //buying wizard
     public void SkillTowers(SkillsButtons s)
     {
-        if (SkillPoints >= s.Cost)
+        if (playerXP >= s.Cost)
         {
             Button = s;
         }
@@ -63,16 +52,18 @@ public class XPManager : MonoBehaviour
 
     public void WinningCondition(SkillsButtons s)
     {
-        if (SkillPoints >= s.Cost)
+        if (playerXP >= s.Cost)
         {
             Button = s;
-            SkillPoints -= s.Cost;
+            playerXP -= s.Cost;
             Time.timeScale = 0;
             EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
             foreach (EnemyScript enemy in allEnemies)
             {
-                enemy.Die();
+                enemy.DieNoXP();
             }
+
+            // Destory insted of die 
 
             Debug.Log("Congrats on winning the game!!");
         }
@@ -81,18 +72,18 @@ public class XPManager : MonoBehaviour
     //decrease skillpoints when used by a button 
     public void PurchaseSkill()
     {
-        if (SkillPoints >= Button.Cost)
+        if (playerXP >= Button.Cost)
         {
-            SkillPoints -= Button.Cost;
+            playerXP -= Button.Cost;
             Button = null;
         }
     }
 
     public void PurchaseUpgrade()
     {
-        if (SkillPoints >= Button.Cost)
+        if (playerXP >= Button.Cost)
         {
-            SkillPoints -= Button.Cost;
+            playerXP -= Button.Cost;
             Button = null;
         }
     }
@@ -104,7 +95,7 @@ public class XPManager : MonoBehaviour
     {
         if (LevelText != null)
         {
-            LevelText.text = $"You have: {SkillPoints} skill points";
+            LevelText.text = $"You have: {playerXP} XP";
         }
     }
 }

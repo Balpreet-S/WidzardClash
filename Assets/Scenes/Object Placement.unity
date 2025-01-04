@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 14de91140025e403bbb1611d966567c8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571363, b: 0.30692217, a: 1}
+  m_IndirectSpecularColor: {r: 0.44863102, g: 0.49184155, b: 0.29416502, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 5875299733704528371, guid: 29f0e750090834c45bd9a9b45be7eab2, type: 3}
-  cost: 1
+  cost: 50
 --- !u!114 &33916416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 1526889637422913483, guid: 43ac22291675c40889da5f081d36f240, type: 3}
-  cost: 1
+  cost: 50
 --- !u!114 &332017518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4078,7 +4078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 8694308759232829234, guid: 5d23424e6a7af4be8bc8a2e58e0a9cf5, type: 3}
-  cost: 1
+  cost: 50
 --- !u!114 &808336631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5032,7 +5032,7 @@ Camera:
   m_GameObject: {fileID: 1045485630}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.5294118, g: 0.80784315, b: 0.92156863, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -6394,7 +6394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 2828160826260076024, guid: 435ad6cd64b864347945a7b3cd8cd730, type: 3}
-  cost: 1
+  cost: 50
 --- !u!114 &1304527168
 MonoBehaviour:
   m_ObjectHideFlags: 0
