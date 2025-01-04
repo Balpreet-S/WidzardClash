@@ -58,9 +58,7 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log($"Enemy took damage!, health: {health}, and damage: {damage}");
         health -= damage;
-        Debug.Log($"Enemy took damage!, health: {health}, and damage: {damage}");
         if (health <= 0)
         {
             Die();
@@ -128,7 +126,7 @@ public class EnemyScript : MonoBehaviour
             movementSpeed = originalSpeed; // Reset to original speed before applying a new slow effect
         }
 
-        Debug.Log($"enemy: Applying slow effect, Original speed {originalSpeed}, New speed {movementSpeed * slowMultiplier}, Duration {duration}");
+        Debug.Log("Slow effect applied!");
         movementSpeed *= slowMultiplier; // Apply the slow effect
         slowEffectCoroutine = StartCoroutine(RemoveSlowAfterDelay(duration));
     }
@@ -137,7 +135,6 @@ public class EnemyScript : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         movementSpeed = originalSpeed; // Restore the original speed
-        Debug.Log($"Enemey: Slow effect expired, New speed {originalSpeed}");
         slowEffectCoroutine = null; // Clear the coroutine reference
     }
 
@@ -149,6 +146,7 @@ public class EnemyScript : MonoBehaviour
         {
             //pathFollower.StopMoving();
             pathFollower.ApplyKnockback(firingPosition, knockbackForce, knockbackDuration);
+            Debug.Log("Knockback applied!");
         }
     }
 

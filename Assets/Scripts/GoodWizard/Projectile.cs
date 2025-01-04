@@ -20,6 +20,10 @@ public class Projectile : MonoBehaviour
 
     public string type;
 
+    public float maxLifetime = 5f;  // The maximum time the projectile will live
+    private float lifetimeTimer;
+
+
     public static void InitializePool(string type, int size, GameObject prefab)
     {
         if (projectilePools == null)
@@ -75,6 +79,9 @@ public class Projectile : MonoBehaviour
         {
             animator.Play("LaunchAnimation");
         }
+
+        // Reset lifetime timer
+        lifetimeTimer = maxLifetime;
     }
 
     void Update()
@@ -84,6 +91,15 @@ public class Projectile : MonoBehaviour
             ReturnToPool(this);
             return;
         }
+
+
+        lifetimeTimer -= Time.deltaTime;
+        if (lifetimeTimer <= 0f && !hasHit)
+        {
+            ReturnToPool(this);
+            return;
+        }
+
 
         Vector3 direction = target.position - transform.position;
         transform.rotation = Quaternion.LookRotation(direction);
