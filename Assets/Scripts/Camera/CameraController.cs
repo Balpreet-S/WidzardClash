@@ -3,154 +3,169 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraControl : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
-    private CameraControlActions cameraActions;
-    private InputAction movement;
+    private CameraControlActions inputActions;
+    private InputAction moveAction;
     private Transform cameraTransform;
 
-    //horizontal motion
+    // Horizontal movement
     [SerializeField]
-    private float maxSpeed=5f;
-    private float speed;
+    private float maxMoveSpeed = 5f;
+    private float currentSpeed;
     [SerializeField]
-    private float acceleration = 10f;
+    private float accelerationRate = 10f;
     [SerializeField]
-    private float damping = 15f;
+    private float dampingRate = 15f;
 
-    //vertical motion - zooming 
+    // Vertical movement (zooming)
     [SerializeField]
-    private float stepSize = 2f;
+    private float zoomStep = 2f;
     [SerializeField]
     private float zoomDampening = 7.5f;
     [SerializeField]
-    private float minHeight = 5f;
+    private float minZoomHeight = 5f;
     [SerializeField]
-    private float maxHeight = 50f;
+    private float maxZoomHeight = 50f;
     [SerializeField]
     private float zoomSpeed = 2f;
 
-    //rotation
+    // Camera rotation
     [SerializeField]
-    private float maxRotationSpeed = 1f;
+    private float rotationSpeed = 1f;
 
-    //screen edge rotation
-    [SerializeField]
-    [Range(0f, 0.1f)]
-    private float edgeTolerence = 0.05f;
-    [SerializeField]
-    private bool useScreenEdge = true;
-
-    //value set in various functions
-    //used to update the position of the camera base object.
-    private Vector3 targetPosition;
-
-    private float zoomHeight;
-
-    //used to track and maintain velocity without a rigid body
+    // Position and velocity tracking
+    private Vector3 targetMovePosition;
+    private float currentZoomHeight;
     private Vector3 horizontalVelocity;
-    private Vector3 lastPosition;
-
-    //tracks where the dragging action started
-    Vector3 startDrag;
+    private Vector3 lastFramePosition;
 
     private void Awake()
     {
-        cameraActions = new CameraControlActions();
-        cameraTransform = this.GetComponentInChildren<Camera>().transform;
+        inputActions = new CameraControlActions();
+        cameraTransform = GetComponentInChildren<Camera>().transform;
     }
 
     private void OnEnable()
     {
-        zoomHeight = cameraTransform.localPosition.y;
-        cameraTransform.LookAt(this.transform);
-        lastPosition = this.transform.position;
-        movement = cameraActions.Camera.Movement;
-        cameraActions.Camera.RotateCamera.performed += RotateCamera;
-        cameraActions.Camera.ZoomCamera.performed += ZoomCamera;
-        cameraActions.Camera.Enable();
-    }
-    private void Ondisable()
-    {
-        cameraActions.Camera.RotateCamera.performed -= RotateCamera;
-        cameraActions.Camera.ZoomCamera.performed -= ZoomCamera;
-        cameraActions.Disable();
-    }
-     private void Update()
-    {
-        GetKeyboardMovement();
+        currentZoomHeight = cameraTransform.localPosition.y;
+        cameraTransform.LookAt(transform);
+        lastFramePosition = transform.position;
 
+        moveAction = inputActions.Camera.Movement;
+        inputActions.Camera.RotateCamera.performed += HandleCameraRotation;
+        inputActions.Camera.ZoomCamera.performed += HandleCameraZoom;
+        inputActions.Camera.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Camera.RotateCamera.performed -= HandleCameraRotation;
+        inputActions.Camera.ZoomCamera.performed -= HandleCameraZoom;
+        inputActions.Camera.Disable();
+    }
+
+    private void Update()
+    {
+        HandleMovementInput();
         UpdateCameraPosition();
-        updateVelocity();
-        UpdateBasePosition();
+        UpdateHorizontalVelocity();
+        UpdateObjectPosition();
     }
-    private void updateVelocity()
+
+    private void UpdateHorizontalVelocity()
     {
-        horizontalVelocity = (this.transform.position - lastPosition) / Time.deltaTime;
+        horizontalVelocity = (transform.position - lastFramePosition) / Time.deltaTime;
         horizontalVelocity.y = 0;
-        lastPosition = this.transform.position;
+        lastFramePosition = transform.position;
     }
 
-    private void GetKeyboardMovement()
+    private void HandleMovementInput()
     {
-        Vector3 inputValue = movement.ReadValue<Vector2>().x * GetCameraRight() + movement.ReadValue<Vector2>().y * GetCameraForward();
-        inputValue = inputValue.normalized;
+        if (moveAction != null && moveAction.enabled)
+        {
+            Vector3 inputDirection = moveAction.ReadValue<Vector2>().x * GetCameraRight() +
+                                     moveAction.ReadValue<Vector2>().y * GetCameraForward();
+            inputDirection = inputDirection.normalized;
 
-        if(inputValue.sqrMagnitude > 0.1f)
-        targetPosition += inputValue;
+            if (inputDirection.sqrMagnitude > 0.1f && !float.IsNaN(inputDirection.x) && !float.IsNaN(inputDirection.z))
+            {
+                targetMovePosition += inputDirection;
+            }
+        }
     }
+
     private Vector3 GetCameraRight()
     {
         Vector3 right = cameraTransform.right;
         right.y = 0;
-        return right;
+        return right.normalized;
     }
-        private Vector3 GetCameraForward()
+
+    private Vector3 GetCameraForward()
     {
         Vector3 forward = cameraTransform.forward;
         forward.y = 0;
-        return forward;
+        return forward.normalized;
     }
-    private void UpdateBasePosition()
+
+    private void UpdateObjectPosition()
     {
-        if (targetPosition.sqrMagnitude > 0.1f)
+        Vector3 newPosition;
+
+        if (targetMovePosition.sqrMagnitude > 0.1f)
         {
-            speed = Mathf.Lerp(speed, maxSpeed, Time.deltaTime * acceleration);
-            transform.position += targetPosition * speed * Time.deltaTime;
+            currentSpeed = Mathf.Lerp(currentSpeed, maxMoveSpeed, Time.deltaTime * accelerationRate);
+            newPosition = transform.position + targetMovePosition * currentSpeed * Time.deltaTime;
         }
         else
         {
-            horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero, Time.deltaTime * damping);
-            transform.position += horizontalVelocity * Time.deltaTime;
+            horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero, Time.deltaTime * dampingRate);
+            newPosition = transform.position + horizontalVelocity * Time.deltaTime;
         }
-        targetPosition = Vector3.zero;
-    }
-    private void RotateCamera(InputAction.CallbackContext inputValue)
-    {
-        if(!Mouse.current.middleButton.isPressed)
-            return;
-        float value = inputValue.ReadValue<Vector2>().x;
-        transform.rotation = Quaternion.Euler(0f, value * maxRotationSpeed + transform.rotation.eulerAngles.y, 0f);
-    }
-    private void ZoomCamera(InputAction.CallbackContext inputValue)
-    {
-        float value = -inputValue.ReadValue<Vector2>().y / 100f;
-        if(Mathf.Abs(value) > 0.1f)
+
+        // Check for NaN and assign position
+        if (!float.IsNaN(newPosition.x) && !float.IsNaN(newPosition.z))
         {
-            zoomHeight = cameraTransform.localPosition.y + value * stepSize;
-            if (zoomHeight < minHeight)
-                zoomHeight = minHeight;
-            else if (zoomHeight > maxHeight)
-                zoomHeight = maxHeight;
+            transform.position = newPosition;
+        }
+
+        targetMovePosition = Vector3.zero;
+    }
+
+    private void HandleCameraRotation(InputAction.CallbackContext context)
+    {
+        if (!Mouse.current.middleButton.isPressed)
+            return;
+
+        float rotationInput = context.ReadValue<Vector2>().x;
+        transform.rotation = Quaternion.Euler(0f, rotationInput * rotationSpeed + transform.rotation.eulerAngles.y, 0f);
+    }
+
+    private void HandleCameraZoom(InputAction.CallbackContext context)
+    {
+        float zoomInput = -context.ReadValue<Vector2>().y / 100f;
+        if (Mathf.Abs(zoomInput) > 0.1f)
+        {
+            currentZoomHeight = Mathf.Clamp(cameraTransform.localPosition.y + zoomInput * zoomStep, minZoomHeight, maxZoomHeight);
         }
     }
 
     private void UpdateCameraPosition()
     {
-        Vector3 zoomTarget = new Vector3(cameraTransform.localPosition.x, zoomHeight, cameraTransform.localPosition.z);
-        zoomTarget -= zoomSpeed * (zoomHeight - cameraTransform.localPosition.y) * Vector3.forward;
+        Vector3 zoomTargetPosition = new Vector3(cameraTransform.localPosition.x, currentZoomHeight, cameraTransform.localPosition.z);
+        zoomTargetPosition -= zoomSpeed * (currentZoomHeight - cameraTransform.localPosition.y) * Vector3.forward;
 
-        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, zoomTarget, Time.deltaTime * zoomDampening);
-        cameraTransform.LookAt(this.transform); 
+        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, zoomTargetPosition, Time.deltaTime * zoomDampening);
+        cameraTransform.LookAt(transform);
+    }
+
+    public void OnGameEnd()
+    {
+        // Reset variables to avoid NaN errors
+        targetMovePosition = Vector3.zero;
+        horizontalVelocity = Vector3.zero;
+        currentSpeed = 0f;
+        currentZoomHeight = Mathf.Clamp(cameraTransform.localPosition.y, minZoomHeight, maxZoomHeight);
     }
 }
