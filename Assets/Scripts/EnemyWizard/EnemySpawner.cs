@@ -27,7 +27,6 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
-
         StartCoroutine(StartWaveAfterDelay());
     }
 
@@ -100,20 +99,16 @@ public class EnemySpawner : MonoBehaviour
         return enemyList;
     }
 
-    /// <summary>
-    /// Instantiates an enemy at the spawn point and wires up references/events
-    /// </summary>
-    /// <param name="prefab">The prefab to be spawned</param>
+    
     void SpawnEnemy(GameObject prefab)
     {
-        GameObject newEnemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity); //spawnPoint.rotation
+        GameObject newEnemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
         EnemyScript enemyScript = newEnemy.GetComponent<EnemyScript>();
 
         if (enemyScript != null)
         {
             enemyScript.Initialize(waypoints);
 
-            // subscribe to the death event
             enemyScript.OnDeath += OnEnemyDeath;
         }
         else

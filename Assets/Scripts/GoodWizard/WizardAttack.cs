@@ -37,6 +37,10 @@ public class WizardAttack : MonoBehaviour
     public float specialAttackCooldown = 10f; 
     private float specialAttackTimer = 0f; 
 
+    [Header("Wizard Upgrade Settings")]
+    [Tooltip("Damage multiplier for all projectiles. 1.0 = normal damage, 1.2 = 20% bonus, etc.")]
+    public float damageMultiplier = 1.0f;
+
 
     [Header("Audio Settings")]
     public AudioClip baseballSound;
@@ -219,6 +223,7 @@ public class WizardAttack : MonoBehaviour
         {
             projectile.transform.position = firePoint.position;
             projectile.transform.rotation = firePoint.rotation;
+            projectile.SetDamageMultiplier(damageMultiplier);
             projectile.SetTarget(currentTarget.transform);
         }
         else

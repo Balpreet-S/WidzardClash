@@ -58,7 +58,9 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log($"Enemy took damage!, health: {health}, and damage: {damage}");
         health -= damage;
+        Debug.Log($"Enemy took damage!, health: {health}, and damage: {damage}");
         if (health <= 0)
         {
             Die();
