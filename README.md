@@ -89,8 +89,45 @@ Our team consists of four members, each focusing on specific areas of the game's
 - **Grass Model (grass)**: Used for environmental decoration grass in the game.
 - **Grass Texture (grass_texture_1)**: Applied to the terrain for ground texturing.
 
+**Papyrus Font**
+- **Source:** https://befonts.com/papyrus-font.html
+
+**Pause Button Icon**
+- **Source:** (https://www.kenney.nl/assets/onscreen-controls)
+
+**Background For Main Menu, How To Play, Game Over And Game Won Scenes**
+- **Source:** https://pixabay.com/illustrations/paper-stationery-parchment-old-3653357/
+
+**Menu Button Hover Sound**
+- **Source:** https://pixabay.com/sound-effects/metal-clicking-240573/
+
+**Menu Button Click Sound**
+- **Source:** https://pixabay.com/sound-effects/rclick-13693/
+
+**Victory Music**
+- **Source:** https://pixabay.com/music/main-title-medieval-victory-epic-150070/
+
+**Loss Music**
+- **Source:** https://pixabay.com/sound-effects/cartoon-fail-trumpet-278822/
+
+**Ultimate Skill Icon**
+- **Source:** https://www.freepik.com/free-vector/comic-explosion-effects-set_9580812.htm#fromView=search&page=1&position=0&uuid=43105dc4-adbf-4a41-bb73-0c575753f515
+
+**Base Wizard Hover Sound**
+- **Source:** https://pixabay.com/sound-effects/funny-swish-101878/
+
+**Fire Wizard Hover Sound**
+- **Source:** https://pixabay.com/sound-effects/fire-sound-effects-224089/
+
+**Earth Wizard Hover Sound**
+- **Source:** https://pixabay.com/sound-effects/earth-rumble-128880/
+
+**Water Wizard Hover Sound**
+- **Source:** https://pixabay.com/sound-effects/water-bubbles-257594/
+  
 These assets were sourced from the Unity Asset Store package:
 - **Lowpoly Piece of Nature**: [Link to Asset Store Page](https://assetstore.unity.com/packages/3d/environments/fantasy/lowpoly-piece-of-nature-40538)
+- **Screenshot Utility** : https://assetstore.unity.com/packages/tools/utilities/screenshot-utility-177723
 
 ### License and Attribution
 The assets are used under the Unity Asset Store license. For more details, see the [Unity Asset Store Terms of Service](https://unity.com/legal/as-terms).
