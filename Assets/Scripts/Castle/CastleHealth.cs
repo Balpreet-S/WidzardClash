@@ -5,6 +5,10 @@ using UnityEngine.Formats.Alembic.Importer; // Import Alembic namespace
 
 public class CastleHealth : MonoBehaviour
 {
+
+    [SerializeField] private CastleHealthBar _healthbar;
+
+
     public int currentHealth = 100; // Castle starts with 100 health
     public float animationSpeed = 1.0f; // Speed of the animation playback
 
@@ -40,6 +44,8 @@ public class CastleHealth : MonoBehaviour
                 player.CurrentTime = 0;
             }
         }
+
+        _healthbar.UpdateHealthBar(100, currentHealth); // updates health bar
     }
 
     void Update()
@@ -76,6 +82,7 @@ public class CastleHealth : MonoBehaviour
         }
         else
         {
+            _healthbar.UpdateHealthBar(100, currentHealth); // updates health bar
             // Update the tower prefab based on current health
             UpdateTowerVisibility();
         }

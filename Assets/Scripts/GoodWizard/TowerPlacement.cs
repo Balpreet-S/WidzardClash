@@ -35,7 +35,7 @@ public class TowerPlacementManager : MonoBehaviour
                     if (hit.collider.CompareTag("TowerSpot")) // Checks if the place clicked is a placable tower spot
                     {
                         //checks if spot is occupied or not
-                        if (hit.collider.transform.childCount == 0)
+                        if (hit.collider.transform.childCount == 23)
                         {
 
                             Vector3 towerPosition = hit.collider.transform.position + new Vector3(0, towerHeightOffset, 0);
