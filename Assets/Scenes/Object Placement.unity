@@ -3000,7 +3000,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: b2f20a3e9aab74c308a8ff8b9d953865, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 1e26faa008672604b980f2df55aa6ed2, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -3988,7 +3988,7 @@ Transform:
   m_GameObject: {fileID: 1045485630}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1921234, y: -0, z: -0, w: 0.98137087}
-  m_LocalPosition: {x: -40.34, y: 18.92, z: -74.03}
+  m_LocalPosition: {x: 0, y: 40.9, z: -95.3}
   m_LocalScale: {x: 1, y: 1.2837434, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4035,7 +4035,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045485630}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 382412c184c8441b8ac11ceac57f70dc, type: 3}
   m_Name: 
@@ -4473,6 +4473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1140902717}
+  - component: {fileID: 1140902718}
   m_Layer: 0
   m_Name: Camera Rig
   m_TagString: Untagged
@@ -4489,13 +4490,36 @@ Transform:
   m_GameObject: {fileID: 1140902716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: 15, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1045485633}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1140902718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140902716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54534915201f9483fa26217a5ebf9cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 15
+  acceleration: 10
+  damping: 15
+  stepSize: 2
+  zoomDampening: 7.5
+  minHeight: 5
+  maxHeight: 50
+  zoomSpeed: 2
+  maxRotationSpeed: 1
+  edgeTolerence: 0.05
+  useScreenEdge: 1
 --- !u!1 &1163749077
 GameObject:
   m_ObjectHideFlags: 0
