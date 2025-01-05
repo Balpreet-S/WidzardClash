@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -25,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     public string highscoredisplay;
     public TextMeshProUGUI CurrentScoreCountText;
     public TextMeshProUGUI HighestScoreCountText;
+
 
     private int currentWave = 0;
     private int enemiesToSpawn;
@@ -60,22 +60,6 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("All waves completed!");
         }
-        currentScore = currentWave;
-    }
-
-    //Setting and Checking saved highestscore from playerPrefab
-    public void HighScoreUpdate(){
-        if (PlayerPrefs.HasKey("SavedHighScore")){
-            if (currentScore > PlayerPrefs.GetInt("SavedHighScore")){
-                PlayerPrefs.SetInt("SavedHighScore", currentScore);
-            }
-        }
-        else{
-            PlayerPrefs.SetInt("SavedHighScore", currentScore);
-        }
-        CurrentScoreCountText.text = $"Current Wave is: {currentScore}";
-        highscoredisplay = PlayerPrefs.GetInt("SavedHighScore").ToString();
-        HighestScoreCountText.text = $"Highest Wave Achieved: {highscoredisplay}";
     }
 
     IEnumerator SpawnEnemies()
