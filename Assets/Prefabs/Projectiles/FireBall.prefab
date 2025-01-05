@@ -4950,6 +4950,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 10
+  damage: 20
   impactEffect: {fileID: 0}
   explosionRadius: 2
+  type: 
+  maxLifetime: 5

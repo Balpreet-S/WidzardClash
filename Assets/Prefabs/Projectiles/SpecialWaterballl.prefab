@@ -4950,7 +4950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 7
-  slowEffectDuration: 4
-  slowEffectMultiplier: 0.5
+  damage: 15
+  slowEffectDuration: 7
+  slowEffectMultiplier: 0.6
   impactEffect: {fileID: 0}
