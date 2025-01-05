@@ -1,5 +1,10 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem.Interactions;
+using UnityEditor.Build.Reporting;
+using UnityEngine.UI;
+
+
 
 //xp system for when enemies are killed (includes skill points)
 public class XPManager : MonoBehaviour
@@ -7,13 +12,15 @@ public class XPManager : MonoBehaviour
     public static XPManager instance;
     public SkillsButtons Button { get; private set; }
 
-    public int playerXP = 50;
-    private int skillPoints;
+    public int playerXP;
+    public int skillPoints;
     public TextMeshProUGUI LevelText;
+    public TextMeshProUGUI XpCounterText;
+    public TextMeshProUGUI RankLevelCounterText;
 
-    private int nextXPThreshold;
+    public Image XpProgressBar;
 
-
+    private int nextXPThreshold = 50;
 
     private void Awake()
     {
@@ -25,7 +32,8 @@ public class XPManager : MonoBehaviour
 
     private void Start()
     {
-        playerXP = 100;
+        playerXP = 0;
+        skillPoints = 2;
         UpdateSkillPointsText();
     }
 
@@ -37,13 +45,19 @@ public class XPManager : MonoBehaviour
     public void AddXP(int xpAmount)
     {
         playerXP += xpAmount;
+        XpCounterText.text = $"{playerXP} xp / {nextXPThreshold} xp";
+        XpProgressBar.fillAmount = (float) playerXP / (float) nextXPThreshold;
+        if(playerXP >= nextXPThreshold){
+            playerXP = playerXP - nextXPThreshold;
+            skillPoints++;
+        }
 
     }
 
     //buying wizard
     public void SkillTowers(SkillsButtons s)
     {
-        if (playerXP >= s.Cost)
+        if (skillPoints >= s.Cost)
         {
             Button = s;
         }
@@ -52,10 +66,10 @@ public class XPManager : MonoBehaviour
 
     public void WinningCondition(SkillsButtons s)
     {
-        if (playerXP >= s.Cost)
+        if (skillPoints >= s.Cost)
         {
             Button = s;
-            playerXP -= s.Cost;
+            skillPoints -= s.Cost;
             Time.timeScale = 0;
             EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
             foreach (EnemyScript enemy in allEnemies)
@@ -72,9 +86,9 @@ public class XPManager : MonoBehaviour
     //decrease skillpoints when used by a button 
     public void PurchaseSkill()
     {
-        if (playerXP >= Button.Cost)
+        if (skillPoints >= Button.Cost)
         {
-            playerXP -= Button.Cost;
+            skillPoints -= Button.Cost;
             Button = null;
         }
     }
@@ -95,7 +109,7 @@ public class XPManager : MonoBehaviour
     {
         if (LevelText != null)
         {
-            LevelText.text = $"You have: {playerXP} XP";
+           LevelText.text = $"{skillPoints}";
         }
     }
 }
