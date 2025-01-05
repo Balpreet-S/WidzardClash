@@ -136,6 +136,6 @@ MonoBehaviour:
   movementSpeed: 7
   damageToCastle: 100
   attackRange: 1
-  xpValue: 300
+  xpValue: 200
   knockbackDuration: 0.5
   killedByCastle: 0
