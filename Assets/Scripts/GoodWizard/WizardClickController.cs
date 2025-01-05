@@ -100,13 +100,23 @@ public class WizardClickHandler : MonoBehaviour
         cooldownBar = GetComponentInChildren<ImageFillGradient>();
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(2)){
+            Destroy(activeWindow);
+            activeWindow = null;
+            Debug.Log("UI Window closed.");
+            return;
+        }
+    }
+
     void OnMouseDown()
     {
         // If a panel is already active for this wizard, destroy it (close the panel)
         if (activeWindow != null)
         {
             Destroy(activeWindow);
-            activeWindow = null; // Reset the reference
+            activeWindow = null;
             Debug.Log("UI Window closed.");
             return;
         }
@@ -218,15 +228,18 @@ public class WizardClickHandler : MonoBehaviour
         switch (upgradeLevel)
         {
             case 0:
-                wizardUpgrade.UpgradeWizardDamage(30f);
-                Debug.Log("Wizard damage upgraded by +30%!");
-                upgradeLevel++;
+                if (XPManager.instance.GetSkillPoints() >= 1){
+                    wizardUpgrade.UpgradeWizardDamage(30f);
+                    Debug.Log("Wizard damage upgraded by +30%!");
+                    upgradeLevel++;
+                }
                 break;
             case 1:
-                wizardUpgrade.UpgradeWizardDamage(20f);
-                Debug.Log("Wizard damage upgraded by +20%!");
-                upgradeLevel++;
-
+                if (XPManager.instance.GetSkillPoints() >= 1){
+                    wizardUpgrade.UpgradeWizardDamage(20f);
+                    Debug.Log("Wizard damage upgraded by +20%!");
+                    upgradeLevel++;
+                }
                 break;
             default:
                 Debug.LogWarning($"Invalid upgrade level: {upgradeLevel}");

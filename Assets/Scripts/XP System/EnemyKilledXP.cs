@@ -92,12 +92,21 @@ public class XPManager : MonoBehaviour
         }
     }
 
-    public void PurchaseUpgrade(int cost)
+    public int PurchaseUpgrade(int cost)
     {
         if (skillPoints >= cost)
         {
             skillPoints -= cost;
+            Debug.Log("Purchased Upgrade point! inside ");
+            return 1;
         }
+
+        return 0;
+    }
+
+    public int GetSkillPoints()
+    {
+        return skillPoints;
     }
 
 

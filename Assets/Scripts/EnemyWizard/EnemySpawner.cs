@@ -31,11 +31,13 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesToSpawn; 
     private int enemiesRemaining;
 
+
     void Start()
     {
         Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
         StartCoroutine(StartWaveAfterDelay());
     }
+
 
     IEnumerator StartWaveAfterDelay()
     {
@@ -45,6 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
     void StartNextWave()
     {
+        
         currentWave++;
         if (currentWave <= waveCount)
         {
@@ -58,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("All waves completed!");
         }
+        
         currentScore = currentWave;
     }
 
