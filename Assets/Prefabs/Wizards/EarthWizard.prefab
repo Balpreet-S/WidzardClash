@@ -261,6 +261,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 41.574814
       objectReference: {fileID: 0}
@@ -528,6 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2930d75fa87bc4ed69c989bae196231b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelText: {fileID: 0}
 --- !u!4 &3203314861683011394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}

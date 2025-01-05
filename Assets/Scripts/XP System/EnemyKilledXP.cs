@@ -92,12 +92,11 @@ public class XPManager : MonoBehaviour
         }
     }
 
-    public void PurchaseUpgrade()
+    public void PurchaseUpgrade(int cost)
     {
-        if (playerXP >= Button.Cost)
+        if (skillPoints >= cost)
         {
-            playerXP -= Button.Cost;
-            Button = null;
+            skillPoints -= cost;
         }
     }
 
