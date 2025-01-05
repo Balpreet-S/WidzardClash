@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a119a15535c488694789b710df4eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 1
   movementSpeed: 7
   damageToCastle: 10
   attackRange: 1
