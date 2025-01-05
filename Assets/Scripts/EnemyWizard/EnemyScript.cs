@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+/* This script defines the behavior of enemy characters in a Tower Defense game, including movement, 
+interactions with the castle, and effects such as slowing and knockback*/
+
+
 public class EnemyScript : MonoBehaviour
 {
-    // Enemy parameters
     public int health = 100;
     public float movementSpeed = 5f;
     public int damageToCastle = 10;
@@ -17,7 +21,7 @@ public class EnemyScript : MonoBehaviour
     private bool hasAttacked = false;
 
     private float originalSpeed;
-    private Coroutine slowEffectCoroutine; // Corrected typo here
+    private Coroutine slowEffectCoroutine;
 
     public event Action OnDeath;
 
@@ -30,6 +34,7 @@ public class EnemyScript : MonoBehaviour
         originalSpeed = movementSpeed;
     }
 
+    // Set up the path for the enemy to follow
     public void Initialize(Transform[] waypoints)
     {
         pathFollower = GetComponent<PathFollower>();
@@ -45,7 +50,7 @@ public class EnemyScript : MonoBehaviour
             Debug.LogError("PathFollower component not found on the Enemy!");
         }
     }
-
+    // Update the enemy state and checks for interactions with the castle
     void Update()
     {
         if (health <= 0)
@@ -56,6 +61,7 @@ public class EnemyScript : MonoBehaviour
         TryAttackCastle();
     }
 
+    // Reduce enemy health when taking damage
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -65,12 +71,11 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    // Handle the enemy's death logic
     public void Die()
     {
-        // Notify listeners that the enemy died, for wave starting/ending logic
         OnDeath?.Invoke();
 
-        // Only award XP if not killed by the castle
         if (!killedByCastle)
         {
             XPManager.instance.AddXP(xpValue);
@@ -79,16 +84,19 @@ public class EnemyScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // Destroy the enemy without awarding XP
     public void DieNoXP()
     {
         Destroy(gameObject);
     }
 
+    // Return the current health of the enemy
     public int GetCurrentHealth()
     {
         return health;
     }
 
+    // Check if the enemy can attack the castle
     void TryAttackCastle()
     {
         if (hasAttacked) return;
@@ -105,6 +113,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    // Handle logic for when the enemy reaches the castle
     public void ReachCastle()
     {
         CastleHealth castle = UnityEngine.Object.FindObjectOfType<CastleHealth>();
@@ -119,37 +128,36 @@ public class EnemyScript : MonoBehaviour
 
         pathFollower.StopMoving();
 
-        Die(); // Destroy the enemy after reaching the castle
+        Die();
     }
 
+    // Apply a slowing effect to the enemy
     public void ApplySlow(float slowMultiplier, float duration)
     {
-        // Cancel any existing slow effect
         if (slowEffectCoroutine != null)
         {
             StopCoroutine(slowEffectCoroutine);
-            movementSpeed = originalSpeed; // Reset to original speed before applying a new slow effect
+            movementSpeed = originalSpeed;
         }
 
         Debug.Log("Slow effect applied!");
-        movementSpeed *= slowMultiplier; // Apply the slow effect
+        movementSpeed *= slowMultiplier;
         slowEffectCoroutine = StartCoroutine(RemoveSlowAfterDelay(duration));
     }
 
+    // Remove the slow effect after a delay
     private IEnumerator RemoveSlowAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        movementSpeed = originalSpeed; // Restore the original speed
-        slowEffectCoroutine = null; // Clear the coroutine reference
+        movementSpeed = originalSpeed;
+        slowEffectCoroutine = null;
     }
 
-   
+   // Apply a knockback effect to the enemy
     public void ApplyKnockback(Vector3 firingPosition, float knockbackForce, float knockbackDuration)
     {
-        // Temporarily stop path-following
         if (pathFollower != null)
         {
-            //pathFollower.StopMoving();
             pathFollower.ApplyKnockback(firingPosition, knockbackForce, knockbackDuration);
             Debug.Log("Knockback applied!");
         }
