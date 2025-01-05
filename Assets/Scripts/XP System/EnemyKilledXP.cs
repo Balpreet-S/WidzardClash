@@ -11,7 +11,6 @@ public class XPManager : MonoBehaviour
 {
     public static XPManager instance;
     public SkillsButtons Button { get; private set; }
-
     public int playerXP;
     public int skillPoints;
     public TextMeshProUGUI LevelText;
@@ -39,6 +38,7 @@ public class XPManager : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log($"Current XP: {playerXP}");
         UpdateSkillPointsText();
     }
     //add skill points and player xp depending on threshold
@@ -51,7 +51,6 @@ public class XPManager : MonoBehaviour
             playerXP = playerXP - nextXPThreshold;
             skillPoints++;
         }
-
     }
 
     //buying wizard
@@ -62,6 +61,18 @@ public class XPManager : MonoBehaviour
             Button = s;
         }
     }
+
+    public void UpgradeTowers(int cost)
+    {
+        if (playerXP >= cost)
+        {
+            playerXP -= cost;
+            Debug.Log("Tower upgraded!, in the if statement");
+        }
+        Debug.Log($"Tower upgraded!, current XP: {playerXP}");
+    }
+
+    
     //for buying final skill
 
     public void WinningCondition(SkillsButtons s)

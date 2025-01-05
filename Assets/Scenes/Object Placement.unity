@@ -4494,7 +4494,7 @@ MonoBehaviour:
   - {fileID: 120309464}
   - {fileID: 833703304}
   - {fileID: 975958085}
-  initialEnemyCount: 5
+  initialEnemyCount: 2
   spawnInterval: 1
   initialSpawnDelay: 4
   waveCount: 5
