@@ -17,29 +17,27 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
-        // Wave 1: only the base button is interactable
         baseSkillButton.interactable = true;
         fireSkillButton.interactable = true;
         waterSkillButton.interactable = true;
-        earthSkillButton.interactable = true;
-        ULTButton.interactable = true;
+        earthSkillButton.interactable = false;
+        ULTButton.interactable = false;
     }
 
     public void NextWave()
     {
         currentWave++;
-        Debug.Log($"Wave {currentWave} started!");
 
         switch (currentWave)
         {
             case 2:
-                fireSkillButton.interactable = true;
+                earthSkillButton.interactable = true;
                 break;
             case 3:
                 waterSkillButton.interactable = true;
                 break;
             case 4:
-                earthSkillButton.interactable = true;
+                fireSkillButton.interactable = true;
                 ULTButton.interactable = true;
                 break;
         }

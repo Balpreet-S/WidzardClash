@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44863155, g: 0.4918427, b: 0.29416576, a: 1}
+  m_IndirectSpecularColor: {r: 0.44863102, g: 0.49184155, b: 0.29416502, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1642,6 +1642,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPlacementSpot2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1749,6 +1753,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2098,6 +2106,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2770,6 +2782,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3509,6 +3525,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4357,6 +4377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPlacementSpot2 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4554,7 +4578,7 @@ MonoBehaviour:
   - {fileID: 120309464}
   - {fileID: 833703304}
   - {fileID: 975958085}
-  initialEnemyCount: 5
+  initialEnemyCount: 2
   spawnInterval: 1
   initialSpawnDelay: 4
   waveCount: 5
@@ -5082,6 +5106,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5807,6 +5835,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6979,6 +7011,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPlacementSpot2 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7518,6 +7554,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPlacementSpot2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7684,6 +7724,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8898,6 +8942,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPlacementSpot2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8954,6 +9002,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9149,6 +9201,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9727,6 +9783,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11704,6 +11764,10 @@ PrefabInstance:
     - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
       propertyPath: m_Name
       value: TowerPlacementSpot2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
