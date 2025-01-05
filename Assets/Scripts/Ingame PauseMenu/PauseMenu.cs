@@ -50,6 +50,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f; // resumes the game
         AudioListener.volume = 1; // turns sound on
     }
+
+    public void HowToPlay() // Takes you to another scene that explains how the game works
+    {
+        SceneManager.LoadScene("How To Play");
+    }
     public void QuitGame()
     {
         Application.Quit(); // quits game

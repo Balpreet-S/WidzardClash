@@ -25,7 +25,7 @@ public class GameEndManager : MonoBehaviour
     private void Update()
     {
         // Check if the player has at least 4 skill points before allowing the final skill
-        if (xpManager.SkillPoints >= 4 && endGameAction.WasPerformedThisFrame())
+        if (xpManager.playerXP >= 60 && endGameAction.WasPerformedThisFrame())
         {
             EndGame();
         }

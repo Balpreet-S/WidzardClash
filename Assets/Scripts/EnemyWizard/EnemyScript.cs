@@ -79,6 +79,11 @@ public class EnemyScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void DieNoXP()
+    {
+        Destroy(gameObject);
+    }
+
     public int GetCurrentHealth()
     {
         return health;
@@ -126,7 +131,7 @@ public class EnemyScript : MonoBehaviour
             movementSpeed = originalSpeed; // Reset to original speed before applying a new slow effect
         }
 
-        Debug.Log($"enemy: Applying slow effect, Original speed {originalSpeed}, New speed {movementSpeed * slowMultiplier}, Duration {duration}");
+        Debug.Log("Slow effect applied!");
         movementSpeed *= slowMultiplier; // Apply the slow effect
         slowEffectCoroutine = StartCoroutine(RemoveSlowAfterDelay(duration));
     }
@@ -135,7 +140,6 @@ public class EnemyScript : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         movementSpeed = originalSpeed; // Restore the original speed
-        Debug.Log($"Enemey: Slow effect expired, New speed {originalSpeed}");
         slowEffectCoroutine = null; // Clear the coroutine reference
     }
 
@@ -147,6 +151,7 @@ public class EnemyScript : MonoBehaviour
         {
             //pathFollower.StopMoving();
             pathFollower.ApplyKnockback(firingPosition, knockbackForce, knockbackDuration);
+            Debug.Log("Knockback applied!");
         }
     }
 

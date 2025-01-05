@@ -123,6 +123,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &6264379058448326138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a119a15535c488694789b710df4eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  movementSpeed: 5
+  health: 100
+  movementSpeed: 6
   damageToCastle: 10
   attackRange: 1
   xpValue: 5

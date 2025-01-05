@@ -31,8 +31,6 @@ public class PathFollower : MonoBehaviour
 
         Vector3 lookAtPosition = transform.position + transform.forward * 10; // Extend forward direction to visualize
 
-        Debug.DrawRay(transform.position, transform.forward * 10, Color.blue, 3f);
-
         if (shouldMove)
         {
             MoveAlongPath();
@@ -128,7 +126,6 @@ public class PathFollower : MonoBehaviour
         // Move to the next waypoint's position instantly
         transform.position = waypoints[currentWaypointIndex].position;
 
-        Debug.Log($"Moved to next waypoint: {currentWaypointIndex} at position {waypoints[currentWaypointIndex].position}");
     }
 
     // New: Apply knockback effect
@@ -153,21 +150,13 @@ private IEnumerator KnockbackCoroutine(Vector3 firingPosition, float force, floa
     // Calculate lateral direction (perpendicular to knockback direction and "up")
     Vector3 lateralDirection = Vector3.Cross(Vector3.up, knockbackDirection).normalized;
 
-    Debug.Log($" Lateral Direction: {lateralDirection}");
-    // Determine whether to push left or right based on the position of the projectile
-    //float side = Vector3.Dot(projectilePosition - transform.position, transform.right);
-    
-    //lateralDirection *= Mathf.Sign(side); // Adjust lateral direction to match the side
-
     Vector3 firingToEnemy = transform.position - firingPosition; // Direction from firing position to enemy
     float side = Vector3.Dot(firingToEnemy, transform.right); // Positive = right, Negative = left
-    Debug.Log($"Side: {side}");
     lateralDirection *= Mathf.Sign(side); 
 
     // Combine knockback direction with lateral movement
     Vector3 finalKnockback = (knockbackDirection + lateralDirection).normalized * (force / duration);
 
-    Debug.Log($"Knockback Direction: {knockbackDirection}, Lateral Direction: {lateralDirection}, Final Knockback: {finalKnockback}");
 
     float elapsedTime = 0f;
 

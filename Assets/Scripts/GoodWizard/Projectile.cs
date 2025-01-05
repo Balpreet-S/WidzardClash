@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     public int damage = 10;
     public GameObject impactEffect; 
     public float explosionRadius = 2f;
+    private float damageMultiplier = 1.0f;
 
     private Transform target;
     private Animator animator;
@@ -18,6 +19,10 @@ public class Projectile : MonoBehaviour
     private static Dictionary<string, ObjectPool<Projectile>> projectilePools;
 
     public string type;
+
+    public float maxLifetime = 5f;  // The maximum time the projectile will live
+    private float lifetimeTimer;
+
 
     public static void InitializePool(string type, int size, GameObject prefab)
     {
@@ -61,6 +66,11 @@ public class Projectile : MonoBehaviour
         hasHit = false;
     }
 
+    public void SetDamageMultiplier(float multiplier)
+    {
+        damageMultiplier = multiplier;
+    }
+
     void OnEnable()
     {
         if (animator == null) animator = GetComponent<Animator>();
@@ -69,6 +79,9 @@ public class Projectile : MonoBehaviour
         {
             animator.Play("LaunchAnimation");
         }
+
+        // Reset lifetime timer
+        lifetimeTimer = maxLifetime;
     }
 
     void Update()
@@ -78,6 +91,15 @@ public class Projectile : MonoBehaviour
             ReturnToPool(this);
             return;
         }
+
+
+        lifetimeTimer -= Time.deltaTime;
+        if (lifetimeTimer <= 0f && !hasHit)
+        {
+            ReturnToPool(this);
+            return;
+        }
+
 
         Vector3 direction = target.position - transform.position;
         transform.rotation = Quaternion.LookRotation(direction);
@@ -103,13 +125,15 @@ public class Projectile : MonoBehaviour
             Instantiate(impactEffect, transform.position, transform.rotation);
         }
 
+        float finalDamage = damage * damageMultiplier;
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in hitColliders)
         {
             EnemyScript enemy = collider.GetComponent<EnemyScript>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(Mathf.RoundToInt(finalDamage));
             }
         }
 
