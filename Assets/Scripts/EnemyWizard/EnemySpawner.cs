@@ -29,14 +29,15 @@ public class EnemySpawner : MonoBehaviour
     private int currentWave = 0;
     private int enemiesToSpawn;
     private int enemiesRemaining;
-
     private WaveManager waveManager;
+
 
     void Start()
     {
         waveManager = GetComponent<WaveManager>();
         StartCoroutine(StartWaveAfterDelay()); //start wave after timer
     }
+
 
     IEnumerator StartWaveAfterDelay()
     {
@@ -46,6 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
     void StartNextWave()
     {
+
         if (currentWave < waveCount)
         {
             waveManager.NextWave(); //check which wizard buttons are available
@@ -83,7 +85,6 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("All waves completed!");
         }
-
         currentScore = currentWave;
         HighScoreUpdate(); // Update the high score UI
     }

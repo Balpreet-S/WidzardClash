@@ -3,34 +3,24 @@ using UnityEngine.UI;
 using System.Collections;
 
 
+
 // uiWindow.SetActive(true);
 
-public class WizardClickHandler : MonoBehaviour
+public class DeleteButtonHandler : MonoBehaviour
 {
     public GameObject uiWindowPrefab; // Assign your prefab in the Inspector
-    private Camera mainCamera;
+  
     private GameObject activeWindow; // To track the currently active panel
+    private Camera mainCamera;
 
 
     private WizardAttack wizardAttack;
-    private WizardUpgrade wizardUpgrade;
-    private ImageFillGradient cooldownBar;
-
-
-    // upgrade level 
-    
-    private int upgradeLevel = 0;   
-
-
-    
 
     void Start()
     {
         mainCamera = Camera.main;
 
         wizardAttack = GetComponent<WizardAttack>();
-        wizardUpgrade = GetComponent<WizardUpgrade>();
-        cooldownBar = GetComponentInChildren<ImageFillGradient>();
     }
 
     void Update()
@@ -102,87 +92,10 @@ public class WizardClickHandler : MonoBehaviour
         activeWindow = uiWindow;
 
         Button[] buttons = uiWindow.GetComponentsInChildren<Button>();
-        if (buttons.Length >= 2)
-        {
-            buttons[0].onClick.AddListener(LevelUpWizard);
-            buttons[1].onClick.AddListener(ActivateSpecialPower);
-            buttons[2].onClick.AddListener(DeleteWizard);
-            
-        }
+        buttons[0].onClick.AddListener(DeleteWizard);
 
         Debug.Log("UI Window opened and positioned.");
     }
-
-
-
-    public void ActivateSpecialPower()
-    {
-        Debug.Log("Activate Special Power!");
-
-        if (cooldownBar != null && cooldownBar.IsCooldownComplete())
-        {
-            if (wizardAttack != null)
-            {
-                switch (wizardAttack.wizardType.ToLower())
-                {
-                    case "fire":
-                        wizardAttack.ActivateSpecialPowerFire();
-                        break;
-                    case "water":
-                        wizardAttack.ActivateSpecialPowerWater();
-                        break;
-                    case "earth":
-                        wizardAttack.ActivateSpecialPowerEarth();
-                        break;
-                    default:
-                        Debug.LogWarning($"Unknown wizard type: {wizardAttack.wizardType}");
-                        break;
-                }
-
-                cooldownBar.StartCooldown();
-            }
-        }
-        else
-        {
-            Debug.Log("Special power is not ready yet.");
-        }
-
-    }
-
-    public void LevelUpWizard()
-    {
-        Debug.Log("Level Up Wizard!");
-
-        if (wizardUpgrade == null)
-        {
-            Debug.LogWarning("No WizardUpgrade script found on this Wizard.");
-            return;
-        }
-
-
-        switch (upgradeLevel)
-        {
-            case 0:
-                if (XPManager.instance.GetSkillPoints() >= 1){
-                    wizardUpgrade.UpgradeWizardDamage(30f);
-                    Debug.Log("Wizard damage upgraded by +30%!");
-                    upgradeLevel++;
-                }
-                break;
-            case 1:
-                if (XPManager.instance.GetSkillPoints() >= 2){
-                    wizardUpgrade.UpgradeWizardDamage(20f);
-                    Debug.Log("Wizard damage upgraded by +20%!");
-                    upgradeLevel++;
-                }
-                break;
-            default:
-                Debug.LogWarning($"Invalid upgrade level: {upgradeLevel}");
-                break;
-        }
-
-    }
-
     public void DeleteWizard()
     {
         Debug.Log("Delete Wizard!");
