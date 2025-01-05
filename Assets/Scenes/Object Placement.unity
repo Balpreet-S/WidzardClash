@@ -5786,7 +5786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 8694308759232829234, guid: 5d23424e6a7af4be8bc8a2e58e0a9cf5, type: 3}
-  cost: 0
+  cost: 1
 --- !u!114 &808336631
 MonoBehaviour:
   m_ObjectHideFlags: 0
