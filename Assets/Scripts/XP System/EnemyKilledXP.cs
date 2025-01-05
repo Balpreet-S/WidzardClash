@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //xp system for when enemies are killed (includes skill points)
 public class XPManager : MonoBehaviour
@@ -79,6 +80,9 @@ public class XPManager : MonoBehaviour
             // Destory insted of die 
 
             Debug.Log("Congrats on winning the game!!");
+
+            // Loads the game won scene
+            SceneManager.LoadScene("Game Won");
         }
     }
 
