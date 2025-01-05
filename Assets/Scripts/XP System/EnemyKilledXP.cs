@@ -67,9 +67,9 @@ public class XPManager : MonoBehaviour
         if (playerXP >= cost)
         {
             playerXP -= cost;
-            Debug.Log("Tower upgraded!, in the if statement");
+            //Debug.Log("Tower upgraded!, in the if statement");
         }
-        Debug.Log($"Tower upgraded!, current XP: {playerXP}");
+        //Debug.Log($"Tower upgraded!, current XP: {playerXP}");
     }
 
     

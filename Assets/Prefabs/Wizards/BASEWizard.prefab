@@ -232,7 +232,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 10
   attackCooldown: 0.5
-  attackDamage: 10
   rotationSpeed: 5
   wizardType: Base
   BasePrefab: {fileID: 5942370526381713114, guid: b6e01838893b04ce19be90ed91481ffd, type: 3}
@@ -246,6 +245,7 @@ MonoBehaviour:
   firePoint: {fileID: 2887871973500871802}
   specialProjectilePrefab: {fileID: 0}
   specialAttackCooldown: 10
+  damageMultiplier: 1
   baseballSound: {fileID: 8300000, guid: 1c1f2952f577f4497a8c64623ce4f6ff, type: 3}
   fireballSound: {fileID: 0}
   waterballSound: {fileID: 0}

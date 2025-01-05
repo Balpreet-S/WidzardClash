@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         baseSkillButton.interactable = true;
-        fireSkillButton.interactable = false;
+        fireSkillButton.interactable = true;
         waterSkillButton.interactable = true;
         earthSkillButton.interactable = false;
         ULTButton.interactable = false;

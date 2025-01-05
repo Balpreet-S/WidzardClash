@@ -148,12 +148,12 @@ public class WizardClickHandler : MonoBehaviour
         {
             case 0:
                 wizardUpgrade.UpgradeWizardDamage(30f);
-                Debug.Log("Wizard damage upgraded by +30%!");
+                //Debug.Log("Wizard damage upgraded by +30%!");
                 upgradeLevel++;
                 break;
             case 1:
                 wizardUpgrade.UpgradeWizardDamage(20f);
-                Debug.Log("Wizard damage upgraded by +20%!");
+                //Debug.Log("Wizard damage upgraded by +20%!");
                 upgradeLevel++;
 
                 break;
