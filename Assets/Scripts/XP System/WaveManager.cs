@@ -19,26 +19,27 @@ public class WaveManager : MonoBehaviour
     {
         // Wave 1: only the base button is interactable
         baseSkillButton.interactable = true;
-        fireSkillButton.interactable = true;
-        waterSkillButton.interactable = true;
-        earthSkillButton.interactable = true;
-        ULTButton.interactable = true;
+        fireSkillButton.interactable = false;
+        waterSkillButton.interactable = false;
+        earthSkillButton.interactable = false;
+        ULTButton.interactable = false;
     }
 
     public void NextWave()
     {
+        //adding interactable buttons based on each wave
         currentWave++;
         Debug.Log($"Wave {currentWave} started!");
 
         switch (currentWave)
         {
-            case 2:
+            case 2: //unlocks fir skill 
                 fireSkillButton.interactable = true;
                 break;
-            case 5:
+            case 5: //unlocks earth skill
                 earthSkillButton.interactable = true;
                 break;
-            case 10:
+            case 10: //unlocks water skill and ult skill
                 waterSkillButton.interactable = true;
                 ULTButton.interactable = true;
                 break;
