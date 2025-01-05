@@ -33,14 +33,14 @@ To run or develop the game locally, follow these steps:
 - **Objective**: Protect your castle from waves of enemies by strategically placing wizards along their path.
   
 - **Gameplay Mechanics**:
-  - **Placing Wizards**: press the left mouse button on the Fire button on the right side of the screen, and than press with the left mouse button on the platform whre you would like to place the wizard.
-  - **Enemies**: Enemies follow a fix path toward your castle.
+  - **Placing Wizards**: press the left mouse button on one of the elemental wizard buttons on the right side of the screen, then press the left mouse button on the platform where you would like to place the wizard.
+  - **Enemies**: Enemies follow a fixed path toward your castle.
   
 - **Winning the Game**:
-  - kill enough enemies in order to collect 4 Skills points, which allows you to but the Ult skills (Ultimate Skill), which will instantly kill all the enemies, and make you win the game
+  - kill enough enemies to collect 4 Skills points, which allows you to buy the Ult skill (Ultimate Skill), which will instantly kill all the enemies, and make you win the game
   
 - **Losing the Game**:
-  - If enemies breach your defenses and the castle’s health is reduced the 0, the game ends.
+  - The game ends if enemies breach your defenses and the castle’s health is reduced to 0.
 
 ## Team Members Contribution
 
