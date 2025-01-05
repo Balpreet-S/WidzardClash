@@ -58,7 +58,7 @@ public class XPManager : MonoBehaviour
     {
         if (skillPoints >= s.Cost)
         {
-            Button = s;
+            Button = s;        
         }
     }
     //for buying final skill

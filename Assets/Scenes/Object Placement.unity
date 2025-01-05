@@ -190,6 +190,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2146151956555505896, guid: b0d7a5eb8e6744798ba25528acb6ddcf, type: 3}
   m_PrefabInstance: {fileID: 497944389}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &27219956 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5819903208210754854, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+  m_PrefabInstance: {fileID: 7830028581166230362}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9a014db63153b44bbef36d51bbd0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &33916413
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +217,7 @@ GameObject:
   - component: {fileID: 33916419}
   - component: {fileID: 33916421}
   - component: {fileID: 33916420}
+  - component: {fileID: 33916422}
   m_Layer: 5
   m_Name: FireButton
   m_TagString: Untagged
@@ -299,6 +311,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 33916415}
           m_ObjectArgumentAssemblyTypeName: SkillsButtons, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 27219956}
+        m_TargetAssemblyTypeName: SelectWizards, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -498,6 +522,20 @@ MonoBehaviour:
   myFx: {fileID: 33916419}
   hoverFx: {fileID: 8300000, guid: dc71e260d58acfa4190fe143a07399e5, type: 3}
   clickFx: {fileID: 8300000, guid: ea2523f11092406468bd47605f8716df, type: 3}
+--- !u!114 &33916422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33916413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9a014db63153b44bbef36d51bbd0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wizards: {fileID: 995321947037596805, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+  check: 0
 --- !u!1 &70416326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,6 +1760,7 @@ GameObject:
   - component: {fileID: 332017523}
   - component: {fileID: 332017522}
   - component: {fileID: 332017521}
+  - component: {fileID: 332017524}
   m_Layer: 5
   m_Name: WaterButton
   m_TagString: Untagged
@@ -1815,6 +1854,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 332017517}
           m_ObjectArgumentAssemblyTypeName: SkillsButtons, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -5982677397174415172, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+        m_TargetAssemblyTypeName: SelectWizards, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2014,6 +2065,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &332017524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332017515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9a014db63153b44bbef36d51bbd0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wizards: {fileID: 9116669501261629312, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+  check: 0
 --- !u!1001 &335690888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5745,6 +5810,7 @@ GameObject:
   - component: {fileID: 808336636}
   - component: {fileID: 808336635}
   - component: {fileID: 808336634}
+  - component: {fileID: 808336637}
   m_Layer: 5
   m_Name: BaseButton
   m_TagString: Untagged
@@ -5838,6 +5904,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 808336630}
           m_ObjectArgumentAssemblyTypeName: SkillsButtons, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1152697319}
+        m_TargetAssemblyTypeName: SelectWizards, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6037,6 +6115,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &808336637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808336628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9a014db63153b44bbef36d51bbd0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wizards: {fileID: 1778292720458130905, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+  check: 0
 --- !u!1 &820120888
 GameObject:
   m_ObjectHideFlags: 0
@@ -8297,6 +8389,17 @@ MonoBehaviour:
   maxZoomHeight: 50
   zoomSpeed: 3
   rotationSpeed: 1
+--- !u!114 &1152697319 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1416763561942687059, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+  m_PrefabInstance: {fileID: 7388610151232146218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9a014db63153b44bbef36d51bbd0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1163749077
 GameObject:
   m_ObjectHideFlags: 0
@@ -9156,6 +9259,7 @@ GameObject:
   - component: {fileID: 1304527173}
   - component: {fileID: 1304527172}
   - component: {fileID: 1304527171}
+  - component: {fileID: 1304527174}
   m_Layer: 5
   m_Name: EarthButton
   m_TagString: Untagged
@@ -9249,6 +9353,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1304527167}
           m_ObjectArgumentAssemblyTypeName: SkillsButtons, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -4371775576854753129, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+        m_TargetAssemblyTypeName: SelectWizards, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9448,6 +9564,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1304527174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304527165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9a014db63153b44bbef36d51bbd0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wizards: {fileID: 2409371631333728299, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+  check: 0
 --- !u!1001 &1330752621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11254,6 +11384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60ba66461ebe6b4f9106acac8344057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameWon: {fileID: 0}
 --- !u!4 &1765065636
 Transform:
   m_ObjectHideFlags: 0
@@ -13046,6 +13177,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6983ab2008f7a9f499b3f8cd6bec328d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1885580123980981396
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -30.66198
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 25.4762
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489067832391638330, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116669501261629312, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
+      propertyPath: m_Name
+      value: WaterClone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 88fe229103f61bf428eda1a7911b3c38, type: 3}
 --- !u!1001 &2884866164737648945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13168,6 +13356,181 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
+--- !u!1001 &7388610151232146218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.319778
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.677862
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433854843782545251, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778292720458130905, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_Name
+      value: WizardModelClone
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778292720458130905, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb439c991d86a6e458db2f47ec7e215f, type: 3}
+--- !u!1001 &7830028581166230362
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.0999856
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 28.84071
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476194796761982527, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 995321947037596805, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+      propertyPath: m_Name
+      value: FireClone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a89a7f5167313304bbdadb9c4f3dc6f6, type: 3}
+--- !u!1001 &9018381015087654870
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2409371631333728299, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_Name
+      value: EarthClone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 41.574814
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.687706
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036585133478820497, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9695caa9e47cdd944a26c1f5a6de4bcc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13191,3 +13554,7 @@ SceneRoots:
   - {fileID: 171735071}
   - {fileID: 1930205664}
   - {fileID: 1187115694}
+  - {fileID: 7388610151232146218}
+  - {fileID: 9018381015087654870}
+  - {fileID: 7830028581166230362}
+  - {fileID: 1885580123980981396}
