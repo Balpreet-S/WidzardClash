@@ -33,8 +33,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f; // pauses the game
-        ScoreCounter.HighScoreUpdate();
-        check = true;
     }
 
     public void ResumeGame()
