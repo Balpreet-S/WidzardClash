@@ -8,17 +8,15 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
     public EnemySpawner ScoreCounter;
-
     public bool check;
 
     // Start is called before the first frame update
     void Start()
     {
         pauseMenu.SetActive(false);
-        
     }
 
-    public void Update(){
+    void Update(){
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(check){
                 ResumeGame();
@@ -33,6 +31,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f; // pauses the game
+        ScoreCounter.HighScoreUpdate();
+        check = true;
     }
 
     public void ResumeGame()

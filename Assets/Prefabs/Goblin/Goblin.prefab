@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  movementSpeed: 6
+  movementSpeed: 5
   damageToCastle: 10
   attackRange: 1
   xpValue: 5

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Unity.VisualScripting;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -20,15 +22,17 @@ public class EnemySpawner : MonoBehaviour
     public float initialSpawnDelay = 5f;
     public int waveCount = 5;
     
-    private int currentWave = 0;
-    private int enemiesToSpawn;
-    private int enemiesRemaining;
+    //HighScore
+    public TextMeshProUGUI CurrentScoreCountText;
+    public TextMeshProUGUI HighestScoreCountText;
+    public int currentScore;
 
-    private WaveManager waveManager;
+    private int currentWave = 0;
+    private int enemiesToSpawn; 
+    private int enemiesRemaining;
 
     void Start()
     {
-        waveManager = GetComponent<WaveManager>();
         Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
         StartCoroutine(StartWaveAfterDelay());
     }
@@ -54,6 +58,21 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("All waves completed!");
         }
+        currentScore = currentWave;
+    }
+
+    public void HighScoreUpdate(){
+        if(PlayerPrefs.HasKey("SavedHighScore")){
+            if(currentScore > PlayerPrefs.GetInt("SavedHighScore")){
+                PlayerPrefs.SetInt("SavedHighScore", currentScore);
+            }
+        }
+        else{
+            PlayerPrefs.SetInt("SavedHighScore", currentScore);
+        }
+
+        CurrentScoreCountText.text = $"Current Wave: {currentWave}";
+        HighestScoreCountText.text = $"Highest Wave Achieved: {PlayerPrefs.GetInt("SavedHighScore").ToString()}";
     }
 
     IEnumerator SpawnEnemies()
@@ -127,7 +146,6 @@ public class EnemySpawner : MonoBehaviour
         if (enemiesRemaining <= 0)
         {
             Debug.Log("Wave " + currentWave + " complete.");
-            waveManager.NextWave();
             StartNextWave();
         }
     }
