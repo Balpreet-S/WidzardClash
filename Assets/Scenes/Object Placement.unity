@@ -2581,80 +2581,6 @@ Transform:
   - {fileID: 1777085431}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &389363447
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2039434076}
-    m_Modifications:
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2099.9998
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 699.99994
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.377716
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.4235976
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -13.886331
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071067
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2222145306943507678, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_Name
-      value: PineTree10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2222145306943507678, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
---- !u!4 &389363448 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1557530575929808484, guid: 07d6200f577d2477e9947fc6b0f67dcd, type: 3}
-  m_PrefabInstance: {fileID: 389363447}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &402927534
 GameObject:
   m_ObjectHideFlags: 0
@@ -16366,7 +16292,6 @@ Transform:
   - {fileID: 1893176526}
   - {fileID: 1052423482}
   - {fileID: 1191423315}
-  - {fileID: 389363448}
   - {fileID: 771337041}
   - {fileID: 2065348556}
   - {fileID: 740269885}
@@ -17352,10 +17277,11 @@ SceneRoots:
   - {fileID: 868323154}
   - {fileID: 1804695712}
   - {fileID: 650439839}
-  - {fileID: 171735071}
-  - {fileID: 1930205664}
-  - {fileID: 1187115694}
   - {fileID: 812996012}
   - {fileID: 277442458}
   - {fileID: 1549738181}
   - {fileID: 1219256794}
+  - {fileID: 374249661}
+  - {fileID: 767505538}
+  - {fileID: 1269788090}
+  - {fileID: 1334378208}
