@@ -6,10 +6,10 @@ using TMPro;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemy Prefabs")]
-    public GameObject enemyPrefab1;
-    public GameObject enemyPrefab2;
-    public GameObject enemyPrefab3;
-    public GameObject enemyPrefab4; // Boss zombie prefab
+    public GameObject enemyPrefab1; //basic goblin prefab
+    public GameObject enemyPrefab2; // speedy goblin prefab
+    public GameObject enemyPrefab3; //heavy armor goblin prefab
+    public GameObject enemyPrefab4; // Boss goblin prefab
 
     [Header("Spawn & Waypoints")]
     public Transform spawnPoint;
@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     public int initialEnemyCount = 5;
     public float spawnInterval = 1f;
     public float initialSpawnDelay = 5f;
-    public int waveCount = 20; // 20 waves
+    public int waveCount = 20;
 
     // High Score
     public TextMeshProUGUI CurrentScoreCountText;
@@ -29,12 +29,15 @@ public class EnemySpawner : MonoBehaviour
     private int currentWave = 0;
     private int enemiesToSpawn;
     private int enemiesRemaining;
+    private WaveManager waveManager;
+
 
     void Start()
     {
-        Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
-        StartCoroutine(StartWaveAfterDelay());
+        waveManager = GetComponent<WaveManager>();
+        StartCoroutine(StartWaveAfterDelay()); //start wave after timer
     }
+
 
     IEnumerator StartWaveAfterDelay()
     {
@@ -44,20 +47,34 @@ public class EnemySpawner : MonoBehaviour
 
     void StartNextWave()
     {
+
         if (currentWave < waveCount)
         {
+            waveManager.NextWave(); //check which wizard buttons are available
             currentWave++; // Increment wave counter
 
-            if (currentWave == waveCount)
+            // Define custom logic for boss waves
+            if (currentWave == 10)
             {
-                // Boss wave: Only 1 enemy to spawn
+                // Wave 10: 1 boss only
                 enemiesToSpawn = 1;
+            }
+            else if (currentWave == 15)
+            {
+                // Wave 15: 2 bosses only
+                enemiesToSpawn = 2;
+            }
+            else if (currentWave == 20)
+            {
+                // Wave 20: 4 bosses only
+                enemiesToSpawn = 4;
             }
             else
             {
-                // Regular waves
+                // Regular waves (no bosses)
                 enemiesToSpawn = Mathf.FloorToInt(initialEnemyCount + (currentWave - 1) * 6 * (1 + currentWave / 20f));
             }
+
             enemiesRemaining = enemiesToSpawn;
 
             Debug.Log($"Starting Wave {currentWave} with {enemiesToSpawn} enemies.");
@@ -68,12 +85,11 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("All waves completed!");
         }
-
         currentScore = currentWave;
         HighScoreUpdate(); // Update the high score UI
     }
 
-    public void HighScoreUpdate()
+    public void HighScoreUpdate() //updating the high score based on the current score scored by the user
     {
         if (PlayerPrefs.HasKey("SavedHighScore"))
         {
@@ -101,10 +117,10 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject prefabToSpawn;
 
-            if (currentWave == waveCount)
+            // Check for boss waves
+            if (currentWave == 10 || currentWave == 15 || currentWave == 20)
             {
-                // Spawn the boss zombie for wave 20
-                prefabToSpawn = enemyPrefab4;
+                prefabToSpawn = enemyPrefab4; // Spawn only the boss prefab
             }
             else
             {
@@ -133,17 +149,18 @@ public class EnemySpawner : MonoBehaviour
     {
         List<GameObject> enemyList = new List<GameObject>();
 
-        // Unlock enemies dynamically based on wave number
-        if (wave >= 1) enemyList.Add(enemyPrefab1);
-        if (wave >= 5) enemyList.Add(enemyPrefab2); // Introduce GoblinL1 at wave 5
-        if (wave >= 10) enemyList.Add(enemyPrefab3); // Introduce GoblinL2 at wave 10
-
-        // Boss zombie spawns exclusively in wave 20
-        if (wave == 20)
+        // Boss waves
+        if (wave == 10 || wave == 15 || wave == 20)
         {
             enemyList.Clear(); // Clear other enemies to ensure only the boss spawns
             enemyList.Add(enemyPrefab4);
+            return enemyList;
         }
+
+        // Regular waves
+        if (wave >= 1) enemyList.Add(enemyPrefab1);
+        if (wave >= 5) enemyList.Add(enemyPrefab2); // Introduce GoblinL1 at wave 5
+        if (wave >= 10) enemyList.Add(enemyPrefab3); // Introduce GoblinL2 at wave 10
 
         return enemyList;
     }

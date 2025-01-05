@@ -40,6 +40,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.319778
       objectReference: {fileID: 0}
@@ -107,10 +119,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
       insertIndex: -1
+      addedObject: {fileID: -8298845380432856310}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8814232447344880335}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6933349256533412783}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4376501786987234110}
   m_SourcePrefab: {fileID: 100100000, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
 --- !u!4 &8350715410832919944 stripped
 Transform:
@@ -122,6 +140,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fd6ac14593fc4dbb9f4ba5d144935c9, type: 3}
   m_PrefabInstance: {fileID: 8388246850925161059}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &-8298845380432856310
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8694308759232829234}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 3.6, z: 1}
+  m_Center: {x: 0, y: 1.6, z: 0}
 --- !u!82 &8814232447344880335
 AudioSource:
   m_ObjectHideFlags: 0
@@ -232,7 +271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 10
   attackCooldown: 0.5
-  attackDamage: 10
   rotationSpeed: 5
   wizardType: Base
   BasePrefab: {fileID: 5942370526381713114, guid: b6e01838893b04ce19be90ed91481ffd, type: 3}
@@ -246,7 +284,21 @@ MonoBehaviour:
   firePoint: {fileID: 2887871973500871802}
   specialProjectilePrefab: {fileID: 0}
   specialAttackCooldown: 10
+  damageMultiplier: 1
   baseballSound: {fileID: 8300000, guid: 1c1f2952f577f4497a8c64623ce4f6ff, type: 3}
   fireballSound: {fileID: 0}
   waterballSound: {fileID: 0}
   earthballSound: {fileID: 0}
+--- !u!114 &4376501786987234110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8694308759232829234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee25e261408914d378c306c1431099e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiWindowPrefab: {fileID: 6880420471849373809, guid: dd6353a2dddb34c6681c0b6565433288, type: 3}

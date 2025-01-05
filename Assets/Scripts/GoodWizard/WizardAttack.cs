@@ -93,6 +93,7 @@ public class WizardAttack : MonoBehaviour
             specialAttackTimer -= Time.deltaTime;
         }
 
+
         // If there is a target, check if it's still in range, and rotate if needed
         if (currentTarget != null)
         {

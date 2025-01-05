@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 761d9347036b54bc0b9b8133df7eb956, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 761d9347036b54bc0b9b8133df7eb956, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 761d9347036b54bc0b9b8133df7eb956, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 761d9347036b54bc0b9b8133df7eb956, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.1723709
       objectReference: {fileID: 0}
@@ -132,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a119a15535c488694789b710df4eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  movementSpeed: 5
+  health: 100
+  movementSpeed: 8
   damageToCastle: 10
   attackRange: 1
   xpValue: 5
