@@ -31,7 +31,7 @@ public class XPManager : MonoBehaviour
     private void Start()
     {
         playerXP = 0;
-        skillPoints = 2;
+        skillPoints = 3;
         UpdateSkillPointsText();
     }
 

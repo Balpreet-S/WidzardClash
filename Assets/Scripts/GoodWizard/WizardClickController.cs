@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 
 // uiWindow.SetActive(true);
@@ -15,6 +16,10 @@ public class WizardClickHandler : MonoBehaviour
     private WizardAttack wizardAttack;
     private WizardUpgrade wizardUpgrade;
     private ImageFillGradient cooldownBar;
+
+    public TMP_Text LevelText;
+
+    public GameObject button;
 
 
     // upgrade level 
@@ -31,6 +36,10 @@ public class WizardClickHandler : MonoBehaviour
         wizardAttack = GetComponent<WizardAttack>();
         wizardUpgrade = GetComponent<WizardUpgrade>();
         cooldownBar = GetComponentInChildren<ImageFillGradient>();
+
+        // Ensure the LevelText is updated at the start
+
+        
     }
 
     void Update()
@@ -41,6 +50,12 @@ public class WizardClickHandler : MonoBehaviour
             Debug.Log("UI Window closed.");
             return;
         }
+
+        
+        if (activeWindow != null) {
+            UpdateLevelText();}
+
+
     }
 
     void OnMouseDown()
@@ -100,6 +115,27 @@ public class WizardClickHandler : MonoBehaviour
 
         // Store reference to the active window
         activeWindow = uiWindow;
+
+        Transform buttonTransform = activeWindow.transform.Find("Level Up"); // Replace "ButtonName" with the actual name
+        if (buttonTransform != null)
+        {
+            button = buttonTransform.gameObject;
+            TMP_Text buttonText = button.GetComponentInChildren<TMP_Text>();
+            if (buttonText != null)
+            {
+                LevelText = buttonText;
+                UpdateLevelText(); // Set the initial text dynamically
+            }
+            else
+            {
+                Debug.LogError("TMP_Text component not found in the button!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Button not found in the activeWindow!");
+        }
+
 
         Button[] buttons = uiWindow.GetComponentsInChildren<Button>();
         if (buttons.Length >= 2)
@@ -189,5 +225,23 @@ public class WizardClickHandler : MonoBehaviour
         Destroy(gameObject);
         Destroy(activeWindow);
         activeWindow = null;
+    }
+
+    private void UpdateLevelText()
+    {
+        if (LevelText != null)
+        {
+            if (upgradeLevel+1 <= 2){
+                LevelText.text = $"Level up, cost: {upgradeLevel+1}";
+            }
+            else{
+                LevelText.text = "Max level";
+            }
+            
+        }
+        else
+        {
+            Debug.LogError("LevelText reference is missing!");
+        }
     }
 }
