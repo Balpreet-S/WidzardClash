@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1522699951019736868}
   - component: {fileID: 1661404696853284699}
   - component: {fileID: 7502569469178779926}
+  - component: {fileID: 337624015358362012}
   m_Layer: 5
   m_Name: Level Up
   m_TagString: Untagged
@@ -267,6 +268,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &337624015358362012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451822373445658526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd4e8d4daea9c44e9eb75f42641deb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillTowers: {fileID: 0}
+  cost: 40
 --- !u!1 &3126147981100979984
 GameObject:
   m_ObjectHideFlags: 0
