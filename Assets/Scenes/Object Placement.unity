@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44863155, g: 0.4918427, b: 0.29416576, a: 1}
+  m_IndirectSpecularColor: {r: 0.4486307, g: 0.49184036, b: 0.29416382, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 1526889637422913483, guid: 43ac22291675c40889da5f081d36f240, type: 3}
-  cost: 5
+  cost: 4
 --- !u!114 &332017518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5786,7 +5786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 8694308759232829234, guid: 5d23424e6a7af4be8bc8a2e58e0a9cf5, type: 3}
-  cost: 1
+  cost: 0
 --- !u!114 &808336631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8512,6 +8512,7 @@ Transform:
   - {fileID: 995566962}
   - {fileID: 906487616}
   - {fileID: 347271198}
+  - {fileID: 1809930137}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1195822278
@@ -9197,7 +9198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 2828160826260076024, guid: 435ad6cd64b864347945a7b3cd8cd730, type: 3}
-  cost: 4
+  cost: 3
 --- !u!114 &1304527168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11442,6 +11443,68 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6895485863125834239, guid: 8ea116b827e1a4677b4ffbc340977cae, type: 3}
   m_PrefabInstance: {fileID: 1792556860}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1809930136
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1187115694}
+    m_Modifications:
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -23.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903782016867431614, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+      propertyPath: m_Name
+      value: TowerPlacementSpot2 (16)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+--- !u!4 &1809930137 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6090266950983527940, guid: c7e729e20a9994e9f8aff7f71e04e095, type: 3}
+  m_PrefabInstance: {fileID: 1809930136}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1865202492 stripped
 Transform:
