@@ -1,3 +1,70 @@
+/*using UnityEngine;
+
+public class WizardClickHandler : MonoBehaviour
+{
+    public GameObject uiWindowPrefab; // Assign your prefab in the Inspector
+    private GameObject activeWindow; // To track the currently active panel
+
+    void OnMouseDown()
+    {
+        // If a panel is already active for this wizard, destroy it (close the panel)
+        if (activeWindow != null)
+        {
+            Destroy(activeWindow);
+            activeWindow = null; // Reset the reference
+            Debug.Log("UI Window closed.");
+            return;
+        }
+
+        if (uiWindowPrefab == null)
+        {
+            Debug.LogError("UI Window Prefab is not assigned!");
+            return;
+        }
+
+        // Instantiate the UI window
+        GameObject uiWindow = Instantiate(uiWindowPrefab);
+
+        // Parent the window to this wizard (so it follows the wizard)
+        uiWindow.transform.SetParent(transform, false);
+
+        // Position the pop-up slightly above the wizard
+        Vector3 offset = new Vector3(0, 2, 0); // Adjust this offset as needed
+        uiWindow.transform.localPosition = offset;
+
+        // Store reference to the active window
+        activeWindow = uiWindow;
+
+        Debug.Log($"UI Window opened at position: {uiWindow.transform.position}");
+    }
+
+    void Update()
+    {
+        // Ensure the UI always faces the camera
+        if (activeWindow != null)
+        {
+            activeWindow.transform.LookAt(Camera.main.transform);
+            activeWindow.transform.Rotate(0, 180, 0); // Flip to face the camera properly
+        }
+    }
+}
+
+private WizardAttack wizardAttack;
+    private WizardUpgrade wizardUpgrade;
+    private ImageFillGradient cooldownBar;
+
+*/
+
+
+
+
+
+
+
+
+
+
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -22,6 +89,8 @@ public class WizardClickHandler : MonoBehaviour
     private int upgradeLevel = 0;   
 
 
+    
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -30,8 +99,6 @@ public class WizardClickHandler : MonoBehaviour
         wizardUpgrade = GetComponent<WizardUpgrade>();
         cooldownBar = GetComponentInChildren<ImageFillGradient>();
     }
-
-
 
     void OnMouseDown()
     {
@@ -139,21 +206,25 @@ public class WizardClickHandler : MonoBehaviour
 
     public void LevelUpWizard()
     {
+        Debug.Log("Level Up Wizard!");
+
         if (wizardUpgrade == null)
         {
+            Debug.LogWarning("No WizardUpgrade script found on this Wizard.");
             return;
         }
-        
+
+
         switch (upgradeLevel)
         {
             case 0:
                 wizardUpgrade.UpgradeWizardDamage(30f);
-                //Debug.Log("Wizard damage upgraded by +30%!");
+                Debug.Log("Wizard damage upgraded by +30%!");
                 upgradeLevel++;
                 break;
             case 1:
                 wizardUpgrade.UpgradeWizardDamage(20f);
-                //Debug.Log("Wizard damage upgraded by +20%!");
+                Debug.Log("Wizard damage upgraded by +20%!");
                 upgradeLevel++;
 
                 break;
