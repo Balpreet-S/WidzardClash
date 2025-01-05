@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
 
     public void HowToPlay() // Takes you to another scene that explains how the game works
     {
-        SceneManager.LoadScene("How To Play");
+        SceneManager.LoadScene("How To Play Page 1");
     }
 
     public void QuitGame() // Quits the game
