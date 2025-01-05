@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44863155, g: 0.4918427, b: 0.29416576, a: 1}
+  m_IndirectSpecularColor: {r: 0.4486307, g: 0.49184036, b: 0.29416382, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 5875299733704528371, guid: 29f0e750090834c45bd9a9b45be7eab2, type: 3}
-  cost: 50
+  cost: 1
 --- !u!114 &33916416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1627,7 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 1526889637422913483, guid: 43ac22291675c40889da5f081d36f240, type: 3}
-  cost: 50
+  cost: 1
 --- !u!114 &332017518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4923,7 +4923,7 @@ MonoBehaviour:
   initialEnemyCount: 5
   spawnInterval: 1
   initialSpawnDelay: 4
-  waveCount: 5
+  waveCount: 20
   CurrentScoreCountText: {fileID: 215481963}
   HighestScoreCountText: {fileID: 1086386072}
   currentScore: 0
@@ -5385,7 +5385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerXP: 50
   LevelText: {fileID: 964894662}
-  XpCounterText: {fileID: 0}
+  XpCounterText: {fileID: 986092841}
   xpProgressbar: {fileID: 627979709}
 --- !u!4 &794375069
 Transform:
@@ -5515,7 +5515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 8694308759232829234, guid: 5d23424e6a7af4be8bc8a2e58e0a9cf5, type: 3}
-  cost: 50
+  cost: 1
 --- !u!114 &808336631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7644,7 +7644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 1286139539451100936, guid: 923e1c533e346f8449a100f6b8e110e6, type: 3}
-  cost: 4
+  cost: 10
 --- !u!1001 &1113134093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8791,7 +8791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 2828160826260076024, guid: 435ad6cd64b864347945a7b3cd8cd730, type: 3}
-  cost: 50
+  cost: 1
 --- !u!114 &1304527168
 MonoBehaviour:
   m_ObjectHideFlags: 0
