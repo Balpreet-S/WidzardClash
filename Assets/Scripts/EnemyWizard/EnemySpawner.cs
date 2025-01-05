@@ -19,22 +19,13 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 1f;
     public float initialSpawnDelay = 5f;
     public int waveCount = 5;
-    
-    public int currentScore = 0;
-    public string highscoredisplay;
-    public TextMeshProUGUI CurrentScoreCountText;
-    public TextMeshProUGUI HighestScoreCountText;
-
 
     private int currentWave = 0;
     private int enemiesToSpawn;
     private int enemiesRemaining;
 
-    private WaveManager waveManager;
-
     void Start()
     {
-        waveManager = GetComponent<WaveManager>();
         Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
         StartCoroutine(StartWaveAfterDelay());
     }
@@ -133,7 +124,6 @@ public class EnemySpawner : MonoBehaviour
         if (enemiesRemaining <= 0)
         {
             Debug.Log("Wave " + currentWave + " complete.");
-            waveManager.NextWave();
             StartNextWave();
         }
     }
