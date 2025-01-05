@@ -6,10 +6,10 @@ using TMPro;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemy Prefabs")]
-    public GameObject enemyPrefab1;
-    public GameObject enemyPrefab2;
-    public GameObject enemyPrefab3;
-    public GameObject enemyPrefab4; // Boss zombie prefab
+    public GameObject enemyPrefab1; //basic goblin prefab
+    public GameObject enemyPrefab2; // speedy goblin prefab
+    public GameObject enemyPrefab3; //heavy armor goblin prefab
+    public GameObject enemyPrefab4; // Boss goblin prefab
 
     [Header("Spawn & Waypoints")]
     public Transform spawnPoint;
@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     public int initialEnemyCount = 5;
     public float spawnInterval = 1f;
     public float initialSpawnDelay = 5f;
-    public int waveCount = 20; // 20 waves
+    public int waveCount = 20;
 
     // High Score
     public TextMeshProUGUI CurrentScoreCountText;
@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         waveManager = GetComponent<WaveManager>();
-        StartCoroutine(StartWaveAfterDelay());
+        StartCoroutine(StartWaveAfterDelay()); //start wave after timer
     }
 
     IEnumerator StartWaveAfterDelay()
@@ -48,28 +48,28 @@ public class EnemySpawner : MonoBehaviour
     {
         if (currentWave < waveCount)
         {
-            waveManager.NextWave();
+            waveManager.NextWave(); //check which wizard buttons are available
             currentWave++; // Increment wave counter
 
             // Define custom logic for boss waves
             if (currentWave == 10)
             {
-                // Wave 10: 1 boss
+                // Wave 10: 1 boss only
                 enemiesToSpawn = 1;
             }
             else if (currentWave == 15)
             {
-                // Wave 15: 2 bosses
+                // Wave 15: 2 bosses only
                 enemiesToSpawn = 2;
             }
             else if (currentWave == 20)
             {
-                // Wave 20: 4 bosses
+                // Wave 20: 4 bosses only
                 enemiesToSpawn = 4;
             }
             else
             {
-                // Regular waves
+                // Regular waves (no bosses)
                 enemiesToSpawn = Mathf.FloorToInt(initialEnemyCount + (currentWave - 1) * 6 * (1 + currentWave / 20f));
             }
 
@@ -88,7 +88,7 @@ public class EnemySpawner : MonoBehaviour
         HighScoreUpdate(); // Update the high score UI
     }
 
-    public void HighScoreUpdate()
+    public void HighScoreUpdate() //updating the high score based on the current score scored by the user
     {
         if (PlayerPrefs.HasKey("SavedHighScore"))
         {
