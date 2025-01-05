@@ -11,18 +11,18 @@ public class WaveManager : MonoBehaviour
     public Button earthSkillButton;
     public Button ULTButton;
 
-    
 
-    private int currentWave = 1;
+
+    private int currentWave = 0;
 
     void Start()
     {
         // Wave 1: only the base button is interactable
         baseSkillButton.interactable = true;
-        fireSkillButton.interactable = true;
-        waterSkillButton.interactable = true;
-        earthSkillButton.interactable = true;
-        ULTButton.interactable = true;
+        fireSkillButton.interactable = false;
+        waterSkillButton.interactable = false;
+        earthSkillButton.interactable = false;
+        ULTButton.interactable = false;
     }
 
     public void NextWave()
@@ -35,11 +35,11 @@ public class WaveManager : MonoBehaviour
             case 2:
                 fireSkillButton.interactable = true;
                 break;
-            case 3:
-                waterSkillButton.interactable = true;
-                break;
-            case 4:
+            case 5:
                 earthSkillButton.interactable = true;
+                break;
+            case 10:
+                waterSkillButton.interactable = true;
                 ULTButton.interactable = true;
                 break;
         }

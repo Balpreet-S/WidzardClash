@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab1;
     public GameObject enemyPrefab2;
     public GameObject enemyPrefab3;
-    public GameObject enemyPrefab4;
+    public GameObject enemyPrefab4; // Boss zombie prefab
 
     [Header("Spawn & Waypoints")]
     public Transform spawnPoint;
@@ -20,21 +19,22 @@ public class EnemySpawner : MonoBehaviour
     public int initialEnemyCount = 5;
     public float spawnInterval = 1f;
     public float initialSpawnDelay = 5f;
-    public int waveCount = 5;
-    
-    //HighScore
+    public int waveCount = 20; // 20 waves
+
+    // High Score
     public TextMeshProUGUI CurrentScoreCountText;
     public TextMeshProUGUI HighestScoreCountText;
     public int currentScore;
 
     private int currentWave = 0;
-    private int enemiesToSpawn; 
+    private int enemiesToSpawn;
     private int enemiesRemaining;
+    private WaveManager waveManager;
 
 
     void Start()
     {
-        Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
+        waveManager = GetComponent<WaveManager>();
         StartCoroutine(StartWaveAfterDelay());
     }
 
@@ -47,31 +47,59 @@ public class EnemySpawner : MonoBehaviour
 
     void StartNextWave()
     {
-        
-        currentWave++;
-        if (currentWave <= waveCount)
+
+        if (currentWave < waveCount)
         {
-            // Increase enemy count per wave
-            enemiesToSpawn = initialEnemyCount + (currentWave - 1) * 6;
+            waveManager.NextWave();
+            currentWave++; // Increment wave counter
+
+            // Define custom logic for boss waves
+            if (currentWave == 10)
+            {
+                // Wave 10: 1 boss
+                enemiesToSpawn = 1;
+            }
+            else if (currentWave == 15)
+            {
+                // Wave 15: 2 bosses
+                enemiesToSpawn = 2;
+            }
+            else if (currentWave == 20)
+            {
+                // Wave 20: 4 bosses
+                enemiesToSpawn = 4;
+            }
+            else
+            {
+                // Regular waves
+                enemiesToSpawn = Mathf.FloorToInt(initialEnemyCount + (currentWave - 1) * 6 * (1 + currentWave / 20f));
+            }
+
             enemiesRemaining = enemiesToSpawn;
 
-            StartCoroutine(SpawnEnemies());
+            Debug.Log($"Starting Wave {currentWave} with {enemiesToSpawn} enemies.");
+
+            StartCoroutine(SpawnEnemies()); // Start spawning enemies for the wave
         }
         else
         {
             Debug.Log("All waves completed!");
         }
-        
         currentScore = currentWave;
+        HighScoreUpdate(); // Update the high score UI
     }
 
-    public void HighScoreUpdate(){
-        if(PlayerPrefs.HasKey("SavedHighScore")){
-            if(currentScore > PlayerPrefs.GetInt("SavedHighScore")){
+    public void HighScoreUpdate()
+    {
+        if (PlayerPrefs.HasKey("SavedHighScore"))
+        {
+            if (currentScore > PlayerPrefs.GetInt("SavedHighScore"))
+            {
                 PlayerPrefs.SetInt("SavedHighScore", currentScore);
             }
         }
-        else{
+        else
+        {
             PlayerPrefs.SetInt("SavedHighScore", currentScore);
         }
 
@@ -81,51 +109,62 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        // 1) Get the list of available enemy types for this wave
+        // Get the list of available enemy types for this wave
         List<GameObject> availablePrefabs = GetPrefabsForWave(currentWave);
 
-        // 2) Spawn enemies one at a time
+        // Spawn enemies one at a time
         while (enemiesToSpawn > 0)
         {
-            // 3) Pick one prefab from the list to spawn
-            int index = Random.Range(0, availablePrefabs.Count);
-            GameObject prefabToSpawn = availablePrefabs[index];
-            
+            GameObject prefabToSpawn;
+
+            // Check for boss waves
+            if (currentWave == 10 || currentWave == 15 || currentWave == 20)
+            {
+                prefabToSpawn = enemyPrefab4; // Spawn only the boss prefab
+            }
+            else
+            {
+                // Pick one prefab from the available list
+                int index = Random.Range(0, availablePrefabs.Count);
+                prefabToSpawn = availablePrefabs[index];
+            }
+
             SpawnEnemy(prefabToSpawn);
 
             enemiesToSpawn--;
             yield return new WaitForSeconds(spawnInterval);
         }
+
+        // Wait for all enemies in the wave to be defeated before starting the next wave
+        while (enemiesRemaining > 0)
+        {
+            yield return null;
+        }
+
+        Debug.Log($"Wave {currentWave} complete!");
+        StartNextWave();
     }
 
-    /// <summary>
-    /// Returns a list of enemy prefabs allowed for the given wave.
-    /// Example logic:
-    ///   Wave 1: Enemy 1
-    ///   Wave 2: Enemy 1, 2
-    ///   Wave 3: Enemy 1, 2, 3
-    ///   Wave 4+: Enemy 1, 2, 3, 4
-    /// </summary>
     private List<GameObject> GetPrefabsForWave(int wave)
     {
         List<GameObject> enemyList = new List<GameObject>();
 
-        // Wave 1
+        // Boss waves
+        if (wave == 10 || wave == 15 || wave == 20)
+        {
+            enemyList.Clear(); // Clear other enemies to ensure only the boss spawns
+            enemyList.Add(enemyPrefab4);
+            return enemyList;
+        }
+
+        // Regular waves
         if (wave >= 1) enemyList.Add(enemyPrefab1);
-
-        // Wave 2
-        if (wave >= 2) enemyList.Add(enemyPrefab2);
-
-        // Wave 3
-        if (wave >= 3) enemyList.Add(enemyPrefab3);
-
-        // Wave 4+
-        if (wave >= 4) enemyList.Add(enemyPrefab4);
+        if (wave >= 5) enemyList.Add(enemyPrefab2); // Introduce GoblinL1 at wave 5
+        if (wave >= 10) enemyList.Add(enemyPrefab3); // Introduce GoblinL2 at wave 10
 
         return enemyList;
     }
 
-    
     void SpawnEnemy(GameObject prefab)
     {
         GameObject newEnemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
