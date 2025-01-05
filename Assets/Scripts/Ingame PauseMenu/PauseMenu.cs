@@ -16,12 +16,16 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            if(check){
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (check)
+            {
                 ResumeGame();
             }
-            else{
+            else
+            {
                 PauseGame();
             }
         }
