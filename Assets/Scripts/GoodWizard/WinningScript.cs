@@ -6,7 +6,7 @@ using UnityEngine;
 // Winning game end script (when alt is pressed)
 public class WinningScript : MonoBehaviour
 {
-    
+    public GameObject gameWon;
     public void WinGame()
     {
         Debug.Log("Congrats on beating the game!!");
@@ -21,5 +21,8 @@ public class WinningScript : MonoBehaviour
         }
 
         Time.timeScale = 0;
+
+        gameWon.SetActive(true);
+
     }
 }

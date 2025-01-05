@@ -13,7 +13,13 @@ EditorBuildSettings:
     guid: 9077ac0f87d34dc48a8055dfc43730c4
   - enabled: 1
     path: Assets/Scenes/How To Play Page 2.unity
-    guid: 019e165b3b5178f4a91a9778770202e3
+    guid: 203978d0818e58842ae56ce2a413d079
+  - enabled: 1
+    path: Assets/Scenes/How To Play Page 3.unity
+    guid: 9f85780b839b0be4d9f3e0bc97be41f5
+  - enabled: 1
+    path: Assets/Scenes/How To Play Page 4.unity
+    guid: bd44ca5516c3ff843b24409b91c9e286
   - enabled: 1
     path: Assets/Scenes/Object Placement.unity
     guid: f9d700f5f914447f48566abe5b02d921

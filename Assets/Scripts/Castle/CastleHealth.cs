@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Formats.Alembic.Importer; // Import Alembic namespace
+using UnityEngine.Formats.Alembic.Importer;
+using UnityEngine.SceneManagement; // Import Alembic namespace
 
 public class CastleHealth : MonoBehaviour
 {
@@ -175,6 +176,11 @@ public class CastleHealth : MonoBehaviour
 
         // Pause the game
         Time.timeScale = 0;
+        
+        // Loads Game Over Scene
+        SceneManager.LoadScene("Game Over");
+
+
     }
 
     // Get the current health of the castle
