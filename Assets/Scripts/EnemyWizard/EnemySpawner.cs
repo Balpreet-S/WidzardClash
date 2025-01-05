@@ -26,13 +26,16 @@ public class EnemySpawner : MonoBehaviour
     public TextMeshProUGUI HighestScoreCountText;
     public int currentScore;
 
-    private int currentWave = 0;
+    private int currentWave = 1;
     private int enemiesToSpawn;
     private int enemiesRemaining;
 
+    private WaveManager waveManager;
+
     void Start()
     {
-        Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
+        //Debug.DrawRay(spawnPoint.position, spawnPoint.forward * 2, Color.magenta, 2f);
+        waveManager = GetComponent<WaveManager>();
         StartCoroutine(StartWaveAfterDelay());
     }
 
@@ -46,6 +49,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (currentWave < waveCount)
         {
+            waveManager.NextWave();
             currentWave++; // Increment wave counter
 
             if (currentWave == waveCount)

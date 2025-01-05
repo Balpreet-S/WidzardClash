@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 5875299733704528371, guid: 29f0e750090834c45bd9a9b45be7eab2, type: 3}
-  cost: 1
+  cost: 2
 --- !u!114 &33916416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1627,7 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 1526889637422913483, guid: 43ac22291675c40889da5f081d36f240, type: 3}
-  cost: 1
+  cost: 5
 --- !u!114 &332017518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7644,7 +7644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 1286139539451100936, guid: 923e1c533e346f8449a100f6b8e110e6, type: 3}
-  cost: 10
+  cost: 40
 --- !u!1001 &1113134093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8791,7 +8791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTowers: {fileID: 2828160826260076024, guid: 435ad6cd64b864347945a7b3cd8cd730, type: 3}
-  cost: 1
+  cost: 4
 --- !u!114 &1304527168
 MonoBehaviour:
   m_ObjectHideFlags: 0
