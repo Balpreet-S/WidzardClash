@@ -4,13 +4,13 @@ using System.Collections;
 using TMPro;
 
 
-// uiWindow.SetActive(true);
+// This script handles the opening and closing of the UI window for each wizard, and well as the fuctionality of each button in the window
 
 public class WizardClickHandler : MonoBehaviour
 {
-    public GameObject uiWindowPrefab; // Assign your prefab in the Inspector
+    public GameObject uiWindowPrefab;
     private Camera mainCamera;
-    private GameObject activeWindow; // To track the currently active panel
+    private GameObject activeWindow;
 
 
     private WizardAttack wizardAttack;
@@ -21,14 +21,10 @@ public class WizardClickHandler : MonoBehaviour
 
     public GameObject button;
 
-
-    // upgrade level 
-    
     private int upgradeLevel = 0;   
 
 
-    
-
+    // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
@@ -36,12 +32,10 @@ public class WizardClickHandler : MonoBehaviour
         wizardAttack = GetComponent<WizardAttack>();
         wizardUpgrade = GetComponent<WizardUpgrade>();
         cooldownBar = GetComponentInChildren<ImageFillGradient>();
-
-        // Ensure the LevelText is updated at the start
-
         
     }
 
+    // contantly check if middle mouse button is pressed, and if so, close the window, and update the level text
     void Update()
     {
         if (Input.GetMouseButtonDown(2)){
@@ -51,16 +45,13 @@ public class WizardClickHandler : MonoBehaviour
             return;
         }
 
-        
         if (activeWindow != null) {
             UpdateLevelText();}
-
-
     }
 
+    // Handles opening and positioning the UI window when the wizard is clicked, and also updates the level text
     void OnMouseDown()
     {
-        // If a panel is already active for this wizard, destroy it (close the panel)
         if (activeWindow != null)
         {
             Destroy(activeWindow);
@@ -75,7 +66,6 @@ public class WizardClickHandler : MonoBehaviour
             return;
         }
 
-        // Find the WizardCanvas
         GameObject canvasObject = GameObject.Find("WizardCanvas");
         if (canvasObject == null)
         {
@@ -90,17 +80,13 @@ public class WizardClickHandler : MonoBehaviour
             return;
         }
 
-        // Instantiate the UI window
         GameObject uiWindow = Instantiate(uiWindowPrefab);
         uiWindow.transform.SetParent(canvas.transform, false);
 
-        // Ensure the panel is active
         uiWindow.SetActive(true);
 
-        // Position the panel at the wizard's screen position
         Vector3 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
 
-        // Convert screen position to local position in the Canvas space
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
             screenPosition,
@@ -108,15 +94,13 @@ public class WizardClickHandler : MonoBehaviour
             out Vector2 localPosition
         );
 
-        // Set the panel's position
         RectTransform rectTransform = uiWindow.GetComponent<RectTransform>();
         localPosition += new Vector2(0, -55);
         rectTransform.localPosition = localPosition;
 
-        // Store reference to the active window
         activeWindow = uiWindow;
 
-        Transform buttonTransform = activeWindow.transform.Find("Level Up"); // Replace "ButtonName" with the actual name
+        Transform buttonTransform = activeWindow.transform.Find("Level Up"); 
         if (buttonTransform != null)
         {
             button = buttonTransform.gameObject;
@@ -124,7 +108,7 @@ public class WizardClickHandler : MonoBehaviour
             if (buttonText != null)
             {
                 LevelText = buttonText;
-                UpdateLevelText(); // Set the initial text dynamically
+                UpdateLevelText();
             }
             else
             {
@@ -151,6 +135,7 @@ public class WizardClickHandler : MonoBehaviour
 
 
 
+    // Handles the activation of the special power
     public void ActivateSpecialPower()
     {
         Debug.Log("Activate Special Power!");
@@ -184,7 +169,7 @@ public class WizardClickHandler : MonoBehaviour
         }
 
     }
-
+    // Handles the level up
     public void LevelUpWizard()
     {
         Debug.Log("Level Up Wizard!");
@@ -218,7 +203,7 @@ public class WizardClickHandler : MonoBehaviour
         }
 
     }
-
+    // Handles the deletion of the wizard
     public void DeleteWizard()
     {
         Debug.Log("Delete Wizard!");
@@ -227,6 +212,7 @@ public class WizardClickHandler : MonoBehaviour
         activeWindow = null;
     }
 
+    // Updates the level text update based on the upgrade level
     private void UpdateLevelText()
     {
         if (LevelText != null)

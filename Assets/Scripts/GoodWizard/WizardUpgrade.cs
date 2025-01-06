@@ -1,22 +1,24 @@
 using UnityEngine;
 using TMPro;
 
+//this file is used to upgrade the wizard
+
 public class WizardUpgrade : MonoBehaviour
 {
     private WizardAttack wizardAttack;
 
     public TextMeshProUGUI LevelText;
-    // Call this (e.g., when you pick up an upgrade or complete a level)
 
-
+    // get the wizard attack component when the game starts
     private void Awake()
     {
         wizardAttack = GetComponent<WizardAttack>();
     }
 
+
+    // method to upgrade the wizard damage
     public void UpgradeWizardDamage(float percentIncrease)
     {
-        // e.g., passing in 20 means +20% damage
         
             float increment = percentIncrease / 100f;
             wizardAttack.damageMultiplier += increment;
@@ -32,10 +34,5 @@ public class WizardUpgrade : MonoBehaviour
             else{
                 XPManager.instance.PurchaseUpgrade(0);
             }
-            
-        
-        
-        // If wizardAttack.damageMultiplier was 1.0 and percentIncrease is 20,
-        // new multiplier is 1.2 (i.e., +20% damage).
     }
 }
