@@ -14,6 +14,6 @@ public class GameOver : MonoBehaviour
 
     public void quit() // quits game
     {
-        Application.Quit();
+        SceneManager.LoadScene("Main Menu"); // Goes back to the main menu
     }
 }

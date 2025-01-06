@@ -33,7 +33,7 @@ To run or develop the game locally, follow these steps:
 - **Objective**: Protect your castle from waves of enemies by strategically placing wizards along their path.
   
 - **Gameplay Mechanics**:
-  - **Placing Wizards**: press the left mouse button on the Fire button on the right side of the screen, and than press with the left mouse button on the platform whre you would like to place the wizard.
+  - **Placing Wizards**: press the left mouse button on the Fire button on the right side of the screen, and than press with the left mouse button on the platform where you would like to place the wizard.
   - **Enemies**: Enemies follow a fix path toward your castle.
   
 - **Winning the Game**:
@@ -50,6 +50,25 @@ Our team consists of four members, each focusing on specific areas of the game's
 - **Ralph El Achkar El Zoghbi**
 - **Ka Hei Chan**
 - **Joshua Ronald Jayasinghe**
+
+
+## 3D Models
+
+These are the 3D models developed by us
+
+**Balpreet Singh**:
+-    Fire, Water, Earth, Base wizard
+-    Fire, Water, Earth, Base projectiles
+-    Fire, Water, Earth, Super-projectiles
+-    4 tower models (with different leveles of demage)
+-    Path followed by teh enemies
+
+**Ralph El Achkar El Zoghbi**:
+-    Terrain
+-    Large and Pine trees
+-    Tower Placement spots
+-    Island
+
 
 ## References
 
