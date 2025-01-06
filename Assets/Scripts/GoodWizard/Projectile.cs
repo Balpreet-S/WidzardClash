@@ -2,28 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// COMMENTS COMPLETED
-
+// Base projectile for all projectiles to build on and basic wizard. (this is used as an abstract)
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 10;
-    public GameObject impactEffect; 
-    public float explosionRadius = 2f;
-    private float damageMultiplier = 1.0f;
+    public float speed = 10f; // Speed at which the projectile moves.
+    public int damage = 10; // Base damage dealt by the projectile.
+    public GameObject impactEffect; // Visual effect displayed upon impact.
+    public float explosionRadius = 2f; // Radius of the explosion effect.
+    private float damageMultiplier = 1.0f; // Multiplier to adjust damage.
 
-    private Transform target;
-    private Animator animator;
-    private bool hasHit = false;
-    private static Dictionary<string, ObjectPool<Projectile>> projectilePools;
+    private Transform target; // The target the projectile is moving towards.
+    private Animator animator; // Animator component for animations.
+    private bool hasHit = false; // Tracks if the projectile has already hit a target.
+    private static Dictionary<string, ObjectPool<Projectile>> projectilePools; // Pools for different projectile types.
 
-    public string type;
+    public string type; // Type of the projectile
+    public float maxLifetime = 5f; // Maximum lifetime of the projectile before it is returned to the pool.
+    private float lifetimeTimer; // Tracks the remaining lifetime of the projectile.
 
-    public float maxLifetime = 5f;  // The maximum time the projectile will live
-    private float lifetimeTimer;
-
-
+    // Initializes a projectile pool of a specified size for a given type.
     public static void InitializePool(string type, int size, GameObject prefab)
     {
         if (projectilePools == null)
@@ -37,6 +34,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    // Retrieves a projectile from the pool of the specified type.
     public static Projectile GetFromPool(string type)
     {
         if (projectilePools != null && projectilePools.ContainsKey(type))
@@ -48,6 +46,7 @@ public class Projectile : MonoBehaviour
         return null;
     }
 
+    // Returns a projectile to its respective pool.
     public static void ReturnToPool(Projectile projectile)
     {
         if (projectilePools != null && projectilePools.ContainsKey(projectile.type))
@@ -60,17 +59,20 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    // Sets the target for the projectile.
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
         hasHit = false;
     }
 
+    // Sets the damage multiplier for the projectile.
     public void SetDamageMultiplier(float multiplier)
     {
         damageMultiplier = multiplier;
     }
 
+    // Called when the projectile is enabled, initializes its state.
     void OnEnable()
     {
         if (animator == null) animator = GetComponent<Animator>();
@@ -80,26 +82,24 @@ public class Projectile : MonoBehaviour
             animator.Play("LaunchAnimation");
         }
 
-        // Reset lifetime timer
-        lifetimeTimer = maxLifetime;
+        lifetimeTimer = maxLifetime; // Reset the lifetime timer.
     }
 
+    // Updates the projectile's position and checks for collisions or timeout.
     void Update()
     {
         if (target == null)
         {
-            ReturnToPool(this);
+            ReturnToPool(this); // Return to pool if no target.
             return;
         }
 
-
-        lifetimeTimer -= Time.deltaTime;
+        lifetimeTimer -= Time.deltaTime; // Decrease lifetime timer.
         if (lifetimeTimer <= 0f && !hasHit)
         {
-            ReturnToPool(this);
+            ReturnToPool(this); // Return to pool if lifetime expires.
             return;
         }
-
 
         Vector3 direction = target.position - transform.position;
         transform.rotation = Quaternion.LookRotation(direction);
@@ -108,13 +108,14 @@ public class Projectile : MonoBehaviour
 
         if (direction.magnitude <= distanceThisFrame && !hasHit)
         {
-            HitTarget();
+            HitTarget(); // Hit the target if within distance.
             return;
         }
 
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }
 
+    // Handles logic for when the projectile hits its target.
     void HitTarget()
     {
         if (hasHit) return;
@@ -127,6 +128,7 @@ public class Projectile : MonoBehaviour
 
         float finalDamage = damage * damageMultiplier;
 
+        // Apply damage to all enemies within the explosion radius.
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in hitColliders)
         {
@@ -140,7 +142,7 @@ public class Projectile : MonoBehaviour
         if (animator != null)
         {
             animator.Play("ImpactAnimation");
-            StartCoroutine(ReturnToPoolAfterDelay(0.5f));
+            StartCoroutine(ReturnToPoolAfterDelay(0.5f)); // Wait before returning to pool.
         }
         else
         {
@@ -148,19 +150,19 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    // Handles logic for when the projectile collides with an object.
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy") && !hasHit)
         {
-            HitTarget();
+            HitTarget(); // Hit the target if it is an enemy.
         }
     }
 
+    // Waits for a delay before returning the projectile to the pool.
     IEnumerator ReturnToPoolAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         ReturnToPool(this);
     }
 }
-
-

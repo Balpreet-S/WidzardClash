@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//script for fireball actions of the fire wizard special skill
 public class SpecialFireballProjectile : MonoBehaviour
 {
     public float speed = 10f; // Speed of the fireball
@@ -17,6 +17,7 @@ public class SpecialFireballProjectile : MonoBehaviour
         target = newTarget;
         hasHit = false; // Reset state when reused
     }
+    //checks if the goblin has dies if no then follow the goblin
 
     void Update()
     {
@@ -38,7 +39,7 @@ public class SpecialFireballProjectile : MonoBehaviour
 
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }
-
+    //effects that take action when the target is hit
     void HitTarget()
     {
         if (hasHit) return; // Prevent multiple hits
@@ -82,7 +83,7 @@ public class SpecialFireballProjectile : MonoBehaviour
             HitTarget();
         }
     }
-
+    //color effect of foreball and area damage
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
