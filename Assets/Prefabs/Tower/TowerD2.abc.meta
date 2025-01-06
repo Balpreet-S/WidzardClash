@@ -7,7 +7,7 @@ ScriptedImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-  script: {fileID: 11500000, guid: f53f5fc499d31e44b9deee84d28a9ee8, type: 3}
+  script: {instanceID: 0}
   rootGameObjectId: 
   rootGameObjectName: 
   importerVersion: 1
@@ -34,5 +34,5 @@ ScriptedImporter:
   startTime: 3.75
   endTime: 10.416666666666666
   importWarning: 
-  firstImport: 0
+  firstImport: 1
   isHDF5: 0
