@@ -7,14 +7,14 @@ using UnityEngine;
 public class WinningScript : MonoBehaviour
 {
     public GameObject gameWon;
+
+    // kill all enemeis and end the game when called
     public void WinGame()
     {
         Debug.Log("Congrats on beating the game!!");
         
-        // Find all enemies in the scene
         EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
 
-        // kill all remaigning enemies
         foreach (EnemyScript enemy in allEnemies)
         {
             enemy.Die();

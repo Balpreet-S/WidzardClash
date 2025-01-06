@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// COMMENTS COMPLETED
+// This script controls the attack behavior of the wizard
 public class WizardAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
     public float attackRange = 5f;
     public float attackCooldown = 2f;
-    public float rotationSpeed = 5f; // Speed of rotation toward the enemy
+    public float rotationSpeed = 5f; 
 
     [Header("Wizard Type (e.g., 'Fire', 'Water', 'Earth')")]
     public string wizardType;
@@ -50,17 +50,16 @@ public class WizardAttack : MonoBehaviour
     private AudioSource audioSource;
 
     private float attackTimer = 0f;
-    private float soundCooldown = 1f; //  used only for the water wizard
+    private float soundCooldown = 1f;
     private float soundCooldownTimer = 0f;
     private EnemyScript currentTarget;
 
+    // set up projectile pools and audio sources
     void Start()
     {
-        // Initialize the audio source
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
 
-        // Initialize the pool for the wizard's actual projectile type
         if (wizardType == "Base")
         {
             Projectile.InitializePool("BaseBall", BasePoolSize, BasePrefab); 
@@ -79,22 +78,19 @@ public class WizardAttack : MonoBehaviour
         }
     }
 
+    // contantly check search for a terget, rotate toeat the target, and fire at the target
     void Update()
     {
-        // Reduce the sound cooldown timer every frame
         if (soundCooldownTimer > 0)
         {
             soundCooldownTimer -= Time.deltaTime;
         }
 
-        // reduce the special attack timer
         if (specialAttackTimer > 0)
         {
             specialAttackTimer -= Time.deltaTime;
         }
 
-
-        // If there is a target, check if it's still in range, and rotate if needed
         if (currentTarget != null)
         {
             float distanceToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
@@ -126,7 +122,7 @@ public class WizardAttack : MonoBehaviour
             }
         }
     }
-
+    // rotates the wizard to face the target
     void RotateTowardsTarget()
     {
         if (currentTarget != null)
@@ -137,7 +133,7 @@ public class WizardAttack : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
-
+    // finds the closest target in range
     void FindTarget()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
@@ -161,6 +157,7 @@ public class WizardAttack : MonoBehaviour
         currentTarget = closestEnemy;
     }
 
+    // fires at the target using the projectile pool
     void AttackEnemy()
     {
         if (currentTarget != null)
@@ -178,11 +175,10 @@ public class WizardAttack : MonoBehaviour
         }
     }
 
-
+    // fires at the target using the projectile pool assignet to the wizard
     void ShootProjectile()
     {
     
-        // Decide which projectile type to shoot
         string projectileType;
         if (wizardType == "Fire")
         {
@@ -215,10 +211,9 @@ public class WizardAttack : MonoBehaviour
         }
         else
         {
-            projectileType = "Fireball"; // backup projectile type
+            projectileType = "Fireball";
         }
 
-        // retrieve a projectile from the pool and fire it
         Projectile projectile = Projectile.GetFromPool(projectileType);
         if (projectile != null)
         {
@@ -234,6 +229,7 @@ public class WizardAttack : MonoBehaviour
         
     }
 
+    // special powers for the water wizard is activated
     public void ActivateSpecialPowerWater()
     {
         if (specialAttackTimer <= 0f && specialProjectilePrefab != null)
@@ -260,19 +256,20 @@ public class WizardAttack : MonoBehaviour
             Debug.Log("Special power is on cooldown or no special projectile prefab assigned.");
         }
     }
+
+    // special powers for the fire wizard is activated
     public void ActivateSpecialPowerFire()
     {
         if (specialAttackTimer <= 0f && specialProjectilePrefab != null)
         {
             Debug.Log("Special power activated!");
 
-            // Instantiate the special fireball
             GameObject specialFireballInstance = Instantiate(specialProjectilePrefab, firePoint.position, firePoint.rotation);
             SpecialFireballProjectile specialFireball = specialFireballInstance.GetComponent<SpecialFireballProjectile>();
 
             if (specialFireball != null && currentTarget != null)
             {
-                specialFireball.SetTarget(currentTarget.transform); // Assign the target
+                specialFireball.SetTarget(currentTarget.transform);
                 Debug.Log($"Special fireball fired at target: {currentTarget.name}");
             }
             else if (specialFireball == null)
@@ -280,7 +277,6 @@ public class WizardAttack : MonoBehaviour
                 Debug.LogError("Failed to attach SpecialFireballProjectile script to the instantiated special fireball.");
             }
 
-            // Reset the cooldown for the special attack
             specialAttackTimer = specialAttackCooldown;
         }
         else
@@ -289,14 +285,13 @@ public class WizardAttack : MonoBehaviour
         }
     }
 
-    // Special power for Earth wizards
+    // special powers for the earth wizard is activated
     public void ActivateSpecialPowerEarth()
     {
         if (specialAttackTimer <= 0f && specialProjectilePrefab != null)
         {
             Debug.Log("Special Earth Knockback power activated!");
 
-            // Instantiate the knockback projectile
             Vector3 firingPosition = transform.position + new Vector3(0, 1.5f, 0);
 
             GameObject specialEarthballInstance = Instantiate(specialProjectilePrefab, firePoint.position, firePoint.rotation);
@@ -305,7 +300,7 @@ public class WizardAttack : MonoBehaviour
 
             if (knockbackProjectile != null && currentTarget != null)
             {
-                knockbackProjectile.SetTarget(currentTarget.transform, firingPosition); // Assign the target
+                knockbackProjectile.SetTarget(currentTarget.transform, firingPosition);
                 Debug.Log($"Knockback projectile fired at target: {currentTarget.name}");
             }
             else if (knockbackProjectile == null)
@@ -313,7 +308,6 @@ public class WizardAttack : MonoBehaviour
                 Debug.LogError("Failed to attach KnockbackProjectile script to the instantiated special projectile.");
             }
 
-            // Reset the cooldown for the special attack
             specialAttackTimer = specialAttackCooldown;
         }
         else
@@ -323,7 +317,7 @@ public class WizardAttack : MonoBehaviour
     }
 
 
-
+    // Method to play a sound when a projectile is fired
     void PlaySound(AudioClip clip)
     {
         if (clip != null && audioSource != null)
