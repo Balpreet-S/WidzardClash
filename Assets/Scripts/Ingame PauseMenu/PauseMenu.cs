@@ -6,18 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenu;
-    public EnemySpawner ScoreCounter;
-    public bool check;
+    public GameObject pauseMenu; // Reference to the pause menu UI
+    public EnemySpawner ScoreCounter; // Reference to the EnemySpawner for high score updates
+    public bool check; // Tracks whether the game is paused
 
-    // Start is called before the first frame update
     void Start()
     {
-        pauseMenu.SetActive(false);
+        // Ensure the pause menu is hidden at the start
+        if (pauseMenu == null)
+        {
+            Debug.LogError("PauseMenu is not assigned in the Inspector.");
+        }
+        pauseMenu?.SetActive(false); // Use null conditional operator to avoid errors
     }
 
     void Update()
     {
+        // Toggle pause when the Escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (check)
@@ -33,32 +38,61 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        if (pauseMenu == null)
+        {
+            Debug.LogError("PauseMenu is not assigned in the Inspector. Cannot pause the game.");
+            return; // Prevent further execution if the menu is null
+        }
+
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f; // pauses the game
-        ScoreCounter.HighScoreUpdate();
+        Time.timeScale = 0f; // Pause the game
+
+        if (ScoreCounter != null)
+        {
+            try
+            {
+                ScoreCounter.HighScoreUpdate();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error updating high score: {e.Message}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("ScoreCounter is not assigned in the Inspector. Skipping HighScoreUpdate.");
+        }
+
         check = true;
     }
 
     public void ResumeGame()
     {
+        if (pauseMenu == null)
+        {
+            Debug.LogError("PauseMenu is not assigned in the Inspector. Cannot resume the game.");
+            return; // Prevent further execution if the menu is null
+        }
+
         pauseMenu.SetActive(false);
-        Time.timeScale = 1f; // resumes the game
+        Time.timeScale = 1f; // Resume the game
         check = false;
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene("Object Placement"); // Reloads the game
-        Time.timeScale = 1f; // resumes the game
-        AudioListener.volume = 1; // turns sound on
+        SceneManager.LoadScene("Object Placement"); // Reload the game scene
+        Time.timeScale = 1f; // Ensure the game resumes
+        AudioListener.volume = 1; // Enable sound
     }
 
-    public void HowToPlay() // Takes you to another scene that explains how the game works
+    public void HowToPlay() // Navigate to the "How To Play" scene
     {
         SceneManager.LoadScene("How To Play");
     }
+
     public void QuitGame()
     {
-        Application.Quit(); // quits game
+        Application.Quit(); // Quit the game
     }
 }

@@ -1,26 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Formats.Alembic.Importer;
-using UnityEngine.SceneManagement; // Import Alembic namespace
+using UnityEngine.SceneManagement;
 
 public class CastleHealth : MonoBehaviour
 {
-
     [SerializeField] private CastleHealthBar _healthbar;
-
 
     public int currentHealth = 100; // Castle starts with 100 health
     public float animationSpeed = 1.0f; // Speed of the animation playback
 
     public List<GameObject> towerStates; // List of preloaded tower GameObjects for different health tiers
-    public List<AlembicStreamPlayer> alembicStreamPlayers; // List of Alembic Stream Players for each tower
 
     public AudioClip transitionSound;
     private AudioSource audioSource;
 
     private int currentTier = -1; // Tracks the current health tier
-    private float animationTime = 0f; // Tracks the current time in the Alembic animation
 
     void Start()
     {
@@ -33,39 +28,10 @@ public class CastleHealth : MonoBehaviour
             Debug.LogError("AudioSource component not found on CastleHealth object.");
         }
 
-        // Initialize tower states and Alembic players
+        // Initialize tower states
         UpdateTowerVisibility();
 
-
-        // Reset the animations for all Alembic players
-        foreach (AlembicStreamPlayer player in alembicStreamPlayers)
-        {
-            if (player != null)
-            {
-                player.CurrentTime = 0;
-            }
-        }
-
         _healthbar.UpdateHealthBar(100, currentHealth); // updates health bar
-    }
-
-    void Update()
-    {
-        // Continuously play the Alembic animation for the active player
-        if (currentTier >= 0 && currentTier < alembicStreamPlayers.Count && alembicStreamPlayers[currentTier] != null)
-        {
-            AlembicStreamPlayer activePlayer = alembicStreamPlayers[currentTier];
-            animationTime += Time.deltaTime * animationSpeed;
-
-            // Loop the animation when it reaches the end
-            if (animationTime > activePlayer.Duration)
-            {
-                animationTime = 0f; // Reset to the beginning
-            }
-
-            // Update the AlembicStreamPlayer's playback time
-            activePlayer.CurrentTime = animationTime;
-        }
     }
 
     // Method to apply damage to the castle
@@ -89,8 +55,7 @@ public class CastleHealth : MonoBehaviour
         }
     }
 
-    // Update tower visibility and manage Alembic Stream Players
-
+    // Update tower visibility
     void UpdateTowerVisibility()
     {
         int newTier;
@@ -104,44 +69,30 @@ public class CastleHealth : MonoBehaviour
         {
             Debug.Log($"Switching from tier {currentTier} to tier {newTier}");
 
-            // Deactivate all towers and stop their animations
+            // Deactivate all towers
             for (int i = 0; i < towerStates.Count; i++)
             {
                 if (towerStates[i] != null)
                 {
                     towerStates[i].SetActive(false);
                 }
-
-                if (i < alembicStreamPlayers.Count && alembicStreamPlayers[i] != null)
-                {
-                    alembicStreamPlayers[i].CurrentTime = 0; // Reset animation
-                }
             }
 
-            // Activate the new tier's tower and its animation
+            // Activate the new tier's tower
             if (newTier < towerStates.Count)
             {
                 towerStates[newTier].SetActive(true);
                 Debug.Log($"Activating tower: {towerStates[newTier].name}");
-
-                if (newTier < alembicStreamPlayers.Count && alembicStreamPlayers[newTier] != null)
-                {
-                    alembicStreamPlayers[newTier].CurrentTime = 0; // Reset animation for the new tier
-                }
             }
 
             if (newTier > 0)
             {
                 PlayTransitionSound();
             }
-            
 
             currentTier = newTier;
-            animationTime = 0f; // Reset animation time for the new tier
         }
     }
-
-    
 
     void PlayTransitionSound()
     {
@@ -149,7 +100,8 @@ public class CastleHealth : MonoBehaviour
         {
             audioSource.PlayOneShot(transitionSound);
         }
-        else{
+        else
+        {
             Debug.Log("Transition sound or audio source is missing");
         }
     }
@@ -159,12 +111,6 @@ public class CastleHealth : MonoBehaviour
     {
         Debug.Log("The castle has been destroyed!");
         Debug.Log("You Lose!!");
-
-        // Stop the animation for the current tier
-        if (currentTier >= 0 && currentTier < alembicStreamPlayers.Count && alembicStreamPlayers[currentTier] != null)
-        {
-            alembicStreamPlayers[currentTier].CurrentTime = alembicStreamPlayers[currentTier].Duration; // Set to end of animation
-        }
 
         // Find all enemies in the scene and destroy them
         EnemyScript[] allEnemies = FindObjectsOfType<EnemyScript>();
@@ -179,8 +125,6 @@ public class CastleHealth : MonoBehaviour
         
         // Loads Game Over Scene
         SceneManager.LoadScene("Game Over");
-
-
     }
 
     // Get the current health of the castle
