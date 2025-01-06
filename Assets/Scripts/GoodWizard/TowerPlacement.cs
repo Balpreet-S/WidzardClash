@@ -21,7 +21,8 @@ public class TowerPlacementManager : MonoBehaviour
         placeTowerAction.Disable();
         placeTowerAction.Dispose();
     }
-    // check raycasting and if the tower spot is not occupied by another tower spot
+
+    // check if the mouse is over the tower placement spot and if the left mouse button is pressed to place the tower
     void Update()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && XPManager.instance.Button != null)
@@ -33,10 +34,9 @@ public class TowerPlacementManager : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.CompareTag("TowerSpot")) // Checks if the place clicked is a placable tower spot
+                    if (hit.collider.CompareTag("TowerSpot"))
                     {
-                        //checks if spot is occupied or not
-                        if (hit.collider.transform.childCount == 23) //23 because blender prefab has 23 objects
+                        if (hit.collider.transform.childCount == 23) 
                         {
 
                             Vector3 towerPosition = hit.collider.transform.position + new Vector3(0, towerHeightOffset, 0);
