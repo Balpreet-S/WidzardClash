@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//script for movement of goblins on path
 public class PathFollower : MonoBehaviour
 {
     public Transform[] waypoints;
@@ -61,7 +61,7 @@ public class PathFollower : MonoBehaviour
 
             Quaternion adjustedRotation = targetRotation * modelRotationOffset;
 
-            Quaternion rotationOffset = Quaternion.Euler(90, -90, 0); 
+            Quaternion rotationOffset = Quaternion.Euler(90, -90, 0);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
 
@@ -140,39 +140,39 @@ public class PathFollower : MonoBehaviour
         knockbackCoroutine = StartCoroutine(KnockbackCoroutine(firingPosition, force, duration));
     }
 
-private IEnumerator KnockbackCoroutine(Vector3 firingPosition, float force, float duration)
-{
-    StopMoving(); // Temporarily disable path following
-
-    // Main knockback direction (away from the projectile)
-    Vector3 knockbackDirection = (transform.position - firingPosition).normalized;
-
-    // Calculate lateral direction (perpendicular to knockback direction and "up")
-    Vector3 lateralDirection = Vector3.Cross(Vector3.up, knockbackDirection).normalized;
-
-    Vector3 firingToEnemy = transform.position - firingPosition; // Direction from firing position to enemy
-    float side = Vector3.Dot(firingToEnemy, transform.right); // Positive = right, Negative = left
-    lateralDirection *= Mathf.Sign(side); 
-
-    // Combine knockback direction with lateral movement
-    Vector3 finalKnockback = (knockbackDirection + lateralDirection).normalized * (force / duration);
-
-
-    float elapsedTime = 0f;
-
-    while (elapsedTime < duration)
+    private IEnumerator KnockbackCoroutine(Vector3 firingPosition, float force, float duration)
     {
-        elapsedTime += Time.deltaTime;
+        StopMoving(); // Temporarily disable path following
 
-        // Apply knockback movement
-        transform.position += finalKnockback * Time.deltaTime;
+        // Main knockback direction (away from the projectile)
+        Vector3 knockbackDirection = (transform.position - firingPosition).normalized;
 
-        yield return null; // Wait for the next frame
+        // Calculate lateral direction (perpendicular to knockback direction and "up")
+        Vector3 lateralDirection = Vector3.Cross(Vector3.up, knockbackDirection).normalized;
+
+        Vector3 firingToEnemy = transform.position - firingPosition; // Direction from firing position to enemy
+        float side = Vector3.Dot(firingToEnemy, transform.right); // Positive = right, Negative = left
+        lateralDirection *= Mathf.Sign(side);
+
+        // Combine knockback direction with lateral movement
+        Vector3 finalKnockback = (knockbackDirection + lateralDirection).normalized * (force / duration);
+
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            // Apply knockback movement
+            transform.position += finalKnockback * Time.deltaTime;
+
+            yield return null; // Wait for the next frame
+        }
+
+        StartMoving(); // Re-enable path following after knockback
+        knockbackCoroutine = null; // Clear the coroutine reference
     }
-
-    StartMoving(); // Re-enable path following after knockback
-    knockbackCoroutine = null; // Clear the coroutine reference
-}
 
 
 

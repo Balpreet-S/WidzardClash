@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Camera Movement and Placement. Horizontal movement using wasd keys. Rotation using middle mouse button. Zoom in and out using scroll wheel.
 public class CameraController : MonoBehaviour
 {
     private CameraControlActions inputActions;
     private InputAction moveAction;
     private Transform cameraTransform;
 
-    // Horizontal movement
+    // Horizontal movement of camera
     [SerializeField]
     private float maxMoveSpeed = 5f;
     private float currentSpeed;
@@ -18,7 +19,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float dampingRate = 15f;
 
-    // Vertical movement (zooming)
+    // Zooming of camera vertically using scroll wheel
     [SerializeField]
     private float zoomStep = 2f;
     [SerializeField]
@@ -30,22 +31,23 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float zoomSpeed = 2f;
 
-    // Camera rotation
+    // Camera rotation by clicking middle mouse button and moving the mouse
     [SerializeField]
     private float rotationSpeed = 1f;
 
-    // Position and velocity tracking
+    // Position and velocity tracking for speed and camera position
     private Vector3 targetMovePosition;
     private float currentZoomHeight;
     private Vector3 horizontalVelocity;
     private Vector3 lastFramePosition;
 
+    // Initializes input actions and sets up camera references.
     private void Awake()
     {
         inputActions = new CameraControlActions();
         cameraTransform = GetComponentInChildren<Camera>().transform;
     }
-
+    // Enables input actions and initializes movement and zoom settings.
     private void OnEnable()
     {
         currentZoomHeight = cameraTransform.localPosition.y;
@@ -57,7 +59,7 @@ public class CameraController : MonoBehaviour
         inputActions.Camera.ZoomCamera.performed += HandleCameraZoom;
         inputActions.Camera.Enable();
     }
-
+    // Disables input actions and unsubscribes from events.
     private void OnDisable()
     {
         inputActions.Camera.RotateCamera.performed -= HandleCameraRotation;
@@ -65,6 +67,7 @@ public class CameraController : MonoBehaviour
         inputActions.Camera.Disable();
     }
 
+    // Handles frame-based updates for movement, position, and velocity.
     private void Update()
     {
         HandleMovementInput();
@@ -73,13 +76,14 @@ public class CameraController : MonoBehaviour
         UpdateObjectPosition();
     }
 
+    // Updates the camera's horizontal velocity.
     private void UpdateHorizontalVelocity()
     {
         horizontalVelocity = (transform.position - lastFramePosition) / Time.deltaTime;
         horizontalVelocity.y = 0;
         lastFramePosition = transform.position;
     }
-
+    // Handles player input for horizontal camera movement.
     private void HandleMovementInput()
     {
         if (moveAction != null && moveAction.enabled)
@@ -94,21 +98,21 @@ public class CameraController : MonoBehaviour
             }
         }
     }
-
+    // Gets the camera's right direction, ignoring vertical tilt.
     private Vector3 GetCameraRight()
     {
         Vector3 right = cameraTransform.right;
         right.y = 0;
         return right.normalized;
     }
-
+    // Gets the camera's forward direction, ignoring vertical tilt.
     private Vector3 GetCameraForward()
     {
         Vector3 forward = cameraTransform.forward;
         forward.y = 0;
         return forward.normalized;
     }
-
+    // Updates the position of the object the camera is following.
     private void UpdateObjectPosition()
     {
         Vector3 newPosition;
@@ -132,7 +136,7 @@ public class CameraController : MonoBehaviour
 
         targetMovePosition = Vector3.zero;
     }
-
+    // Handles player input for rotating the camera around the target.
     private void HandleCameraRotation(InputAction.CallbackContext context)
     {
         if (!Mouse.current.middleButton.isPressed)
@@ -141,7 +145,7 @@ public class CameraController : MonoBehaviour
         float rotationInput = context.ReadValue<Vector2>().x;
         transform.rotation = Quaternion.Euler(0f, rotationInput * rotationSpeed + transform.rotation.eulerAngles.y, 0f);
     }
-
+    // Handles player input for zooming the camera in and out.
     private void HandleCameraZoom(InputAction.CallbackContext context)
     {
         float zoomInput = -context.ReadValue<Vector2>().y / 100f;
@@ -150,7 +154,7 @@ public class CameraController : MonoBehaviour
             currentZoomHeight = Mathf.Clamp(cameraTransform.localPosition.y + zoomInput * zoomStep, minZoomHeight, maxZoomHeight);
         }
     }
-
+    // Smoothly updates the camera's position based on zoom and damping settings.
     private void UpdateCameraPosition()
     {
         Vector3 zoomTargetPosition = new Vector3(cameraTransform.localPosition.x, currentZoomHeight, cameraTransform.localPosition.z);
@@ -159,7 +163,7 @@ public class CameraController : MonoBehaviour
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, zoomTargetPosition, Time.deltaTime * zoomDampening);
         cameraTransform.LookAt(transform);
     }
-
+    // Resets camera movement and zoom variables when the game ends.
     public void OnGameEnd()
     {
         // Reset variables to avoid NaN errors

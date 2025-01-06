@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+//code for castle health bar
 public class CastleHealthBar : MonoBehaviour
 {
     [SerializeField] private Image _healthbarSprite;
@@ -12,7 +13,7 @@ public class CastleHealthBar : MonoBehaviour
 
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
-        _target = currentHealth / maxHealth;    
+        _target = currentHealth / maxHealth;
     }
 
     void Update()

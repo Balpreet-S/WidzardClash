@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+// this code is responsable for the castle health and animation throughout the damage process
 public class CastleHealth : MonoBehaviour
 {
     [SerializeField] private CastleHealthBar _healthbar;
@@ -93,7 +93,7 @@ public class CastleHealth : MonoBehaviour
             currentTier = newTier;
         }
     }
-
+    // playing the transition soound from one stage to another after being destroyed based on hp.
     void PlayTransitionSound()
     {
         if (audioSource != null && transitionSound != null)
@@ -106,7 +106,7 @@ public class CastleHealth : MonoBehaviour
         }
     }
 
-    // Destroy the castle method
+    // Destroy the castle method that causes the loss.
     void CastleDestroyed()
     {
         Debug.Log("The castle has been destroyed!");
@@ -122,7 +122,7 @@ public class CastleHealth : MonoBehaviour
 
         // Pause the game
         Time.timeScale = 0;
-        
+
         // Loads Game Over Scene
         SceneManager.LoadScene("Game Over");
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+// code for the enemy spawner object that is responsable for waves and types of enemies
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemy Prefabs")]
@@ -144,7 +144,7 @@ public class EnemySpawner : MonoBehaviour
         Debug.Log($"Wave {currentWave} complete!");
         StartNextWave();
     }
-
+    //fetching prefabs for the different prefab types
     private List<GameObject> GetPrefabsForWave(int wave)
     {
         List<GameObject> enemyList = new List<GameObject>();
@@ -164,7 +164,7 @@ public class EnemySpawner : MonoBehaviour
 
         return enemyList;
     }
-
+    //spawn enemy by instentiation and add waypoints for enemy to follow
     void SpawnEnemy(GameObject prefab)
     {
         GameObject newEnemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
@@ -181,7 +181,7 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogError("No EnemyScript found on the spawned enemy!");
         }
     }
-
+    //on death funtion to decrease the enemy when killed
     void OnEnemyDeath()
     {
         enemiesRemaining--;

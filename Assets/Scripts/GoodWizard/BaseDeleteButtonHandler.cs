@@ -2,37 +2,36 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-
-
-// uiWindow.SetActive(true);
+// Handles the creation, positioning, and destruction of UI windows for wizards.
 
 public class DeleteButtonHandler : MonoBehaviour
 {
     public GameObject uiWindowPrefab; // Assign your prefab in the Inspector
-  
+
     private GameObject activeWindow; // To track the currently active panel
     private Camera mainCamera;
 
 
     private WizardAttack wizardAttack;
-
+    // Initializes references to the main camera and other components.
     void Start()
     {
         mainCamera = Camera.main;
 
         wizardAttack = GetComponent<WizardAttack>();
     }
-
+    // Checks for middle mouse button input to close the active UI window.
     void Update()
     {
-        if (Input.GetMouseButtonDown(2)){
+        if (Input.GetMouseButtonDown(2))
+        {
             Destroy(activeWindow);
             activeWindow = null;
             Debug.Log("UI Window closed.");
             return;
         }
     }
-
+    // Handles opening and positioning the UI window when the wizard is clicked.
     void OnMouseDown()
     {
         // If a panel is already active for this wizard, destroy it (close the panel)
